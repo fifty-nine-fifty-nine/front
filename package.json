@@ -25,6 +25,7 @@
     "typescript": "5.1.6"
   },
   "devDependencies": {
-    "@vanilla-extract/next-plugin": "^2.2.2"
+    "@vanilla-extract/next-plugin": "^2.2.2",
+    "firebase-tools": "^12.4.8"
   }
 }

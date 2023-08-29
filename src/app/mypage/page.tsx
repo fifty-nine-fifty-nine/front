@@ -1,14 +1,21 @@
-import type { Metadata } from 'next';
+import { getServerSession } from 'next-auth';
 
-export const metadata: Metadata = {
-  title: '펫명함생성 | 5959',
-  description: '오구오구에서 명함을 만들어볼까요',
-};
+import { KakaoLogoutButton, UserInfo } from '@/components/auth';
+import { authOptions } from '@/lib/auth';
+import { flexColCenter } from '@/styles/ogoo';
+import { cn } from '@/styles/utils';
 
-export default function Routetest() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1>Route Test</h1>
-    </main>
-  );
+export default async function MyPage() {
+  const session = await getServerSession(authOptions);
+
+  if (session) {
+    return (
+      <section className={cn(flexColCenter, `px-5`)}>
+        <p>{session.user?.name}님 반갑습니다</p>
+        <KakaoLogoutButton />
+        <UserInfo />
+      </section>
+    );
+  }
+  return <></>;
 }

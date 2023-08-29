@@ -1,11 +1,13 @@
 import '@/styles/tailwind.css';
 
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 
-import { Navbar } from '@/components';
+import { Navbar } from '@/components/common/navbar';
+import { themeClass } from '@/styles';
+import { bgSubPrimary, flexCenter, mainContainer } from '@/styles/ogoo';
+import { cn } from '@/styles/utils';
 
-const inter = Inter({ subsets: ['latin'] });
+import { NextAuthProvider } from './providers';
 
 export const metadata: Metadata = {
   title: '5959',
@@ -15,9 +17,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ko">
-      <body className={inter.className}>
-        {children}
-        <Navbar />
+      <body className={cn(themeClass, flexCenter, bgSubPrimary)}>
+        <main className={cn(mainContainer, `flex-1 max-w-2xl relative h-screen overflow-hidden`)}>
+          <NextAuthProvider>
+            <div className={`h-screen py-20 overflow-y-auto overflow-x-hidden`}>{children}</div>
+          </NextAuthProvider>
+          <Navbar />
+        </main>
       </body>
     </html>
   );

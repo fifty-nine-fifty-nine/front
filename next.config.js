@@ -3,7 +3,9 @@ const withVanillaExtract = createVanillaExtractPlugin();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
-}
+  images: {
+    domains: ['k.kakaocdn.net'],
+  },
+};
 
 module.exports = withVanillaExtract(nextConfig);

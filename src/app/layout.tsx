@@ -41,7 +41,7 @@ export default function RootLayout({
           )}
         >
           <NextAuthProvider>
-            <div className={`h-screen py-20 overflow-y-auto overflow-x-hidden`}>
+            <div className={`h-screen pb-20 overflow-y-auto overflow-x-hidden`}>
               {children}
             </div>
           </NextAuthProvider>

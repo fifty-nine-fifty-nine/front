@@ -1,10 +1,15 @@
+"use client";
+
 import Link from "next/link";
+import { useRef } from "react";
 
 import {
+  bgSub,
   button,
   flexCol,
   flexColCenter,
   flexRow,
+  optionalText,
   subtitleText,
   titleLg,
   titleMd,
@@ -13,7 +18,17 @@ import {
 import { input } from "@/styles/ogoo/input.css";
 import { cn } from "@/styles/utils";
 
-export default async function InfoCardProcessTwo() {
+export default function InfoCardProcessTwo() {
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  const handleClick = () => {
+    fileRef.current?.click();
+  };
+
+  const handleChangeImage = (e: React.ChangeEvent) => {
+    const targetFiles = e.target as HTMLInputElement;
+  };
+
   return (
     <section className={cn(flexCol, `gap-8`)}>
       <div>
@@ -24,7 +39,25 @@ export default async function InfoCardProcessTwo() {
 
       <div className={cn(flexCol, "gap-2")}>
         <p className={cn(subtitleText)}>반려동물의 사진을 추가해주세요.</p>
-        <div className={cn(flexCol, "gap-3")}></div>
+        <div className={cn(flexCol, "gap-3")}>
+          <div className={flexColCenter}>
+            <input
+              ref={fileRef}
+              type="file"
+              accept="image/*"
+              className="hidden"
+              name="img_input"
+              onChange={handleChangeImage}
+            />
+            <button
+              onClick={handleClick}
+              className={cn(bgSub, "w-32 h-32 rounded-full")}
+            >
+              <p className={cn(optionalText, "text-[60px] font-light")}>+</p>
+            </button>
+            <div>{/* <img src={} width="" height="" alt="" /> */}</div>
+          </div>
+        </div>
       </div>
 
       <div className={cn(flexCol, "gap-2")}>

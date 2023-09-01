@@ -1,10 +1,10 @@
-import { recipe } from "@vanilla-extract/recipes";
+import { recipe } from '@vanilla-extract/recipes';
 
-import { themeVars } from "..";
+import { themeVars } from '..';
 
 export const input = recipe({
   base: {
-    display: "block",
+    display: 'block',
   },
 
   variants: {
@@ -13,7 +13,7 @@ export const input = recipe({
     },
     size: {
       single: {
-        width: "100%",
+        width: '100%',
         height: 60,
         borderRadius: 12,
         fontSize: 18,
@@ -26,7 +26,7 @@ export const input = recipe({
 
   // fallback으로 설정하는 variant
   defaultVariants: {
-    color: "inputColor",
-    size: "single",
+    color: 'inputColor',
+    size: 'single',
   },
 });

@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
-import { themeVars } from "@/styles";
-import { flexCenter, flexRowCenter } from "@/styles/ogoo";
-import { cn } from "@/styles/utils";
+import { themeVars } from '@/styles';
+import { flexCenter, flexRowCenter } from '@/styles/ogoo';
+import { cn } from '@/styles/utils';
 
 export const Tab = () => {
   const pathname = usePathname();
@@ -13,12 +13,12 @@ export const Tab = () => {
   return (
     <nav className={navbar}>
       <Link href="/infocard" className="flex-1">
-        <div className={cn(tabMenu, pathname === "/infocard" && activeTab)}>
+        <div className={cn(tabMenu, pathname === '/infocard' && activeTab)}>
           <p>펫 명함</p>
         </div>
       </Link>
       <Link href="/mypage" className="flex-1">
-        <div className={cn(tabMenu, pathname === "/mypage" && activeTab)}>
+        <div className={cn(tabMenu, pathname === '/mypage' && activeTab)}>
           <p>펫 카드</p>
         </div>
       </Link>
@@ -32,7 +32,7 @@ const tabMenu = cn(
   flexCenter,
   `${(themeVars.fontWeights.bold, themeVars.fontSizes[18])}
   h-full hover:bg-neutral-100 ease-in duration-150
-`
+`,
 );
 
 const activeTab = `border-b-4 border-primary`;

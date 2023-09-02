@@ -3,9 +3,10 @@
 import Image from 'next/image';
 import { signIn, signOut } from 'next-auth/react';
 
-import { flexCenter, subText } from '@/styles/ogoo';
+import { flexCenter } from '@/styles/ogoo/alignment.css';
 import { button } from '@/styles/ogoo/button.css';
-import { cn } from '@/styles/utils';
+import { subText } from '@/styles/ogoo/colors.css';
+import { cn } from '@/utils';
 
 export const KakaoLoginButton = () => {
   return (

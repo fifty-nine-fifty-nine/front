@@ -1,4 +1,3 @@
-// components/ProgressBar.tsx
 import Image from 'next/image';
 import React from 'react';
 
@@ -7,7 +6,7 @@ interface ProgressBarProps {
   currentStep: number;
 }
 
-const ProgressBar: React.FC<ProgressBarProps> = ({ totalSteps, currentStep }) => {
+export const ProgressBar: React.FC<ProgressBarProps> = ({ totalSteps, currentStep }) => {
   const percentComplete = (currentStep / totalSteps) * 100;
   const iconPosition = `calc(100% - ${percentComplete}%)`; // Adjust icon width
 
@@ -32,5 +31,3 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ totalSteps, currentStep }) =>
     </>
   );
 };
-
-export default ProgressBar;

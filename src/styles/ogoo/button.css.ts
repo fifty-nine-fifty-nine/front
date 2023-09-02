@@ -1,6 +1,6 @@
 import { recipe } from '@vanilla-extract/recipes';
 
-import { bgKakao, bgOptional, bgPrimary, bgSecondary, bgSub } from '.';
+import { bgKakao, bgOptional, bgPrimary, bgSecondary, bgSub } from './colors.css';
 
 export const button = recipe({
   base: {

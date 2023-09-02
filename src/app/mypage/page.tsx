@@ -1,9 +1,9 @@
 import { getServerSession } from 'next-auth';
 
-import { KakaoLogoutButton, UserInfo } from '@/components/auth';
+import { KakaoLogoutButton, UserInfo } from '@/components';
 import { authOptions } from '@/lib/auth';
-import { flexColCenter } from '@/styles/ogoo';
-import { cn } from '@/styles/utils';
+import { flexColCenter } from '@/styles/ogoo/alignment.css';
+import { cn } from '@/utils';
 
 export default async function MyPage() {
   const session = await getServerSession(authOptions);

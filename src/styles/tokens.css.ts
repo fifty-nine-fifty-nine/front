@@ -19,7 +19,7 @@ const grayScale = {
 };
 
 export const [themeClass, themeVars] = createTheme({
-  textColors: {
+  colors: {
     primary: primary,
     secondary: secondary,
     blackText: black,
@@ -27,6 +27,8 @@ export const [themeClass, themeVars] = createTheme({
     subtitleText: grayScale.w600,
     subText: grayScale.w500,
     optionalText: grayScale.w400,
+    input: grayScale.w300,
+    divider: grayScale.w100,
   },
   backgroundColors: {
     primary: primary,
@@ -37,10 +39,6 @@ export const [themeClass, themeVars] = createTheme({
     sub: grayScale.w100,
     optional: grayScale.w50,
     kakao: kakao,
-  },
-  borderColors: {
-    input: grayScale.w300,
-    divider: grayScale.w100,
   },
   spaces: {
     auto: 'auto',

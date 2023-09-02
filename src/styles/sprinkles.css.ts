@@ -52,7 +52,7 @@ export const responsiveProperties = defineProperties({
 
 const colorProperties = defineProperties({
   properties: {
-    color: themeVars.textColors,
+    color: themeVars.colors,
     background: themeVars.backgroundColors,
   },
 });
@@ -66,7 +66,7 @@ export const textProperties = defineProperties({
 
 export const borderProperties = defineProperties({
   properties: {
-    borderColor: themeVars.borderColors,
+    borderColor: themeVars.colors,
   },
 });
 

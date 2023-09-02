@@ -18,7 +18,7 @@ interface Props {
 export const GenerateView = ({ questionNumber, title, children, nextLink }: Props) => {
   return (
     <section className={cn(flexCol, `gap-8`)}>
-      <div>
+      <div className={'px-5'}>
         <h2 className={cn(titleMd)}>Q{questionNumber}</h2>
         <h2 className={cn(titleLg, `whitespace-pre-wrap`)}>{title}</h2>
       </div>

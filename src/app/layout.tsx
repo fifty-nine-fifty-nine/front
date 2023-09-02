@@ -25,11 +25,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ko">
       <body className={cn(themeClass, Pretendard.className, flexCenter, bgSubPrimary)}>
-        <main className={cn(mainContainer, `flex-1 max-w-2xl relative h-screen overflow-hidden`)}>
-          <NextAuthProvider>
-            <div className={`h-screen pb-20 overflow-y-auto overflow-x-hidden`}>{children}</div>
-          </NextAuthProvider>
-          <Navbar />
+        <main className={cn(mainContainer, `flex-1 max-w-2xl relative overflow-hidden`)}>
+          <NextAuthProvider>{children}</NextAuthProvider>
         </main>
       </body>
     </html>

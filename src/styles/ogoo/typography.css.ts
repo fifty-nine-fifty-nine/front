@@ -43,11 +43,10 @@ export const bodyMd = sprinkles({
 });
 
 export const bodySm = sprinkles({
-  fontSize: '12',
+  fontSize: '13',
   fontWeight: 'bold',
 });
 
 export const caption = sprinkles({
   fontSize: '12',
-  fontWeight: 'bold',
 });

@@ -14,7 +14,6 @@ module.exports = withVanillaExtract({
     config.module.rules.push({
       test: /\.svg$/i,
       issuer: /\.[jt]sx?$/,
-      resourceQuery: { not: /url/ },
       use: ['@svgr/webpack'],
     });
 

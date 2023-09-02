@@ -4,9 +4,11 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useLayoutEffect, useState } from 'react';
 
-import { flexCenter, flexRowCenter } from '@/styles/ogoo/alignment.css';
+import { flexColCenter, flexRowCenter } from '@/styles/ogoo/alignment.css';
 import { dividerColor, optionalText, primary } from '@/styles/ogoo/colors.css';
 import { caption } from '@/styles/ogoo/typography.css';
+import HomeIcon from '@/svg/home.svg';
+import MyPageIcon from '@/svg/mypage.svg';
 import { cn } from '@/utils';
 
 interface Props {
@@ -24,12 +26,14 @@ export const Navbar = (props: Props) => {
   return (
     <nav className={navbar}>
       <Link href="/" className="flex-1">
-        <div className={cn(navbarMenu, tabIndex == 0 ? primary : optionalText)}>
+        <div className={cn(navbarMenu, tabIndex == 0 ? activeText : optionalText)}>
+          <HomeIcon />
           <p>홈</p>
         </div>
       </Link>
       <Link href="/mypage" className="flex-1">
-        <div className={cn(navbarMenu, tabIndex == 1 ? primary : optionalText)}>
+        <div className={cn(navbarMenu, tabIndex == 1 ? activeText : optionalText)}>
+          <MyPageIcon />
           <p>마이페이지</p>
         </div>
       </Link>
@@ -41,11 +45,9 @@ const navbar = cn(
   flexRowCenter,
   dividerColor,
   `w-full bg-white h-[80px]
-  border-t border-neutral-300`,
+  border-t border-neutral-300 `,
 );
 
-const navbarMenu = cn(
-  flexCenter,
-  caption,
-  `h-full font-normal hover:bg-neutral-100 ease-in duration-150`,
-);
+const navbarMenu = cn(flexColCenter, caption, `h-full p-4 select-none hover:bg-neutral-100`);
+
+const activeText = `${primary} font-bold`;

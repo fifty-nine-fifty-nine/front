@@ -3,10 +3,12 @@ import '@/styles/tailwind.css';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 
-import { Navbar } from '@/components/common/navbar';
+import { Navbar } from '@/components';
 import { themeClass } from '@/styles';
-import { bgSubPrimary, flexCenter, mainContainer } from '@/styles/ogoo';
-import { cn } from '@/styles/utils';
+import { flexCenter } from '@/styles/ogoo/alignment.css';
+import { bgSubPrimary } from '@/styles/ogoo/colors.css';
+import { mainContainer } from '@/styles/ogoo/container.css';
+import { cn } from '@/utils';
 
 import { NextAuthProvider } from './providers';
 

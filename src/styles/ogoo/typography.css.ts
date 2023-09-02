@@ -51,19 +51,3 @@ export const caption = sprinkles({
   fontSize: '12',
   fontWeight: 'bold',
 });
-
-export const primary = sprinkles({ color: 'primary' });
-export const secondary = sprinkles({ color: 'secondary' });
-export const subText = sprinkles({ color: 'subText' });
-export const optionalText = sprinkles({ color: 'optionalText' });
-export const subtitleText = sprinkles({ color: 'subtitleText' });
-
-export const whiteText = sprinkles({ color: 'whiteText' });
-export const blackText = sprinkles({ color: 'blackText' });
-
-export const bgPrimary = sprinkles({ background: 'primary' });
-export const bgSubPrimary = sprinkles({ background: 'primarySub' });
-export const bgSecondary = sprinkles({ background: 'secondary' });
-export const bgSub = sprinkles({ background: 'sub' });
-export const bgOptional = sprinkles({ background: 'optional' });
-export const bgKakao = sprinkles({ background: 'kakao' });

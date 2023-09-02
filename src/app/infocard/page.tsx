@@ -2,21 +2,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getServerSession } from 'next-auth';
 
-import { KakaoLogoutButton } from '@/components/auth/kakaoButtons';
-import ProgressBar from '@/components/common/progressbar';
-import { Tab } from '@/components/common/tab';
+import { KakaoLogoutButton, ProgressBar, Tab } from '@/components';
 import { authOptions } from '@/lib/auth';
-import {
-  bodyLg,
-  flexColCenter,
-  flexRowCenter,
-  optionalText,
-  primary,
-  titleMd,
-  whiteText,
-} from '@/styles/ogoo';
-import { button } from '@/styles/ogoo/button.css';
-import { cn } from '@/styles/utils';
+import { button } from '@/styles/ogoo';
+import { flexColCenter, flexRowCenter } from '@/styles/ogoo/alignment.css';
+import { optionalText, primary, whiteText } from '@/styles/ogoo/colors.css';
+import { bodyLg, titleMd } from '@/styles/ogoo/typography.css';
+import { cn } from '@/utils';
 
 export default async function InfoCard() {
   const session = await getServerSession(authOptions);

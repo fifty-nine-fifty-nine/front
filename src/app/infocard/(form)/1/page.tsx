@@ -1,18 +1,10 @@
 import Link from 'next/link';
 
-import {
-  button,
-  flexCol,
-  flexColCenter,
-  flexRow,
-  subText,
-  subtitle,
-  titleLg,
-  titleMd,
-  whiteText,
-} from '@/styles/ogoo';
-import { input } from '@/styles/ogoo/input.css';
-import { cn } from '@/styles/utils';
+import { button, input } from '@/styles/ogoo';
+import { flexCol, flexColCenter, flexRow } from '@/styles/ogoo/alignment.css';
+import { subText, whiteText } from '@/styles/ogoo/colors.css';
+import { subtitle, titleLg, titleMd } from '@/styles/ogoo/typography.css';
+import { cn } from '@/utils';
 
 export default async function InfoCardProcessOne() {
   return (

@@ -3,9 +3,9 @@
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 
-import ProgressBar from '@/components/common/progressbar';
-import { optionalText } from '@/styles/ogoo';
-import { cn } from '@/styles/utils';
+import { ProgressBar } from '@/components';
+import { optionalText } from '@/styles/ogoo/colors.css';
+import { cn } from '@/utils';
 
 export default function InfoCardFormLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();

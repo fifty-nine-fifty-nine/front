@@ -4,8 +4,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import { themeVars } from '@/styles';
-import { flexCenter, flexRowCenter } from '@/styles/ogoo';
-import { cn } from '@/styles/utils';
+import { flexCenter, flexRowCenter } from '@/styles/ogoo/alignment.css';
+import { cn } from '@/utils';
 
 export const Tab = () => {
   const pathname = usePathname();

@@ -7,9 +7,8 @@ import { cn } from '@/utils';
 export default async function BusinesscardThree() {
   return (
     <GenerateView
-      questionNumber={'Q3'}
-      firstTitle={'말랑이는 N살이군요!'}
-      secondTitle={'말랑이에 대해 조금 더 알려주세요!'}
+      questionNumber={'3'}
+      title={'말랑이는 N살이군요!\n말랑이에 대해 조금 더 알려주세요!'}
       nextLink={'/businesscard/4'}
     >
       <GenerateItem question={'중성화 여부를 알려주세요.'}>

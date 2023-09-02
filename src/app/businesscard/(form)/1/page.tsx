@@ -7,9 +7,8 @@ import { cn } from '@/utils';
 export default async function BusinesscardOne() {
   return (
     <GenerateView
-      questionNumber={'Q1'}
-      firstTitle={'집사님의 반려동물에 대해'}
-      secondTitle={'알려주세요'}
+      questionNumber={'1'}
+      title={'집사님의 반려동물에 대해\n알려주세요'}
       nextLink={'/businesscard/2'}
     >
       <GenerateItem question={'어떤 반려동물과 함께하고 계신가요?'}>

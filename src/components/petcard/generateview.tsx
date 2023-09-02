@@ -8,27 +8,19 @@ import { whiteText } from '@/styles/ogoo/colors.css';
 import { titleLg, titleMd } from '@/styles/ogoo/typography.css';
 import { cn } from '@/utils';
 
-type Props = {
+interface Props {
   questionNumber: string;
-  firstTitle: string;
-  secondTitle: string;
+  title: string;
   children: React.ReactNode;
   nextLink: string;
-};
+}
 
-export const GenerateView = ({
-  questionNumber,
-  firstTitle,
-  secondTitle,
-  children,
-  nextLink,
-}: Props) => {
+export const GenerateView = ({ questionNumber, title, children, nextLink }: Props) => {
   return (
     <section className={cn(flexCol, `gap-8`)}>
       <div>
-        <h2 className={cn(titleMd)}>{questionNumber}</h2>
-        <h2 className={cn(titleLg)}>{firstTitle}</h2>
-        <h2 className={cn(titleLg)}>{secondTitle}</h2>
+        <h2 className={cn(titleMd)}>Q{questionNumber}</h2>
+        <h2 className={cn(titleLg, `whitespace-pre-wrap`)}>{title}</h2>
       </div>
       {children}
       <footer

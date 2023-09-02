@@ -1,10 +1,25 @@
+'use client';
+
+import { useState } from 'react';
+
 import { GenerateItem, GenerateView } from '@/components';
+import BottomUpSheet from '@/components/common/BottomSheet';
 import { button } from '@/styles/ogoo';
 import { flexRow } from '@/styles/ogoo/alignment.css';
 import { subText } from '@/styles/ogoo/colors.css';
 import { cn } from '@/utils';
 
-export default async function BusinesscardThree() {
+export default function BusinesscardThree() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const allergySheetOpen = () => {
+    setIsOpen(true);
+  };
+
+  const allergySheetClose = () => {
+    setIsOpen(false);
+  };
+
   return (
     <GenerateView
       questionNumber={'3'}
@@ -24,7 +39,7 @@ export default async function BusinesscardThree() {
 
       <GenerateItem question={'가지고 있는 알러지가 있나요?'}>
         <div className={cn(flexRow, 'gap-3')}>
-          <button className={cn(button({ color: 'sub' }))}>
+          <button className={cn(button({ color: 'sub' }))} onClick={allergySheetOpen}>
             <p className={cn(subText, `font-normal`)}>알러지가 있어요</p>
           </button>
           <button className={cn(button({ color: 'sub' }))}>
@@ -32,6 +47,9 @@ export default async function BusinesscardThree() {
           </button>
         </div>
       </GenerateItem>
+      <BottomUpSheet isOpen={isOpen} onClose={allergySheetClose}>
+        <div>알러지 정보</div>
+      </BottomUpSheet>
     </GenerateView>
   );
 }

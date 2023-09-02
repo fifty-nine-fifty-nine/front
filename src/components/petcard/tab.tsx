@@ -13,7 +13,7 @@ export const Tab = () => {
   return (
     <nav className={navbar}>
       <Link href="/infocard" className="flex-1">
-        <div className={cn(tabMenu, pathname === '/infocard' && activeTab)}>
+        <div className={cn(tabMenu, pathname === '/businesscard' && activeTab)}>
           <p>펫 명함</p>
         </div>
       </Link>

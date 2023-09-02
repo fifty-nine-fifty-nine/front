@@ -1,21 +1,20 @@
 import { getServerSession } from 'next-auth';
 
-import { KakaoLogoutButton, UserInfo } from '@/components';
+import { KakaoLogoutButton, Template, UserInfo } from '@/components';
 import { authOptions } from '@/lib/auth';
 import { flexColCenter } from '@/styles/ogoo/alignment.css';
 import { cn } from '@/utils';
 
 export default async function MyPage() {
-  const session = await getServerSession(authOptions);
+  const serverSession = await getServerSession(authOptions);
 
-  if (session) {
-    return (
+  return (
+    <Template>
       <section className={cn(flexColCenter, `px-5`)}>
-        <p>{session.user?.name}님 반갑습니다</p>
         <KakaoLogoutButton />
+        {serverSession && <p>{serverSession.user?.name}님 반갑습니다</p>}
         <UserInfo />
       </section>
-    );
-  }
-  return <></>;
+    </Template>
+  );
 }

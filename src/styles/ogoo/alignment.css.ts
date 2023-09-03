@@ -20,6 +20,11 @@ export const flexRowCenter = sprinkles({
   justifyContent: 'center',
 });
 
+export const flexRowItemsEnd = sprinkles({
+  display: 'flex',
+  alignItems: 'flex-end',
+});
+
 export const flexColCenter = sprinkles({
   display: 'flex',
   flexDirection: 'column',
@@ -30,6 +35,12 @@ export const flexBetween = sprinkles({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
+});
+
+export const flexBetweenItemsEnd = sprinkles({
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'flex-end',
 });
 
 export const flexColBetween = sprinkles({

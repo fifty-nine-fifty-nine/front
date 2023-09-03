@@ -3,15 +3,16 @@
 import Image from 'next/image';
 import { signIn, signOut } from 'next-auth/react';
 
-import { flexCenter } from '@/styles/ogoo/alignment.css';
-import { button } from '@/styles/ogoo/button.css';
+import { button } from '@/styles/ogoo';
+import { flexCenter, flexRowCenter } from '@/styles/ogoo/alignment.css';
 import { subText } from '@/styles/ogoo/colors.css';
+import { bodyMd } from '@/styles/ogoo/typography.css';
 import { cn } from '@/utils';
 
 export const KakaoLoginButton = () => {
   return (
     <button
-      className={cn(button({ color: 'kakao', size: 'md' }), buttonHover)}
+      className={cn(button({ color: 'kakao', size: 'md' }), loginHover)}
       onClick={() => {
         signIn('kakao', {
           redirect: true,
@@ -29,10 +30,15 @@ export const KakaoLoginButton = () => {
 
 export const KakaoLogoutButton = () => {
   return (
-    <button className={cn(subText, `my-5`)} onClick={() => signOut()}>
-      로그아웃
+    <button
+      className={cn(subText, bodyMd, flexRowCenter, logoutHover, `p-1`)}
+      onClick={() => signOut()}
+    >
+      <span className="mr-0.5">로그아웃</span>
+      <Image src="/svg/arrow_right.svg" alt="" width={16} height={16} priority className="py-0.5" />
     </button>
   );
 };
 
-const buttonHover = `hover:bg-yellow-300 ease-in duration-150`;
+const loginHover = `hover:bg-yellow-300 ease-in duration-150`;
+const logoutHover = `rounded hover:bg-neutral-100 ease-in duration-150`;

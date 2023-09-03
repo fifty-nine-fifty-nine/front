@@ -25,7 +25,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ko">
       <body className={cn(themeClass, Pretendard.className, flexCenter, bgSubPrimary)}>
-        <main className={cn(mainContainer, `flex-1 max-w-2xl relative overflow-hidden`)}>
+        <main
+          className={cn(mainContainer, `flex-1 max-w-md relative overflow-hidden drop-shadow-sm`)}
+        >
           <NextAuthProvider>{children}</NextAuthProvider>
         </main>
       </body>

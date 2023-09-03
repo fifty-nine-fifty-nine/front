@@ -48,6 +48,10 @@ const navbar = cn(
   border-t border-neutral-300 `,
 );
 
-const navbarMenu = cn(flexColCenter, caption, `h-full p-4 select-none hover:bg-neutral-100`);
+const navbarMenu = cn(
+  flexColCenter,
+  caption,
+  `h-full p-4 select-none hover:bg-neutral-100 transition-all duration-300 ease-in-out`,
+);
 
 const activeText = `${primary} font-bold`;

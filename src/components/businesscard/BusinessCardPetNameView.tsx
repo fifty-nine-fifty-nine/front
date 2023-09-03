@@ -1,10 +1,12 @@
+'use client';
+
 import { GenerateItem, GenerateView } from '@/components';
 import { button, input } from '@/styles/ogoo';
 import { flexCol, flexRow } from '@/styles/ogoo/alignment.css';
 import { subText } from '@/styles/ogoo/colors.css';
 import { cn } from '@/utils';
 
-export default async function BusinesscardOne() {
+export default function BusinessCardPetNameView() {
   return (
     <GenerateView
       questionNumber={'1'}

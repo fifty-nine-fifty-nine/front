@@ -1,3 +1,5 @@
+'use client';
+
 import { GenerateItem, GenerateView } from '@/components';
 import { button, input } from '@/styles/ogoo';
 import { flexCol } from '@/styles/ogoo/alignment.css';
@@ -5,7 +7,7 @@ import { subtitleText } from '@/styles/ogoo/colors.css';
 import { subtitleMd } from '@/styles/ogoo/typography.css';
 import { cn } from '@/utils';
 
-export default async function BusinesscardFive() {
+export default function BusinessCardPreferenceView() {
   return (
     <GenerateView
       questionNumber={'5'}

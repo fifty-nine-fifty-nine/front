@@ -1,9 +1,11 @@
+'use client';
+
 import { GenerateItem, GenerateView } from '@/components';
 import { input } from '@/styles/ogoo';
 import { flexCol } from '@/styles/ogoo/alignment.css';
 import { cn } from '@/utils';
 
-export default async function BusinesscardFour() {
+export default function BusinessCardFreindshipView() {
   return (
     <GenerateView
       questionNumber={'4'}

@@ -12,7 +12,7 @@ export const Template = ({ children, withNavbar = true }: Props) => {
   if (withNavbar)
     return (
       <>
-        <div className={`viewport h-[calc(100vh-80px)] overflow-y-auto overflow-x-hidden`}>
+        <div className={`viewport relative h-[calc(100vh-80px)] overflow-y-auto overflow-x-hidden`}>
           {children}
         </div>
         <Navbar />

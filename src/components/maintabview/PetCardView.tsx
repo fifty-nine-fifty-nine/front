@@ -14,11 +14,15 @@ interface Props {
 
 export const PetCardView = ({ active }: Props) => {
   return (
-    <section className={cn(active ? show : hide, `block w-full absolute top-0 pt-4 px-5`)}>
+    <section className={cn(active ? show : hide)}>
       <article
-        className={cn(flexColCenter, `overflow-hidden relative m-auto max-w-[400px] rounded-xl `)}
+        className={cn(flexColCenter, `relative m-auto max-w-[400px] rounded-xl overflow-hidden`)}
       >
-        <picture className="w-[400px] h-[274px] relative">
+        <picture
+          className={`w-[400px] ${
+            active ? 'h-[274px]' : 'h-0'
+          } relative ease-in duration-200 delay-150`}
+        >
           <Image
             src="/img/petcard_example_1.png"
             fill
@@ -52,7 +56,7 @@ export const PetCardView = ({ active }: Props) => {
   );
 };
 
-const show = `ease-in-out duration-300`;
+const show = `w-full absolute top-0 left-0 right-0 pt-4 px-5 ease-in-out duration-300`;
 const hide = `invisible scale-90 opacity-0 ease-in-out duration-300`;
 
 const bulletItem = cn(bodySm, optionalText, `font-normal list-disc list-inside`);

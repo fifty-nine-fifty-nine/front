@@ -1,10 +1,9 @@
 import Link from 'next/link';
 import { getServerSession } from 'next-auth';
 
-import { KakaoLogoutButton, Template } from '@/components';
-import { TabBarViewContainer } from '@/components/maintabview/TabBarViewContainer';
+import { KakaoLogoutButton, TabBarViewContainer, Template } from '@/components';
 import { authOptions } from '@/lib/auth';
-import { flexBetweenItemsEnd, flexCol, flexRowItemsEnd } from '@/styles/ogoo/alignment.css';
+import { flexCol, flexRowBetweenItemsEnd, flexRowItemsEnd } from '@/styles/ogoo/alignment.css';
 import { primary } from '@/styles/ogoo/colors.css';
 import { titleLg, titleMd } from '@/styles/ogoo/typography.css';
 import { cn } from '@/utils';
@@ -15,7 +14,7 @@ export default async function Home() {
   return (
     <Template>
       <div className={cn(flexCol, `bg-white`)}>
-        <header className={cn(flexBetweenItemsEnd, `pl-5 pr-4 h-24 mb-5`)}>
+        <header className={cn(flexRowBetweenItemsEnd, `pl-5 pr-4 h-24 mb-5`)}>
           <div className={cn(flexCol)}>
             <h1 className={cn(titleMd)}>
               <p>안녕하세요!</p>

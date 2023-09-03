@@ -31,13 +31,13 @@ export const flexColCenter = sprinkles({
   alignItems: 'center',
 });
 
-export const flexBetween = sprinkles({
+export const flexRowBetween = sprinkles({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
 });
 
-export const flexBetweenItemsEnd = sprinkles({
+export const flexRowBetweenItemsEnd = sprinkles({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'flex-end',

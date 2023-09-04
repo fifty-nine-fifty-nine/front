@@ -33,7 +33,7 @@ export default function InfoCardFormLayout({ children }: { children: React.React
           </div>
           <ProgressBar totalSteps={5} currentStep={currentPathNumber} />
         </header>
-        <div className="py-36 px-5">{children}</div>
+        <div className="py-36">{children}</div>
       </div>
     </Template>
   );

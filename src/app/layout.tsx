@@ -15,11 +15,6 @@ const Pretendard = localFont({
   src: './fonts/PretendardVariable.woff2',
 });
 
-export const metadata: Metadata = {
-  title: '5959',
-  description: '오구오구에 오신 것을 환영합니다',
-};
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ko">

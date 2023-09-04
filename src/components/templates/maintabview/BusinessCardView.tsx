@@ -3,9 +3,8 @@ import Link from 'next/link';
 import React from 'react';
 
 import { button } from '@/styles/ogoo';
-import { flexColCenter } from '@/styles/ogoo/alignment.css';
 import { optionalText, whiteText } from '@/styles/ogoo/colors.css';
-import { bodyLg } from '@/styles/ogoo/typography.css';
+import { bodyLg, bodySm } from '@/styles/ogoo/typography.css';
 import { cn } from '@/utils';
 
 interface Props {
@@ -28,9 +27,7 @@ export const BusinessCardView = ({ active }: Props) => {
             />
             <div>
               <p className={bodyLg}>힙하게 반려동물을 자랑하고,</p>
-              <p className={cn(optionalText, `text-[13px]`)}>
-                사진으로 저장해두고 언제든지 자랑하세요.
-              </p>
+              <p className={cn(optionalText, bodySm)}>사진으로 저장해두고 언제든지 자랑하세요.</p>
             </div>
           </li>
           <li className={'flex flex-row my-6'}>
@@ -44,7 +41,7 @@ export const BusinessCardView = ({ active }: Props) => {
             />
             <div>
               <p className={bodyLg}>반려동물의 세세한 정보까지 한눈에 확인하고,</p>
-              <p className={cn(optionalText, `text-[13px]`)}>
+              <p className={cn(optionalText, bodySm)}>
                 반려동물의 기본정보와 추가적으로 유의사항을 작성해 쉽게 확인하며 대비할 수 있어요.
               </p>
             </div>
@@ -60,7 +57,7 @@ export const BusinessCardView = ({ active }: Props) => {
             />
             <div>
               <p className={bodyLg}>빠르고 간편하게!</p>
-              <p className={cn(optionalText, `text-[13px]`)}>
+              <p className={cn(optionalText, bodySm)}>
                 간단한 정보 입력으로 2분만에 무료로 만들 수 있어요.
               </p>
             </div>
@@ -68,11 +65,11 @@ export const BusinessCardView = ({ active }: Props) => {
         </ul>
 
         <footer className={bottomButton}>
-          <button className={cn(button(), `mt-1 mb-8`)}>
-            <Link href={'/businesscard/1'}>
+          <Link href={'/businesscard/1'}>
+            <button className={cn(button(), buttonHover)}>
               <p className={whiteText}>2분만에 펫 명함 만들기</p>
-            </Link>
-          </button>
+            </button>
+          </Link>
         </footer>
       </section>
     </>
@@ -82,4 +79,5 @@ export const BusinessCardView = ({ active }: Props) => {
 const wrapper = `absolute top-0 left-0 right-0 bottom-0 flex flex-col justify-between`;
 const show = `ease-in-out duration-300`;
 const hide = `invisible scale-90 opacity-0 ease-in-out duration-300`;
-const bottomButton = cn(flexColCenter, `sticky left-0 right-0 bottom-0 px-5 pt-3`);
+const bottomButton = cn(`sticky left-0 right-0 bottom-0 px-5 pt-3 mb-8`);
+const buttonHover = `hover:opacity-90 transition duration-200 ease-in-out`;

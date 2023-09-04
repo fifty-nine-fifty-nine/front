@@ -4,7 +4,7 @@ import {
   BusinessCardPetNameView,
   BusinessCardPetPhotoView,
   BusinessCardPreferenceView,
-} from '@/components';
+} from '@/components/businesscard';
 
 export default function GenerateProgress({ params }: { params: { generateCount: string } }) {
   const currentPage = params.generateCount;

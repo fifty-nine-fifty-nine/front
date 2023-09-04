@@ -37,6 +37,7 @@ export const PetCardView = ({ active }: Props) => {
           <p className={subText}>파란 하늘 아래의 바닷가에 수영복을 입고있는 치와와</p>
         </div>
       </article>
+
       <div className={`w-full px-1 my-7`}>
         <strong className={cn(bodyLg, subText, `block pb-2`)}>유의사항</strong>
         <ul className={bulletItem}>
@@ -45,12 +46,13 @@ export const PetCardView = ({ active }: Props) => {
           <li>하루에 n번만 생성 가능합니다.</li>
         </ul>
       </div>
-      <footer className={cn(flexColCenter, `pt-3`)}>
-        <button className={cn(button(), `mb-8`)}>
-          <Link href={'/businesscard/1'}>
+
+      <footer className={`pt-3`}>
+        <Link href={'/petcard/1'}>
+          <button className={cn(button(), buttonHover, `mb-8`)}>
             <p className={whiteText}>순식간에 펫 카드 만들기</p>
-          </Link>
-        </button>
+          </button>
+        </Link>
       </footer>
     </section>
   );
@@ -58,5 +60,5 @@ export const PetCardView = ({ active }: Props) => {
 
 const show = `w-full absolute top-0 left-0 right-0 pt-4 px-5 ease-in-out duration-300`;
 const hide = `invisible scale-90 opacity-0 ease-in-out duration-300`;
-
+const buttonHover = `hover:opacity-90 transition duration-200 ease-in-out`;
 const bulletItem = cn(bodySm, optionalText, `font-normal list-disc list-inside`);

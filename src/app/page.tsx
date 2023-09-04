@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getServerSession } from 'next-auth';
 
@@ -7,6 +8,11 @@ import { flexCol, flexRowBetweenItemsEnd, flexRowItemsEnd } from '@/styles/ogoo/
 import { primary } from '@/styles/ogoo/colors.css';
 import { titleLg, titleMd } from '@/styles/ogoo/typography.css';
 import { cn } from '@/utils';
+
+export const metadata: Metadata = {
+  title: '5959',
+  description: '오구오구에 오신 것을 환영합니다',
+};
 
 export default async function Home() {
   const session = await getServerSession(authOptions);

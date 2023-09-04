@@ -31,7 +31,7 @@ export const BusinessCardPreferenceView = () => {
     <GenerateView
       questionNumber={'5'}
       title={'말랑이에 대해서 알아두면\n좋은 정보를 추가해주세요.'}
-      nextLink={'/businesscard'}
+      nextLink={'/'}
     >
       <div className={cn(flexCol, 'px-5 gap-8')}>
         <GenerateItem question={'말랑이는 이런 것들을 좋아해요.'}>

@@ -11,7 +11,7 @@ import { subText } from '@/styles/ogoo/colors.css';
 import { subtitle } from '@/styles/ogoo/typography.css';
 import { cn } from '@/utils';
 
-export default function BusinessCardAllergyView() {
+export const BusinessCardAllergyView = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const allergySheetOpen = () => {
@@ -96,7 +96,7 @@ export default function BusinessCardAllergyView() {
       </GenerateView>
     </div>
   );
-}
+};
 
 const listItem = cn(button({ size: 'xs', color: 'sub' }), subText);
 const allergeWrap = `flex gap-3 flex-wrap`;

@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React from 'react';
 
 import { button } from '@/styles/ogoo';
-import { flexBetween, flexColCenter } from '@/styles/ogoo/alignment.css';
+import { flexColCenter, flexRowBetween } from '@/styles/ogoo/alignment.css';
 import { whiteText } from '@/styles/ogoo/colors.css';
 import { titleMd } from '@/styles/ogoo/typography.css';
 import { cn } from '@/utils';
@@ -24,7 +24,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({ isOpen, onClose, children, ti
       )}
     >
       <div className="flex flex-col max-w-2xl  h-full rounded-t-xl bg-white">
-        <div className={cn(flexBetween, `h-[66px] border-b border-neutral-300 px-5`)}>
+        <div className={cn(flexRowBetween, `h-[66px] border-b border-neutral-300 px-5`)}>
           <h2 className={titleMd}>{title}</h2>
           <button className={'w-6 h-6'} onClick={onClose}>
             <Image

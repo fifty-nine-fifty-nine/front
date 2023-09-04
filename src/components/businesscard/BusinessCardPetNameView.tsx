@@ -6,7 +6,7 @@ import { flexCol, flexRow } from '@/styles/ogoo/alignment.css';
 import { subText } from '@/styles/ogoo/colors.css';
 import { cn } from '@/utils';
 
-export default function BusinessCardPetNameView() {
+export const BusinessCardPetNameView = () => {
   return (
     <GenerateView
       questionNumber={'1'}
@@ -42,4 +42,4 @@ export default function BusinessCardPetNameView() {
       </div>
     </GenerateView>
   );
-}
+};

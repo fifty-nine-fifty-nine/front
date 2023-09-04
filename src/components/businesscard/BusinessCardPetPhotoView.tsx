@@ -8,7 +8,7 @@ import { flexCol, flexColCenter } from '@/styles/ogoo/alignment.css';
 import { bgSub, optionalText } from '@/styles/ogoo/colors.css';
 import { cn } from '@/utils';
 
-export default function BusinessCardPetPhotoView() {
+export const BusinessCardPetPhotoView = () => {
   const fileRef = useRef<HTMLInputElement>(null);
 
   const handleClick = () => {
@@ -55,4 +55,4 @@ export default function BusinessCardPetPhotoView() {
       </div>
     </GenerateView>
   );
-}
+};

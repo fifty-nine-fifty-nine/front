@@ -5,7 +5,7 @@ import { input } from '@/styles/ogoo';
 import { flexCol } from '@/styles/ogoo/alignment.css';
 import { cn } from '@/utils';
 
-export default function BusinessCardFreindshipView() {
+export const BusinessCardFreindshipView = () => {
   return (
     <GenerateView
       questionNumber={'4'}
@@ -23,4 +23,4 @@ export default function BusinessCardFreindshipView() {
       </div>
     </GenerateView>
   );
-}
+};

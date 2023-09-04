@@ -9,7 +9,7 @@ import { subtitleText } from '@/styles/ogoo/colors.css';
 import { subtitleMd } from '@/styles/ogoo/typography.css';
 import { cn } from '@/utils';
 
-export default function BusinessCardPreferenceView() {
+export const BusinessCardPreferenceView = () => {
   const [likeInputCount, setLikeInputCount] = useState(1); // Initialize with 1 input
   const [unlikeInputCount, setUnLikeInputCount] = useState(1); // Initialize with 1 input
 
@@ -68,4 +68,4 @@ export default function BusinessCardPreferenceView() {
       </div>
     </GenerateView>
   );
-}
+};

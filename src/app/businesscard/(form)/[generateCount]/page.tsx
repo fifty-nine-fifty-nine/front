@@ -1,8 +1,10 @@
-import BusinessCardAllergyView from '@/components/businesscard/BusinessCardAllergyView';
-import BusinessCardFreindshipView from '@/components/businesscard/BusinessCardFreindshipView';
-import BusinessCardPetNameView from '@/components/businesscard/BusinessCardPetNameView';
-import BusinessCardPetPhotoView from '@/components/businesscard/BusinessCardPetPhotoView';
-import BusinessCardPreferenceView from '@/components/businesscard/BusinessCardPreferenceView';
+import {
+  BusinessCardAllergyView,
+  BusinessCardFreindshipView,
+  BusinessCardPetNameView,
+  BusinessCardPetPhotoView,
+  BusinessCardPreferenceView,
+} from '@/components';
 
 export default function GenerateProgress({ params }: { params: { generateCount: string } }) {
   const currentPage = params.generateCount;

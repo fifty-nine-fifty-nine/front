@@ -1,15 +1,25 @@
 import { sprinkles } from '../sprinkles.css';
 
-export const titleLg = sprinkles({
-  fontSize: '32',
-  fontWeight: 'bold',
-});
-
 export const titleMain = sprinkles({
   fontSize: '28',
   fontWeight: 'bold',
   color: 'primary',
   py: '20',
+});
+
+export const titleXxl = sprinkles({
+  fontSize: '32',
+  fontWeight: 'bold',
+});
+
+export const titleXl = sprinkles({
+  fontSize: '28',
+  fontWeight: 'bold',
+});
+
+export const titleLg = sprinkles({
+  fontSize: '26',
+  fontWeight: 'bold',
 });
 
 export const titleMd = sprinkles({
@@ -25,7 +35,6 @@ export const titleSm = sprinkles({
 export const subtitle = sprinkles({
   fontSize: '18',
   fontWeight: 'bold',
-  color: 'subtitleText',
 });
 
 export const subtitleMd = sprinkles({
@@ -44,7 +53,6 @@ export const bodyMd = sprinkles({
 
 export const bodySm = sprinkles({
   fontSize: '13',
-  fontWeight: 'bold',
 });
 
 export const caption = sprinkles({

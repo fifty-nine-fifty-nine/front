@@ -1,3 +1,9 @@
+'use client';
+
+import type { Dispatch, SetStateAction } from 'react';
+import { useEffect, useState } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
+
 import {
   BusinessCardAllergyView,
   BusinessCardFreindshipView,
@@ -5,26 +11,54 @@ import {
   BusinessCardPetPhotoView,
   BusinessCardPreferenceView,
 } from '@/components';
+import type { FormData } from '@/types/businesscardType';
 
 export default function GenerateProgress({ params }: { params: { generateCount: string } }) {
   const currentPage = params.generateCount;
 
-  if (currentPage === '1') {
-    return <BusinessCardPetNameView />;
-  }
+  const [businessCardFormData, setBusinessCardFormData] = useState<FormData>({
+    type: '',
+    petName: '',
+    gender: '',
+    petProfileImgPath: '',
+    birth: '',
+    species: '',
+    neutralization: false,
+    allergy: false,
+    mainAllerge: [],
+    subAllerge: [],
+    etcAllerge: [],
+    personalityToPerson: '',
+    personalityAmongAnimals: '',
+    petLike: [],
+    petHate: [],
+  });
 
-  if (currentPage === '2') {
-    return <BusinessCardPetPhotoView />;
-  }
+  const methods = useForm<FormData>();
 
-  if (currentPage === '3') {
-    return <BusinessCardAllergyView />;
-  }
+  useEffect(() => {
+    console.log(businessCardFormData);
+  }, [businessCardFormData]);
 
-  if (currentPage === '4') {
-    return <BusinessCardFreindshipView />;
-  }
-  if (currentPage === '5') {
-    return <BusinessCardPreferenceView />;
-  }
+  return (
+    <FormProvider {...methods}>
+      <div>
+        {currentPage === '1' && (
+          <BusinessCardPetNameView setBusinessCardFormData={setBusinessCardFormData} />
+        )}
+        {currentPage === '2' && (
+          <BusinessCardPetPhotoView setBusinessCardFormData={setBusinessCardFormData} />
+        )}
+        {currentPage === '3' && (
+          <BusinessCardAllergyView setBusinessCardFormData={setBusinessCardFormData} />
+        )}
+        {currentPage === '4' && (
+          <BusinessCardFreindshipView setBusinessCardFormData={setBusinessCardFormData} />
+        )}
+        {currentPage === '5' && (
+          <BusinessCardPreferenceView setBusinessCardFormData={setBusinessCardFormData} />
+        )}
+      </div>
+    </FormProvider>
+  );
 }

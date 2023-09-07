@@ -12,9 +12,16 @@ interface BottomSheetProps {
   onClose: () => void;
   title: string;
   children: React.ReactNode;
+  isConfirm: () => void;
 }
 
-const BottomSheet: React.FC<BottomSheetProps> = ({ isOpen, onClose, children, title }) => {
+const BottomSheet: React.FC<BottomSheetProps> = ({
+  isOpen,
+  onClose,
+  children,
+  title,
+  isConfirm,
+}) => {
   return (
     <div
       className={cn(
@@ -26,7 +33,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({ isOpen, onClose, children, ti
       <div className="flex flex-col max-w-2xl  h-full rounded-t-xl bg-white">
         <div className={cn(flexRowBetween, `h-[66px] border-b border-neutral-300 px-5`)}>
           <h2 className={titleMd}>{title}</h2>
-          <button className={'w-6 h-6'} onClick={onClose}>
+          <button type="button" className={'w-6 h-6'} onClick={() => onClose()}>
             <Image
               className={`mb-3`}
               src="/svg/xbutton.svg"
@@ -45,7 +52,14 @@ const BottomSheet: React.FC<BottomSheetProps> = ({ isOpen, onClose, children, ti
           `z-20	absolute max-w-2xl left-0 bottom-0 right-0 px-5 pt-3 h-24 bg-white`,
         )}
       >
-        <button className={cn(button(), 'bottom-8')} onClick={onClose}>
+        <button
+          type="button"
+          className={cn(button(), 'bottom-8')}
+          onClick={() => {
+            isConfirm();
+            onClose();
+          }}
+        >
           <p className={whiteText}>확인</p>
         </button>
       </footer>

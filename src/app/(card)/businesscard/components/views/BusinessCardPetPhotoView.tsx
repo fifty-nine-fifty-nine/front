@@ -52,7 +52,7 @@ export const BusinessCardPetPhotoView = ({ setBusinessCardFormData }: Props) => 
       species: data.species,
     }));
 
-    router.push('3');
+    window.history.pushState({}, '', '/businesscard/3');
   };
 
   return (

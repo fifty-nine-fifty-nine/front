@@ -103,7 +103,7 @@ export const BusinessCardView = ({ active }: Props) => {
       </div>
       <footer className={cn(flexColCenter, `pt-3`)}>
         <button className={cn(button(), `mb-8`)}>
-          <Link href={'/businesscard/1'}>
+          <Link href={'/businesscard'}>
             <p className={whiteText}>2분만에 펫 명함 만들기</p>
           </Link>
         </button>

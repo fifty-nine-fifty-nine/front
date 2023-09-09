@@ -46,7 +46,7 @@ export const BusinessCardPetNameView = ({ setBusinessCardFormData }: Props) => {
       gender: data.gender,
     }));
 
-    router.push('2');
+    window.history.pushState({}, '', '2');
   };
 
   return (

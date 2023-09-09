@@ -40,7 +40,7 @@ export const BusinessCardFreindshipView = ({ setBusinessCardFormData }: Props) =
       personalityAmongAnimals: data.personalityAmongAnimals,
     }));
 
-    router.push('5');
+    window.history.pushState({}, '', '/businesscard/5');
   };
 
   return (

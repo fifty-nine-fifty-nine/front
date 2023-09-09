@@ -1,6 +1,7 @@
 import { getServerSession } from 'next-auth';
 
-import { KakaoLogoutButton, Template, UserInfo } from '@/components';
+import { KakaoLogoutButton, UserInfo } from '@/components';
+import { Template } from '@/components/templates';
 import { authOptions } from '@/lib/auth';
 import { flexColCenter } from '@/styles/ogoo/alignment.css';
 import { cn } from '@/utils';

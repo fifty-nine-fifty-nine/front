@@ -59,6 +59,8 @@ export const BusinessCardAllergyView = ({ setBusinessCardFormData }: Props) => {
       subAllerge: data.subAllerge,
       etcAllerge: data.etcAllerge,
     }));
+
+    window.history.pushState({}, '', '/businesscard/4');
   };
 
   const handleButtonClickToForm = (field: keyof BusinessCardFormData, value: any) => {

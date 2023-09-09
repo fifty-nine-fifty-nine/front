@@ -11,13 +11,16 @@ import { button } from '@/styles/ogoo';
 import { flexCol, flexRow } from '@/styles/ogoo/alignment.css';
 import { secondary, subText } from '@/styles/ogoo/colors.css';
 import { caption, subtitle } from '@/styles/ogoo/typography.css';
-import type { FormData } from '@/types/businesscardType';
+import type { BusinessCardFormData } from '@/types';
 import { cn } from '@/utils';
 
-type UpdateAllergesForForm = Pick<FormData, 'mainAllerge' | 'subAllerge' | 'etcAllerge'>;
+type UpdateAllergesForForm = Pick<
+  BusinessCardFormData,
+  'mainAllerge' | 'subAllerge' | 'etcAllerge'
+>;
 
 interface Props {
-  setBusinessCardFormData: Dispatch<SetStateAction<FormData>>;
+  setBusinessCardFormData: Dispatch<SetStateAction<BusinessCardFormData>>;
 }
 
 export const BusinessCardAllergyView = ({ setBusinessCardFormData }: Props) => {
@@ -28,7 +31,7 @@ export const BusinessCardAllergyView = ({ setBusinessCardFormData }: Props) => {
     watch,
     control,
     formState: { isValid },
-  } = useFormContext<FormData>();
+  } = useFormContext<BusinessCardFormData>();
   const [updateAllergesForForm, setUpdateAllergesForForm] = useState<UpdateAllergesForForm>({
     mainAllerge: [],
     subAllerge: [],
@@ -37,7 +40,7 @@ export const BusinessCardAllergyView = ({ setBusinessCardFormData }: Props) => {
 
   const formData = watch();
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = (data: BusinessCardFormData) => {
     if (isValid) {
       console.log('Please enter the required value!');
       return;
@@ -48,7 +51,7 @@ export const BusinessCardAllergyView = ({ setBusinessCardFormData }: Props) => {
       }
     }
 
-    setBusinessCardFormData((prevFormData: FormData) => ({
+    setBusinessCardFormData((prevFormData: BusinessCardFormData) => ({
       ...prevFormData,
       neutralization: data.neutralization,
       allergy: data.allergy,
@@ -58,7 +61,7 @@ export const BusinessCardAllergyView = ({ setBusinessCardFormData }: Props) => {
     }));
   };
 
-  const handleButtonClickToForm = (field: keyof FormData, value: any) => {
+  const handleButtonClickToForm = (field: keyof BusinessCardFormData, value: any) => {
     setValue(field, value);
   };
 

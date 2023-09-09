@@ -11,12 +11,12 @@ import {
   BusinessCardPetPhotoView,
   BusinessCardPreferenceView,
 } from '@/components';
-import type { FormData } from '@/types/businesscardType';
+import type { BusinessCardFormData } from '@/types';
 
 export default function GenerateProgress({ params }: { params: { generateCount: string } }) {
   const currentPage = params.generateCount;
 
-  const [businessCardFormData, setBusinessCardFormData] = useState<FormData>({
+  const [businessCardFormData, setBusinessCardFormData] = useState<BusinessCardFormData>({
     type: '',
     petName: '',
     gender: '',
@@ -34,7 +34,7 @@ export default function GenerateProgress({ params }: { params: { generateCount: 
     petHate: [],
   });
 
-  const methods = useForm<FormData>();
+  const methods = useForm<BusinessCardFormData>();
 
   useEffect(() => {
     console.log(businessCardFormData);

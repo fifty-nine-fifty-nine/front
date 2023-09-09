@@ -9,11 +9,11 @@ import { button, input } from '@/styles/ogoo';
 import { flexCol } from '@/styles/ogoo/alignment.css';
 import { secondary, subtitleText } from '@/styles/ogoo/colors.css';
 import { caption, subtitleMd } from '@/styles/ogoo/typography.css';
-import type { FormData } from '@/types/businesscardType';
+import type { BusinessCardFormData } from '@/types';
 import { cn } from '@/utils';
 
 interface Props {
-  setBusinessCardFormData: Dispatch<SetStateAction<FormData>>;
+  setBusinessCardFormData: Dispatch<SetStateAction<BusinessCardFormData>>;
 }
 
 export const BusinessCardPreferenceView = ({ setBusinessCardFormData }: Props) => {
@@ -22,7 +22,7 @@ export const BusinessCardPreferenceView = ({ setBusinessCardFormData }: Props) =
     register,
     control,
     formState: { isValid },
-  } = useFormContext<FormData>();
+  } = useFormContext<BusinessCardFormData>();
 
   const [likeInputCount, setLikeInputCount] = useState(1);
   const [hateInputCount, setHateInputCount] = useState(1);
@@ -41,7 +41,7 @@ export const BusinessCardPreferenceView = ({ setBusinessCardFormData }: Props) =
     }
   };
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = (data: BusinessCardFormData) => {
     console.log(data, isValid);
 
     if (!isValid) {
@@ -49,7 +49,7 @@ export const BusinessCardPreferenceView = ({ setBusinessCardFormData }: Props) =
       return;
     }
 
-    setBusinessCardFormData((prevFormData: FormData) => ({
+    setBusinessCardFormData((prevFormData: BusinessCardFormData) => ({
       ...prevFormData,
       petLike: data.petLike,
       petHate: data.petHate,

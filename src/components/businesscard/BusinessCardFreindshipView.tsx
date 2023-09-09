@@ -9,11 +9,11 @@ import { input } from '@/styles/ogoo';
 import { flexCol } from '@/styles/ogoo/alignment.css';
 import { secondary } from '@/styles/ogoo/colors.css';
 import { caption } from '@/styles/ogoo/typography.css';
-import type { FormData } from '@/types/businesscardType';
+import type { BusinessCardFormData } from '@/types';
 import { cn } from '@/utils';
 
 interface Props {
-  setBusinessCardFormData: Dispatch<SetStateAction<FormData>>;
+  setBusinessCardFormData: Dispatch<SetStateAction<BusinessCardFormData>>;
 }
 
 export const BusinessCardFreindshipView = ({ setBusinessCardFormData }: Props) => {
@@ -22,11 +22,11 @@ export const BusinessCardFreindshipView = ({ setBusinessCardFormData }: Props) =
     register,
     control,
     formState: { isValid },
-  } = useFormContext<FormData>();
+  } = useFormContext<BusinessCardFormData>();
 
   const router = useRouter();
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = (data: BusinessCardFormData) => {
     console.log(data, isValid);
 
     if (!isValid) {
@@ -34,7 +34,7 @@ export const BusinessCardFreindshipView = ({ setBusinessCardFormData }: Props) =
       return;
     }
 
-    setBusinessCardFormData((prevFormData: FormData) => ({
+    setBusinessCardFormData((prevFormData: BusinessCardFormData) => ({
       ...prevFormData,
       personalityToPerson: data.personalityToPerson,
       personalityAmongAnimals: data.personalityAmongAnimals,

@@ -10,11 +10,11 @@ import { input } from '@/styles/ogoo';
 import { flexCol, flexColCenter } from '@/styles/ogoo/alignment.css';
 import { bgSub, optionalText, secondary } from '@/styles/ogoo/colors.css';
 import { caption } from '@/styles/ogoo/typography.css';
-import type { FormData } from '@/types/businesscardType';
+import type { BusinessCardFormData } from '@/types';
 import { cn } from '@/utils';
 
 interface Props {
-  setBusinessCardFormData: Dispatch<SetStateAction<FormData>>;
+  setBusinessCardFormData: Dispatch<SetStateAction<BusinessCardFormData>>;
 }
 
 export const BusinessCardPetPhotoView = ({ setBusinessCardFormData }: Props) => {
@@ -24,7 +24,7 @@ export const BusinessCardPetPhotoView = ({ setBusinessCardFormData }: Props) => 
     setValue,
     control,
     formState: { isValid },
-  } = useFormContext<FormData>();
+  } = useFormContext<BusinessCardFormData>();
 
   const fileRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
@@ -37,7 +37,7 @@ export const BusinessCardPetPhotoView = ({ setBusinessCardFormData }: Props) => 
     const targetFiles = e.target as HTMLInputElement;
   };
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = (data: BusinessCardFormData) => {
     console.log(data, isValid);
 
     if (!isValid) {
@@ -45,7 +45,7 @@ export const BusinessCardPetPhotoView = ({ setBusinessCardFormData }: Props) => 
       return;
     }
 
-    setBusinessCardFormData((prevFormData: FormData) => ({
+    setBusinessCardFormData((prevFormData: BusinessCardFormData) => ({
       ...prevFormData,
       petProfileImgPath: data.petProfileImgPath,
       birth: data.birth,

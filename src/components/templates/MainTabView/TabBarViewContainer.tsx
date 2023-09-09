@@ -15,7 +15,7 @@ export const TabBarViewContainer = () => {
     <>
       <TabBar tabIndex={tabIndex} />
 
-      <div className={`relative h-[calc(100vh-250px)] bg-white`}>
+      <div className={`relative h-[calc(100vh-260px)] bg-white`}>
         <BusinessCardView active={tabIndex == 0} />
         <PetCardView active={tabIndex == 1} />
       </div>

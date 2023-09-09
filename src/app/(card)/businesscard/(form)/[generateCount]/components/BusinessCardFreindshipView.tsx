@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import type { Dispatch, SetStateAction } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
-import { GenerateItem, GenerateView } from '@/components';
+import { GenerateItem, GenerateView } from '@/components/templates';
 import { input } from '@/styles/ogoo';
 import { flexCol } from '@/styles/ogoo/alignment.css';
 import { secondary } from '@/styles/ogoo/colors.css';

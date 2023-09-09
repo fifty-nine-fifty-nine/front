@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 
-import { ProgressBar, Template } from '@/components';
+import { ProgressBar, Template } from '@/components/templates';
 import { optionalText } from '@/styles/ogoo/colors.css';
 import { cn } from '@/utils';
 

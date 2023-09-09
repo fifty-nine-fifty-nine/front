@@ -4,7 +4,7 @@ import type { Dispatch, SetStateAction } from 'react';
 import { useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
-import { GenerateItem, GenerateView } from '@/components';
+import { GenerateItem, GenerateView } from '@/components/templates';
 import { button, input } from '@/styles/ogoo';
 import { flexCol } from '@/styles/ogoo/alignment.css';
 import { secondary, subtitleText } from '@/styles/ogoo/colors.css';

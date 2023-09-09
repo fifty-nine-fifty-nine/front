@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { getServerSession } from 'next-auth';
 
-import { KakaoLogoutButton, TabBarViewContainer, Template } from '@/components';
+import { KakaoLogoutButton } from '@/components';
+import { TabBarViewContainer, Template } from '@/components/templates';
 import { authOptions } from '@/lib/auth';
 import { flexCol, flexRowBetweenItemsEnd, flexRowItemsEnd } from '@/styles/ogoo/alignment.css';
 import { primary } from '@/styles/ogoo/colors.css';

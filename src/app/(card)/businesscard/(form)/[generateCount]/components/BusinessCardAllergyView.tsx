@@ -4,8 +4,8 @@ import type { Dispatch, SetStateAction } from 'react';
 import { useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
-import { GenerateItem, GenerateView } from '@/components';
-import BottomUpSheet from '@/components/common/BottomSheet';
+import { BottomSheet } from '@/components';
+import { GenerateItem, GenerateView } from '@/components/templates';
 import { AllergeListTable } from '@/data';
 import { button } from '@/styles/ogoo';
 import { flexCol, flexRow } from '@/styles/ogoo/alignment.css';
@@ -204,7 +204,7 @@ export const BusinessCardAllergyView = ({ setBusinessCardFormData }: Props) => {
             )}
           ></Controller>
         </div>
-        <BottomUpSheet
+        <BottomSheet
           isOpen={isOpen}
           onClose={allergySheetClose}
           title={'알러지가 있어요'}
@@ -266,7 +266,7 @@ export const BusinessCardAllergyView = ({ setBusinessCardFormData }: Props) => {
               </div>
             </div>
           </div>
-        </BottomUpSheet>
+        </BottomSheet>
       </GenerateView>
     </div>
   );

@@ -1,8 +1,9 @@
 'use client';
 
-import type { Dispatch, SetStateAction } from 'react';
 import { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+
+import type { BusinessCardFormData } from '@/types';
 
 import {
   BusinessCardAllergyView,
@@ -10,8 +11,7 @@ import {
   BusinessCardPetNameView,
   BusinessCardPetPhotoView,
   BusinessCardPreferenceView,
-} from '@/components';
-import type { BusinessCardFormData } from '@/types';
+} from './components';
 
 export default function GenerateProgress({ params }: { params: { generateCount: string } }) {
   const currentPage = params.generateCount;

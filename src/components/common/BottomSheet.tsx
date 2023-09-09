@@ -15,7 +15,7 @@ interface BottomSheetProps {
   isConfirm: () => void;
 }
 
-const BottomSheet: React.FC<BottomSheetProps> = ({
+export const BottomSheet: React.FC<BottomSheetProps> = ({
   isOpen,
   onClose,
   children,
@@ -66,5 +66,3 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
     </div>
   );
 };
-
-export default BottomSheet;

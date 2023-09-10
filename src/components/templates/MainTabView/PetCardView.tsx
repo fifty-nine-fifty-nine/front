@@ -12,7 +12,7 @@ interface Props {
   active: boolean;
 }
 
-export const PetCardView = ({ active }: Props) => {
+export const MainPetCardView = ({ active }: Props) => {
   return (
     <section className={cn(active ? show : hide)}>
       <article
@@ -47,7 +47,7 @@ export const PetCardView = ({ active }: Props) => {
       </div>
       <footer className={cn(flexColCenter, `pt-3`)}>
         <button className={cn(button(), `mb-8`)}>
-          <Link href={'/businesscard/1'}>
+          <Link href={'/petcard'}>
             <p className={whiteText}>순식간에 펫 카드 만들기</p>
           </Link>
         </button>

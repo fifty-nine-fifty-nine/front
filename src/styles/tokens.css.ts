@@ -21,6 +21,7 @@ const grayScale = {
 export const [themeClass, themeVars] = createTheme({
   colors: {
     primary: primary,
+    primarySub: primarySub,
     secondary: secondary,
     blackText: black,
     whiteText: white,

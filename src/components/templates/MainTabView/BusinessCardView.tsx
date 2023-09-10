@@ -12,7 +12,7 @@ interface Props {
   active: boolean;
 }
 
-export const BusinessCardView = ({ active }: Props) => {
+export const MainBusinessCardView = ({ active }: Props) => {
   return (
     <section className={cn(active ? show : hide)}>
       <article

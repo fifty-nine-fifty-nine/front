@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 
 import { button } from '@/styles/ogoo';
-import { flexColCenter } from '@/styles/ogoo/alignment.css';
+import { flexColCenter, flexRowCenter } from '@/styles/ogoo/alignment.css';
 import { optionalText, whiteText } from '@/styles/ogoo/colors.css';
 import { bodyLg } from '@/styles/ogoo/typography.css';
 import { cn } from '@/utils';
@@ -14,9 +14,43 @@ interface Props {
 
 export const BusinessCardView = ({ active }: Props) => {
   return (
-    <>
-      <section className={cn(wrapper, active ? show : hide)}>
-        <ul className="px-8">
+    <section className={cn(active ? show : hide)}>
+      <article
+        className={cn(
+          flexRowCenter,
+          `relative m-auto max-w-[400px] rounded-xl overflow-hidden gap-6`,
+        )}
+      >
+        <picture
+          className={`w-[146px] ${
+            active ? 'h-[220px]' : 'h-0'
+          } relative ease-in duration-200 delay-150`}
+        >
+          <Image
+            src="/img/bussinesscardFront_example.png"
+            fill
+            sizes="100%"
+            alt=""
+            priority
+            className="object-cover"
+          />
+        </picture>
+        <picture
+          className={`w-[146px] ${
+            active ? 'h-[225px]' : 'h-0'
+          } relative ease-in duration-200 delay-150`}
+        >
+          <Image
+            src="/img/bussinesscardBack_example.png"
+            fill
+            alt=""
+            priority
+            className="object-cover"
+          />
+        </picture>
+      </article>
+      <div className={`w-full my-7`}>
+        <ul className="px-4">
           <li className={'flex flex-row my-6'}>
             <Image
               className={`mr-8`}
@@ -66,20 +100,17 @@ export const BusinessCardView = ({ active }: Props) => {
             </div>
           </li>
         </ul>
-
-        <footer className={bottomButton}>
-          <button className={cn(button(), `mt-1 mb-8`)}>
-            <Link href={'/businesscard/1'}>
-              <p className={whiteText}>2분만에 펫 명함 만들기</p>
-            </Link>
-          </button>
-        </footer>
-      </section>
-    </>
+      </div>
+      <footer className={cn(flexColCenter, `pt-3`)}>
+        <button className={cn(button(), `mb-8`)}>
+          <Link href={'/businesscard'}>
+            <p className={whiteText}>2분만에 펫 명함 만들기</p>
+          </Link>
+        </button>
+      </footer>
+    </section>
   );
 };
 
-const wrapper = `absolute top-0 left-0 right-0 bottom-0 flex flex-col justify-between`;
-const show = `ease-in-out duration-300`;
+const show = `w-full absolute top-0 left-0 right-0 pt-4 px-5 ease-in-out duration-300`;
 const hide = `invisible scale-90 opacity-0 ease-in-out duration-300`;
-const bottomButton = cn(flexColCenter, `sticky left-0 right-0 bottom-0 px-5 pt-3`);

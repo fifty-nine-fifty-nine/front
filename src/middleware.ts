@@ -5,12 +5,7 @@ import { getToken } from 'next-auth/jwt';
 export { default } from 'next-auth/middleware';
 
 export const config = {
-  matcher: [
-    '/admin/:path*',
-    '/mypage/:path*',
-    '/infocard/generate/:path*',
-    '/card/generate/:path*',
-  ],
+  matcher: ['/mypage/:path*', '/businesscard/:path*', '/petcard/:path*'],
 };
 
 export async function middleware(request: NextRequest) {

@@ -1,10 +1,9 @@
 import React from 'react';
 
-import { Navbar } from '.';
+import { Navbar } from '../common';
 
 interface Props {
   children: React.ReactNode;
-  withHeader?: Boolean; // TODO: 뒤로가기 헤더 추가
   withNavbar?: Boolean;
 }
 

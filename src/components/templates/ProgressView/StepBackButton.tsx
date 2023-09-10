@@ -8,7 +8,7 @@ interface Props {
   currentStep?: number;
   setCurrentStep?: (step: string) => void;
   link?: string;
-  shallow: boolean;
+  shallow?: boolean;
 }
 
 type PropsWithOptionalFields =

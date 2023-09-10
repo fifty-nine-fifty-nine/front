@@ -1,7 +1,5 @@
 'use client';
 
-// import Link from 'next/link';
-
 import { button } from '@/styles/ogoo';
 import { flexCol, flexColCenter } from '@/styles/ogoo/alignment.css';
 import { whiteText } from '@/styles/ogoo/colors.css';

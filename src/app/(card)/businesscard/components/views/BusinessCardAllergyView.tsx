@@ -115,8 +115,11 @@ export const BusinessCardAllergyView = ({ setBusinessCardFormData }: Props) => {
       )}
       <GenerateView
         questionNumber={'3'}
-        title={'말랑이는 N살이군요!\n말랑이에 대해 조금 더 알려주세요!'}
+        title={() =>
+          `${watch('petName')}는 N살이군요!\n${watch('petName')}에 대해 조금 더 알려주세요!`
+        }
         onSubmit={handleSubmit(onSubmit)}
+        watch={watch}
       >
         <div className={cn(flexCol, 'px-5 gap-8')}>
           <Controller

@@ -69,7 +69,7 @@ export const BusinessCardGeneration = () => {
             </p>
           </div>
         </div>
-        <ProgressBar totalSteps={5} currentStep={+currentStep} />
+        <ProgressBar totalSteps={TOTAL_STEPS} currentStep={+currentStep} />
       </header>
 
       <FormProvider {...methods}>

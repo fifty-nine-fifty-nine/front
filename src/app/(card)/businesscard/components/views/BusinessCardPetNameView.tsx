@@ -22,6 +22,7 @@ export const BusinessCardPetNameView = ({ setBusinessCardFormData }: Props) => {
     register,
     setValue,
     control,
+    watch,
     formState: { isValid },
   } = useFormContext<BusinessCardFormData>();
 
@@ -52,8 +53,9 @@ export const BusinessCardPetNameView = ({ setBusinessCardFormData }: Props) => {
   return (
     <GenerateView
       questionNumber={'1'}
-      title={'집사님의 반려동물에 대해\n알려주세요'}
+      title={() => '집사님의 반려동물에 대해\n알려주세요'}
       onSubmit={handleSubmit(onSubmit)}
+      watch={watch}
     >
       <div className={cn(flexCol, 'px-5 gap-8')}>
         <Controller

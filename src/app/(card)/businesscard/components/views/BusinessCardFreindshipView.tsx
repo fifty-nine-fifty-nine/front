@@ -21,6 +21,7 @@ export const BusinessCardFreindshipView = ({ setBusinessCardFormData }: Props) =
     handleSubmit,
     register,
     control,
+    watch,
     formState: { isValid },
   } = useFormContext<BusinessCardFormData>();
 
@@ -47,8 +48,9 @@ export const BusinessCardFreindshipView = ({ setBusinessCardFormData }: Props) =
     <form>
       <GenerateView
         questionNumber={'4'}
-        title={'말랑이는 어떤 성격을\n가지고 있나요?'}
+        title={(watch) => `${watch('petName')}는 어떤 성격을\n가지고 있나요?`}
         onSubmit={handleSubmit(onSubmit)}
+        watch={watch}
       >
         <div className={cn(flexCol, 'px-5 gap-8')}>
           <Controller

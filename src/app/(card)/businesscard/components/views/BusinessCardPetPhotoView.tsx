@@ -23,6 +23,7 @@ export const BusinessCardPetPhotoView = ({ setBusinessCardFormData }: Props) => 
     register,
     setValue,
     control,
+    watch,
     formState: { isValid },
   } = useFormContext<BusinessCardFormData>();
 
@@ -59,8 +60,9 @@ export const BusinessCardPetPhotoView = ({ setBusinessCardFormData }: Props) => 
     <form>
       <GenerateView
         questionNumber={'2'}
-        title={'함께하는 반려동물에 대해서\n자세히 소개해 주세요!'}
+        title={() => '함께하는 반려동물에 대해서\n자세히 소개해 주세요!'}
         onSubmit={handleSubmit(onSubmit)}
+        watch={watch}
       >
         <div className={cn(flexCol, 'px-5 gap-8')}>
           <GenerateItem question={'반려동물의 사진을 추가해주세요.'}>

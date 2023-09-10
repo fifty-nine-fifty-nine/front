@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
-import { button } from '@/styles/ogoo';
+import { button, buttonHover } from '@/styles/ogoo';
 import { flexColCenter } from '@/styles/ogoo/alignment.css';
 import { bgSub, optionalText, subText, whiteText } from '@/styles/ogoo/colors.css';
 import { bodyLg, bodySm } from '@/styles/ogoo/typography.css';
@@ -12,7 +12,7 @@ interface Props {
   active: boolean;
 }
 
-export const PetCardView = ({ active }: Props) => {
+export const MainPetCardView = ({ active }: Props) => {
   return (
     <section className={cn(active ? show : hide)}>
       <article
@@ -37,7 +37,7 @@ export const PetCardView = ({ active }: Props) => {
           <p className={subText}>파란 하늘 아래의 바닷가에 수영복을 입고있는 치와와</p>
         </div>
       </article>
-      <div className={`w-full px-1 my-7`}>
+      <div className={`w-full px-1 mt-7 mb-10`}>
         <strong className={cn(bodyLg, subText, `block pb-2`)}>유의사항</strong>
         <ul className={bulletItem}>
           <li>펫 카드는 생성된 후 마이페이지에 저장되지 않습니다.</li>
@@ -45,12 +45,12 @@ export const PetCardView = ({ active }: Props) => {
           <li>하루에 n번만 생성 가능합니다.</li>
         </ul>
       </div>
-      <footer className={cn(flexColCenter, `pt-3`)}>
-        <button className={cn(button(), `mb-8`)}>
-          <Link href={'/businesscard/1'}>
+      <footer className={cn(flexColCenter, `mb-8`)}>
+        <Link href={'/petcard'} className="w-full">
+          <button className={cn(button(), buttonHover)}>
             <p className={whiteText}>순식간에 펫 카드 만들기</p>
-          </Link>
-        </button>
+          </button>
+        </Link>
       </footer>
     </section>
   );

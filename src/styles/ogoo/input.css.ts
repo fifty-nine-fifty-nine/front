@@ -5,6 +5,17 @@ import { themeVars } from '..';
 export const input = recipe({
   base: {
     display: 'block',
+    width: '100%',
+    borderRadius: 12,
+    fontSize: 18,
+    fontWeight: 500,
+    border: `2px solid ${themeVars.colors.input}`,
+    padding: 20,
+    ':focus': {
+      border: `2px solid ${themeVars.colors.primarySub}`,
+    },
+    outline: 'none',
+    transition: `all 150 ease-in-out`,
   },
 
   variants: {
@@ -13,13 +24,10 @@ export const input = recipe({
     },
     line: {
       single: {
-        width: '100%',
         height: 60,
-        borderRadius: 12,
-        fontSize: 18,
-        fontWeight: 500,
-        border: `solid ${themeVars.colors.input}`,
-        padding: 20,
+      },
+      multiple: {
+        height: 180,
       },
     },
   },

@@ -1,3 +1,4 @@
+import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 import { bgKakao, bgOptional, bgPrimary, bgSecondary, bgSub } from './colors.css';
@@ -26,5 +27,12 @@ export const button = recipe({
   defaultVariants: {
     color: 'primary',
     size: 'lg',
+  },
+});
+
+export const buttonHover = style({
+  transition: 'all 200 ease-in-out',
+  ':hover': {
+    opacity: '90%',
   },
 });

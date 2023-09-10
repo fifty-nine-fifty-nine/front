@@ -3,6 +3,7 @@
 import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { match } from 'ts-pattern';
 
 import { ProgressBar, StepBackButton } from '@/components/templates';
 import { usePushStateListener } from '@/hooks';
@@ -73,21 +74,25 @@ export const BusinessCardGeneration = () => {
       </header>
 
       <FormProvider {...methods}>
-        {currentStep === '1' && (
-          <Step.BusinessCardPetNameView setBusinessCardFormData={setBusinessCardFormData} />
-        )}
-        {currentStep === '2' && (
-          <Step.BusinessCardPetPhotoView setBusinessCardFormData={setBusinessCardFormData} />
-        )}
-        {currentStep === '3' && (
-          <Step.BusinessCardAllergyView setBusinessCardFormData={setBusinessCardFormData} />
-        )}
-        {currentStep === '4' && (
-          <Step.BusinessCardFreindshipView setBusinessCardFormData={setBusinessCardFormData} />
-        )}
-        {currentStep === '5' && (
-          <Step.BusinessCardPreferenceView setBusinessCardFormData={setBusinessCardFormData} />
-        )}
+        {match(currentStep)
+          .with('1', () => (
+            <Step.BusinessCardPetNameView setBusinessCardFormData={setBusinessCardFormData} />
+          ))
+          .with('2', () => (
+            <Step.BusinessCardPetPhotoView setBusinessCardFormData={setBusinessCardFormData} />
+          ))
+          .with('3', () => (
+            <Step.BusinessCardAllergyView setBusinessCardFormData={setBusinessCardFormData} />
+          ))
+          .with('4', () => (
+            <Step.BusinessCardFreindshipView setBusinessCardFormData={setBusinessCardFormData} />
+          ))
+          .with('5', () => (
+            <Step.BusinessCardPreferenceView setBusinessCardFormData={setBusinessCardFormData} />
+          ))
+          .otherwise(() => (
+            <></>
+          ))}
       </FormProvider>
     </>
   );

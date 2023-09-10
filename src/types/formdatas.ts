@@ -17,7 +17,7 @@ export interface BusinessCardFormData {
 }
 
 export interface PetCardFormData {
-  type: AnimalTypeEnum | null;
+  type: AnimalTypeEnum;
   name: string;
   description: string;
 }

@@ -3,8 +3,8 @@
 import { useSearchParams } from 'next/navigation';
 import React from 'react';
 
-import { MainBusinessCardView } from './BusinessCardView';
-import { MainPetCardView } from './PetCardView';
+import { MainBusinessCardView } from './MainBusinessCardView';
+import { MainPetCardView } from './MainPetCardView';
 import { TabBar } from './TabBar';
 
 export const TabBarViewContainer = () => {

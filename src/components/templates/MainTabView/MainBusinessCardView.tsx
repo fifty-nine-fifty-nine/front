@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
-import { button } from '@/styles/ogoo';
+import { button, buttonHover } from '@/styles/ogoo';
 import { flexColCenter, flexRowCenter } from '@/styles/ogoo/alignment.css';
 import { optionalText, whiteText } from '@/styles/ogoo/colors.css';
 import { bodyLg } from '@/styles/ogoo/typography.css';
@@ -49,7 +49,7 @@ export const MainBusinessCardView = ({ active }: Props) => {
           />
         </picture>
       </article>
-      <div className={`w-full my-7`}>
+      <div className={`w-full mt-7 mb-10`}>
         <ul className="px-4">
           <li className={'flex flex-row my-6'}>
             <Image
@@ -101,12 +101,12 @@ export const MainBusinessCardView = ({ active }: Props) => {
           </li>
         </ul>
       </div>
-      <footer className={cn(flexColCenter, `pt-3`)}>
-        <button className={cn(button(), `mb-8`)}>
-          <Link href={'/businesscard'}>
+      <footer className={cn(flexColCenter, `mb-8`)}>
+        <Link href={'/businesscard'} className="w-full">
+          <button className={cn(button(), buttonHover)}>
             <p className={whiteText}>2분만에 펫 명함 만들기</p>
-          </Link>
-        </button>
+          </button>
+        </Link>
       </footer>
     </section>
   );

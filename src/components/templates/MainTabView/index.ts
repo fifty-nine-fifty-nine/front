@@ -1,4 +1,4 @@
-export * from './BusinessCardView';
-export * from './PetCardView';
+export * from './MainBusinessCardView';
+export * from './MainPetCardView';
 export * from './TabBar';
 export * from './TabBarViewContainer';

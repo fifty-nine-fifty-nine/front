@@ -2,7 +2,7 @@
 
 import type { FieldValues, UseFormWatch } from 'react-hook-form';
 
-import { button } from '@/styles/ogoo';
+import { button, buttonHover } from '@/styles/ogoo';
 import { flexCol, flexColCenter } from '@/styles/ogoo/alignment.css';
 import { whiteText } from '@/styles/ogoo/colors.css';
 import { titleLg, titleMd } from '@/styles/ogoo/typography.css';
@@ -35,7 +35,7 @@ export const GenerateView = <T extends FieldValues>({
       <footer
         className={cn(flexColCenter, `absolute left-0 bottom-0 right-0 px-5 pt-3 h-24 bg-white`)}
       >
-        <button type="button" className={cn(button(), 'bottom-8')} onClick={onSubmit}>
+        <button type="button" className={cn(button(), buttonHover)} onClick={onSubmit}>
           <p className={whiteText}>다음</p>
         </button>
       </footer>

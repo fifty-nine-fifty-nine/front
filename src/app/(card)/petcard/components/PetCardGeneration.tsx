@@ -24,7 +24,7 @@ export const PetCardGeneration = () => {
 
   const allStepsCompleted = submitCount === TOTAL_STEPS;
 
-  // TODO: if (allStepsCompleted) /pets/cards 후 리턴받은 response를
+  // TODO: if (allStepsCompleted) /pets/cards POST 후 리턴받은 response를
   // share/${type}?name=${name}&img_url=${img_url}로 넘겨주기
   // (redirect 또는 pushState)
 

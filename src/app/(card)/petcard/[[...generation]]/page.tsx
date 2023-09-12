@@ -1,6 +1,8 @@
 'use client';
 import { redirect, usePathname } from 'next/navigation';
+import { Suspense } from 'react';
 
+import Loading from '../../loading';
 import { PetCardGeneration } from '../components';
 
 export default function PetBusinessCardPage() {
@@ -8,6 +10,10 @@ export default function PetBusinessCardPage() {
   if (pathname != '/petcard') {
     redirect('/petcard');
   } else {
-    return <PetCardGeneration />;
+    return (
+      <Suspense fallback={<Loading />}>
+        <PetCardGeneration />
+      </Suspense>
+    );
   }
 }

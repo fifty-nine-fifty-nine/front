@@ -4,7 +4,7 @@ export default function InfoCardFormLayout({ children }: { children: React.React
   return (
     <Template withNavbar={false}>
       <div className={`viewport h-screen overflow-y-auto overflow-x-hidden`}>
-        <div className="py-36">{children}</div>
+        <div className="py-36 h-full">{children}</div>
       </div>
     </Template>
   );

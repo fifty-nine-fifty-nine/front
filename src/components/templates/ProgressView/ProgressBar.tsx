@@ -20,12 +20,13 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({ totalSteps, currentSte
           ></div>
         </div>
         <Image
-          className="absolute duration-300 ease-in-out"
+          className="absolute duration-300 ease-in-out h-auto"
           src="/svg/progressicon.svg"
           alt="progress"
           width={32}
-          height={34}
+          height={37}
           style={{ right: iconPosition, top: '-15px' }}
+          priority
         />
       </div>
     </>

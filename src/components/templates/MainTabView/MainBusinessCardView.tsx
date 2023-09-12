@@ -28,8 +28,9 @@ export const MainBusinessCardView = ({ active }: Props) => {
         >
           <Image
             src="/img/bussinesscardFront_example.png"
-            fill
-            sizes="100%"
+            width={146}
+            height={220}
+            style={{ width: 'auto', height: 'auto' }}
             alt=""
             priority
             className="object-cover"
@@ -42,7 +43,9 @@ export const MainBusinessCardView = ({ active }: Props) => {
         >
           <Image
             src="/img/bussinesscardBack_example.png"
-            fill
+            width={146}
+            height={222}
+            style={{ width: 'auto', height: 'auto' }}
             alt=""
             priority
             className="object-cover"

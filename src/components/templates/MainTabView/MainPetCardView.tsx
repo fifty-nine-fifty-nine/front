@@ -25,11 +25,12 @@ export const MainPetCardView = ({ active }: Props) => {
         >
           <Image
             src="/img/petcard_example_1.png"
-            fill
-            sizes="100%"
+            width={400}
+            height={395}
+            style={{ width: 'auto', height: 'auto' }}
             alt=""
             priority
-            className="object-cover"
+            className="object-cover object-top"
           />
         </picture>
         <div className={cn(bgSub, `sticky bottom-0 left-0 right-0 w-full p-5`)}>

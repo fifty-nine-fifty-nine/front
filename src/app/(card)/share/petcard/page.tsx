@@ -1,10 +1,39 @@
-import React from 'react';
+import { getServerSession } from 'next-auth';
+import React, { Suspense } from 'react';
 
-const SharePetCardPage = () => {
-  // TODO: URL query string으로 type, name, img_url 넘겨받기
-  // URL에 정보가 담겨있어야 주소 공유 시 렌더 가능
+import { API_BASE_URL } from '@/constants';
+import { authOptions } from '@/lib/auth';
+import type { PetCardResponse } from '@/types';
 
-  return <div>펫카드 공유 페이지</div>;
-};
+import Loading from '../../loading';
+import { PetCardResult } from './component/PetCardResult';
 
-export default SharePetCardPage;
+export default async function SharePetCardPage({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  const session = await getServerSession(authOptions);
+  const accessToken = session?.accessToken;
+  const genRequired = !searchParams.imageUrl;
+
+  const fetchPetCard = async () =>
+    await fetch(`${API_BASE_URL}/pets/cards`, {
+      method: 'POST',
+      body: JSON.stringify(searchParams),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => res);
+
+  const petCardInfo: PetCardResponse = genRequired ? await fetchPetCard() : searchParams;
+
+  return (
+    <Suspense fallback={<Loading />}>
+      <PetCardResult petCardInfo={petCardInfo} />
+    </Suspense>
+  );
+}

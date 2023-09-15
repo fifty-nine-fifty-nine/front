@@ -1,5 +1,4 @@
 'use client';
-
 import { useCallback, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { match } from 'ts-pattern';
@@ -18,15 +17,6 @@ export const PetCardGeneration = () => {
   const [currentStep, setCurrentStep] = useState('1');
 
   const methods = useForm<PetCardFormData>();
-  const {
-    formState: { submitCount },
-  } = methods;
-
-  const allStepsCompleted = submitCount === TOTAL_STEPS;
-
-  // TODO: if (allStepsCompleted) /pets/cards POST 후 리턴받은 response를
-  // share/${type}?name=${name}&img_url=${img_url}로 넘겨주기
-  // (redirect 또는 pushState)
 
   usePushStateListener(
     useCallback((url) => {

@@ -14,6 +14,7 @@ export interface BusinessCardFormData {
   personalityAmongAnimals: string;
   petLike: string[];
   petHate: string[];
+  businesscardImgPath: string[];
 }
 
 export interface PetCardFormData {

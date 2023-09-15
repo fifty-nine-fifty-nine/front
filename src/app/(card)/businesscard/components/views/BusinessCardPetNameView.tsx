@@ -1,13 +1,12 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import type { Dispatch, SetStateAction } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
 import { GenerateItem, GenerateView } from '@/components/templates';
 import { button, input } from '@/styles/ogoo';
 import { flexCol } from '@/styles/ogoo/alignment.css';
-import { secondary, subText } from '@/styles/ogoo/colors.css';
+import { secondary, subText, whiteText } from '@/styles/ogoo/colors.css';
 import { caption } from '@/styles/ogoo/typography.css';
 import type { BusinessCardFormData } from '@/types';
 import { cn } from '@/utils';
@@ -26,16 +25,12 @@ export const BusinessCardPetNameView = ({ setBusinessCardFormData }: Props) => {
     formState: { isValid },
   } = useFormContext<BusinessCardFormData>();
 
-  const router = useRouter();
-
   const handleButtonClickToForm = (field: keyof BusinessCardFormData, value: any) => {
     setValue(field, value);
   };
 
   const onSubmit = (data: BusinessCardFormData) => {
-    console.log(data, isValid);
-
-    if (!isValid) {
+    if (watch('type') === '' || watch('petName') === '' || watch('gender') === '') {
       console.log('Please enter the required value!');
       return;
     }
@@ -57,7 +52,7 @@ export const BusinessCardPetNameView = ({ setBusinessCardFormData }: Props) => {
       onSubmit={handleSubmit(onSubmit)}
       watch={watch}
     >
-      <div className={cn(flexCol, 'px-5 gap-8')}>
+      <div className={cn(flexCol, 'px-5 pb-36 gap-8')}>
         <Controller
           name="type"
           control={control}
@@ -67,25 +62,40 @@ export const BusinessCardPetNameView = ({ setBusinessCardFormData }: Props) => {
               <div className={cn(flexCol, 'gap-3')}>
                 <button
                   type="button"
-                  className={cn(button({ color: 'sub' }), {
-                    selected: field.value === '강아지',
-                  })}
+                  className={cn(
+                    button({
+                      color: watch('type') === '강아지' ? 'selected' : 'sub',
+                    }),
+                    {
+                      selected: field.value === '강아지',
+                    },
+                  )}
                   onClick={() => {
                     handleButtonClickToForm('type', '강아지');
                   }}
                 >
-                  <p className={cn(subText, `font-normal`)}>귀여운 강아지</p>
+                  <p
+                    className={cn(watch('type') === '강아지' ? whiteText : subText, `font-normal`)}
+                  >
+                    귀여운 강아지
+                  </p>
                 </button>
                 <button
                   type="button"
-                  className={cn(button({ color: 'sub' }), {
-                    selected: field.value === '고양이',
-                  })}
+                  className={cn(
+                    button({
+                      color: watch('type') === '고양이' ? 'selected' : 'sub',
+                    }),
+                  )}
                   onClick={() => {
                     handleButtonClickToForm('type', '고양이');
                   }}
                 >
-                  <p className={cn(subText, `font-normal`)}>도도한 고양이</p>
+                  <p
+                    className={cn(watch('type') === '고양이' ? whiteText : subText, `font-normal`)}
+                  >
+                    도도한 고양이
+                  </p>
                 </button>
               </div>
               {fieldState.error && (
@@ -123,25 +133,37 @@ export const BusinessCardPetNameView = ({ setBusinessCardFormData }: Props) => {
               <div className={cn(flexCol, 'gap-3')}>
                 <button
                   type="button"
-                  className={cn(button({ color: 'sub' }), {
-                    selected: field.value === '남자',
-                  })}
+                  className={cn(
+                    button({
+                      color: watch('gender') === '수컷' ? 'selected' : 'sub',
+                    }),
+                  )}
                   onClick={() => {
-                    handleButtonClickToForm('gender', '남자');
+                    handleButtonClickToForm('gender', '수컷');
                   }}
                 >
-                  <p className={cn(subText, `font-normal`)}>남자아이</p>
+                  <p
+                    className={cn(watch('gender') === '수컷' ? whiteText : subText, `font-normal`)}
+                  >
+                    남자아이
+                  </p>
                 </button>
                 <button
                   type="button"
-                  className={cn(button({ color: 'sub' }), {
-                    selected: field.value === '여자',
-                  })}
+                  className={cn(
+                    button({
+                      color: watch('gender') === '암컷' ? 'selected' : 'sub',
+                    }),
+                  )}
                   onClick={() => {
-                    handleButtonClickToForm('gender', '여자');
+                    handleButtonClickToForm('gender', '암컷');
                   }}
                 >
-                  <p className={cn(subText, `font-normal`)}>여자아이</p>
+                  <p
+                    className={cn(watch('gender') === '암컷' ? whiteText : subText, `font-normal`)}
+                  >
+                    여자아이
+                  </p>
                 </button>
               </div>
               {fieldState.error && (

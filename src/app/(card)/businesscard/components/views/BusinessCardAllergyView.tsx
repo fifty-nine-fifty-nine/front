@@ -9,7 +9,7 @@ import { GenerateItem, GenerateView } from '@/components/templates';
 import { AllergeListTable } from '@/data';
 import { button } from '@/styles/ogoo';
 import { flexCol, flexRow } from '@/styles/ogoo/alignment.css';
-import { secondary, subText } from '@/styles/ogoo/colors.css';
+import { secondary, subText, whiteText } from '@/styles/ogoo/colors.css';
 import { caption, subtitle } from '@/styles/ogoo/typography.css';
 import type { BusinessCardFormData } from '@/types';
 import { cn } from '@/utils';
@@ -41,7 +41,9 @@ export const BusinessCardAllergyView = ({ setBusinessCardFormData }: Props) => {
   const formData = watch();
 
   const onSubmit = (data: BusinessCardFormData) => {
-    if (isValid) {
+    console.log(data, isValid);
+
+    if (data.neutralization === null || data.neutralization === null) {
       console.log('Please enter the required value!');
       return;
     } else if (data.allergy) {
@@ -85,6 +87,17 @@ export const BusinessCardAllergyView = ({ setBusinessCardFormData }: Props) => {
     }));
   };
 
+  const listItem = (allerge: string, field: 'mainAllerge' | 'subAllerge' | 'etcAllerge') =>
+    cn(
+      button({
+        size: 'xs',
+        color: updateAllergesForForm[field]?.includes(allerge) ? 'selected' : 'sub',
+      }),
+      {
+        [updateAllergesForForm[field]?.includes(allerge) ? whiteText : subText]: true,
+      },
+    );
+
   const allergySheetOpen = () => {
     setUpdateAllergesForForm(() => ({
       mainAllerge: formData.mainAllerge || [],
@@ -99,6 +112,12 @@ export const BusinessCardAllergyView = ({ setBusinessCardFormData }: Props) => {
     setValue('mainAllerge', updateAllergesForForm.mainAllerge);
     setValue('subAllerge', updateAllergesForForm.subAllerge);
     setValue('etcAllerge', updateAllergesForForm.etcAllerge);
+  };
+
+  const onClickNoAllergy = () => {
+    setValue('mainAllerge', []);
+    setValue('subAllerge', []);
+    setValue('etcAllerge', []);
   };
 
   const allergySheetClose = () => {
@@ -121,7 +140,7 @@ export const BusinessCardAllergyView = ({ setBusinessCardFormData }: Props) => {
         onSubmit={handleSubmit(onSubmit)}
         watch={watch}
       >
-        <div className={cn(flexCol, 'px-5 gap-8')}>
+        <div className={cn(flexCol, 'px-5 pb-36 gap-8')}>
           <Controller
             name="neutralization"
             control={control}
@@ -137,25 +156,43 @@ export const BusinessCardAllergyView = ({ setBusinessCardFormData }: Props) => {
                 <div className={cn(flexRow, 'gap-3')}>
                   <button
                     type="button"
-                    className={cn(button({ color: 'sub' }), {
-                      selected: field.value === true,
-                    })}
+                    className={cn(
+                      button({
+                        color: watch('neutralization') === true ? 'selected' : 'sub',
+                      }),
+                    )}
                     onClick={() => {
                       handleButtonClickToForm('neutralization', true);
                     }}
                   >
-                    <p className={cn(subText, `font-normal`)}>중성화 했어요</p>
+                    <p
+                      className={cn(
+                        watch('neutralization') === true ? whiteText : subText,
+                        `font-normal`,
+                      )}
+                    >
+                      중성화 했어요
+                    </p>
                   </button>
                   <button
                     type="button"
-                    className={cn(button({ color: 'sub' }), {
-                      selected: field.value === false,
-                    })}
+                    className={cn(
+                      button({
+                        color: watch('neutralization') === false ? 'selected' : 'sub',
+                      }),
+                    )}
                     onClick={() => {
                       handleButtonClickToForm('neutralization', false);
                     }}
                   >
-                    <p className={cn(subText, `font-normal`)}>중성화 안했어요</p>
+                    <p
+                      className={cn(
+                        watch('neutralization') === false ? whiteText : subText,
+                        `font-normal`,
+                      )}
+                    >
+                      중성화 안했어요
+                    </p>
                   </button>
                 </div>
                 {fieldState.error && (
@@ -175,31 +212,47 @@ export const BusinessCardAllergyView = ({ setBusinessCardFormData }: Props) => {
                 }
               },
             }}
-            render={({ field, fieldState }) => (
+            render={({ fieldState }) => (
               <GenerateItem question={'가지고 있는 알러지가 있나요?'}>
                 <div className={cn(flexRow, 'gap-3')}>
                   <button
                     type="button"
-                    className={cn(button({ color: 'sub' }), {
-                      selected: field.value === true,
-                    })}
+                    className={cn(
+                      button({
+                        color: watch('allergy') === true ? 'selected' : 'sub',
+                      }),
+                    )}
                     onClick={() => {
                       allergySheetOpen();
                       handleButtonClickToForm('allergy', true);
                     }}
                   >
-                    <p className={cn(subText, `font-normal`)}>알러지가 있어요</p>
+                    <p
+                      className={cn(watch('allergy') === true ? whiteText : subText, `font-normal`)}
+                    >
+                      알러지가 있어요
+                    </p>
                   </button>
                   <button
                     type="button"
-                    className={cn(button({ color: 'sub' }), {
-                      selected: field.value === false,
-                    })}
+                    className={cn(
+                      button({
+                        color: watch('allergy') === false ? 'selected' : 'sub',
+                      }),
+                    )}
                     onClick={() => {
                       handleButtonClickToForm('allergy', false);
+                      onClickNoAllergy();
                     }}
                   >
-                    <p className={cn(subText, `font-normal`)}>알러지가 없어요</p>
+                    <p
+                      className={cn(
+                        watch('allergy') === false ? whiteText : subText,
+                        `font-normal`,
+                      )}
+                    >
+                      알러지가 없어요
+                    </p>
                   </button>
                 </div>
                 {fieldState.error && (
@@ -224,7 +277,7 @@ export const BusinessCardAllergyView = ({ setBusinessCardFormData }: Props) => {
                     type="button"
                     key={allerge}
                     value={allerge}
-                    className={listItem}
+                    className={listItem(allerge, 'mainAllerge')}
                     onClick={() => {
                       handleAllergeButtonClickToForm('mainAllerge', allerge);
                     }}
@@ -242,7 +295,7 @@ export const BusinessCardAllergyView = ({ setBusinessCardFormData }: Props) => {
                     type="button"
                     key={allerge}
                     value={allerge}
-                    className={listItem}
+                    className={listItem(allerge, 'subAllerge')}
                     onClick={() => {
                       handleAllergeButtonClickToForm('subAllerge', allerge);
                     }}
@@ -260,7 +313,7 @@ export const BusinessCardAllergyView = ({ setBusinessCardFormData }: Props) => {
                     type="button"
                     key={allerge}
                     value={allerge}
-                    className={listItem}
+                    className={listItem(allerge, 'etcAllerge')}
                     onClick={() => {
                       handleAllergeButtonClickToForm('etcAllerge', allerge);
                     }}
@@ -277,5 +330,4 @@ export const BusinessCardAllergyView = ({ setBusinessCardFormData }: Props) => {
   );
 };
 
-const listItem = cn(button({ size: 'xs', color: 'sub' }), subText);
 const allergeWrap = `flex gap-3 flex-wrap`;

@@ -1,11 +1,15 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import Image from 'next/image';
 import type { Dispatch, SetStateAction } from 'react';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
+import { v4 as uuid } from 'uuid'; //v4 버전 사용
 
 import { GenerateItem, GenerateView } from '@/components/templates';
+import { speciesMock } from '@/data/SpeciesMock';
+import { storage } from '@/firebase/fireStore';
 import { input } from '@/styles/ogoo';
 import { flexCol, flexColCenter } from '@/styles/ogoo/alignment.css';
 import { bgSub, optionalText, secondary } from '@/styles/ogoo/colors.css';
@@ -21,27 +25,63 @@ export const BusinessCardPetPhotoView = ({ setBusinessCardFormData }: Props) => 
   const {
     handleSubmit,
     register,
-    setValue,
     control,
     watch,
+    setValue,
     formState: { isValid },
   } = useFormContext<BusinessCardFormData>();
 
+  const [selectedSpecies, setSelectedSpecies] = useState<string>();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   const fileRef = useRef<HTMLInputElement>(null);
-  const router = useRouter();
+  const [imgFile, setImgFile] = useState<File>();
+  const [uploadedUrl, setUploadedUrl] = useState('');
 
   const handleClick = () => {
     fileRef.current?.click();
   };
 
-  const handleChangeImage = (e: React.ChangeEvent) => {
-    const targetFiles = e.target as HTMLInputElement;
+  const handleChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setImgFile(e.target.files?.[0]);
+    }
+  };
+
+  const handleSpeciesClick = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleOptionClick = (value: string) => {
+    setSelectedSpecies(value);
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  useEffect(() => {
+    if (imgFile) {
+      handleImageUpload(); // Call handleImageUpload when imgFile changes
+    }
+  }, [imgFile]);
+
+  const handleImageUpload = async () => {
+    if (!imgFile) return;
+
+    try {
+      const uploadFileName = uuid() + '.png';
+      const storageRef = ref(storage, `businesscardOrigin/${uploadFileName}`);
+      await uploadBytes(storageRef, imgFile);
+      const downloadURL = await getDownloadURL(storageRef);
+      setValue('petProfileImgPath', downloadURL);
+      setUploadedUrl(downloadURL);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const onSubmit = (data: BusinessCardFormData) => {
-    console.log(data, isValid);
+    console.log(data);
 
-    if (!isValid) {
+    if (watch('birth') === '' || watch('petProfileImgPath') === '' || watch('species') === '') {
       console.log('Please enter the required value!');
       return;
     }
@@ -64,34 +104,72 @@ export const BusinessCardPetPhotoView = ({ setBusinessCardFormData }: Props) => 
         onSubmit={handleSubmit(onSubmit)}
         watch={watch}
       >
-        <div className={cn(flexCol, 'px-5 gap-8')}>
-          <GenerateItem question={'반려동물의 사진을 추가해주세요.'}>
-            <div className={cn(flexCol, 'gap-3')}>
-              <div className={flexColCenter}>
-                <input
-                  ref={fileRef}
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  name="img_input"
-                  onChange={handleChangeImage}
-                />
-                <button onClick={handleClick} className={cn(bgSub, 'w-32 h-32 rounded-full')}>
-                  <p className={cn(optionalText, 'text-[60px] font-light')}>+</p>
-                </button>
-                <div>{/* <img src={} width="" height="" alt="" /> */}</div>
-              </div>
-            </div>
-          </GenerateItem>
+        <div className={cn(flexCol, 'px-5 pb-36 gap-8')}>
+          <Controller
+            name="petProfileImgPath"
+            control={control}
+            rules={{ required: '필수 입력값입니다.' }}
+            render={({ fieldState }) => (
+              <GenerateItem question={'반려동물의 사진을 추가해주세요.'}>
+                <div className={cn(flexCol, 'gap-3')}>
+                  <div className={flexColCenter}>
+                    <input
+                      ref={fileRef}
+                      type="file"
+                      accept="image/*"
+                      name="petProfileImgPath"
+                      className="hidden"
+                      onChange={handleChangeImage}
+                    />
+
+                    {uploadedUrl ? (
+                      <div className="w-52 h-52 relative">
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <Image
+                            src={uploadedUrl}
+                            fill
+                            className="object-contain"
+                            sizes="(max-width: 208px)"
+                            alt=""
+                            priority
+                            onClick={handleClick}
+                          />
+                        </div>
+                      </div>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={handleClick}
+                        className={cn(bgSub, 'w-32 h-32 rounded-full')}
+                      >
+                        <p className={cn(optionalText, 'text-[60px] font-light')}>+</p>
+                      </button>
+                    )}
+                  </div>
+                  {fieldState.error && (
+                    <p className={cn(secondary, caption)}>{fieldState.error.message}</p>
+                  )}
+                </div>
+              </GenerateItem>
+            )}
+          ></Controller>
 
           <Controller
             name="birth"
             control={control}
-            rules={{ required: '필수 입력값입니다.' }}
+            rules={{
+              validate: (value) => {
+                if (!/^\d{8}$/.test(value)) {
+                  return '8자리의 숫자로 입력해주세요.';
+                }
+              },
+            }}
             render={({ fieldState }) => (
               <GenerateItem question={'반려동물의 생일은 언제인가요?'}>
                 <input
-                  type="number"
+                  type="text"
+                  minLength={8}
+                  maxLength={8}
                   pattern="\d{8}"
                   className={cn(input())}
                   placeholder="ex) 20240830"
@@ -108,13 +186,44 @@ export const BusinessCardPetPhotoView = ({ setBusinessCardFormData }: Props) => 
             name="species"
             control={control}
             rules={{ required: '필수 입력값입니다.' }}
-            render={({ fieldState }) => (
+            render={({ field, fieldState }) => (
               <GenerateItem question={'반려동물의 견종/묘종을 알려주세요.'}>
-                <input
-                  className={cn(input())}
-                  placeholder="종류를 입력해주세요!"
-                  {...register('species')}
-                ></input>
+                <div className="relative">
+                  <input
+                    className={cn(input())}
+                    placeholder="종류를 입력해주세요!"
+                    {...register('species')}
+                    value={selectedSpecies}
+                    onClick={handleSpeciesClick}
+                  />
+                  {isDropdownOpen && (
+                    <div className="absolute mt-2 bg-gray-100 border border-gray-300 rounded-xl w-full max-h-32 overflow-y-auto shadow-lg z-40">
+                      <ul>
+                        {watch('type') === '강아지' &&
+                          speciesMock.dog.map((value) => (
+                            <li
+                              key={value}
+                              onClick={() => handleOptionClick(value)}
+                              className="mx-5 py-2 cursor-pointer border-b-2 border-gray"
+                            >
+                              {value}
+                            </li>
+                          ))}
+                        {watch('type') === '고양이' &&
+                          speciesMock.cat.map((value) => (
+                            <li
+                              key={value}
+                              onClick={() => handleOptionClick(value)}
+                              className="mx-5 py-2 cursor-pointer border-b-2 border-gray"
+                            >
+                              {value}
+                            </li>
+                          ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+
                 {fieldState.error && (
                   <p className={cn(secondary, caption)}>{fieldState.error.message}</p>
                 )}

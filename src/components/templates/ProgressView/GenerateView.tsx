@@ -29,11 +29,12 @@ export const GenerateView = <T extends FieldValues>({
         <h2 className={cn(titleMd)}>Q{questionNumber}</h2>
         <h2 className={cn(titleLg, `whitespace-pre-wrap`)}>{title(watch)}</h2>
       </div>
-
       {children}
-
       <footer
-        className={cn(flexColCenter, `absolute left-0 bottom-0 right-0 px-5 pt-3 h-24 bg-white`)}
+        className={cn(
+          flexColCenter,
+          `absolute left-0 bottom-0 right-0 px-5 pt-3 h-24 bg-white z-30`,
+        )}
       >
         <button type="button" className={cn(button(), buttonHover)} onClick={onSubmit}>
           <p className={whiteText}>다음</p>

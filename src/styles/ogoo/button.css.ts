@@ -1,7 +1,7 @@
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-import { bgKakao, bgOptional, bgPrimary, bgSecondary, bgSub } from './colors.css';
+import { bgKakao, bgOptional, bgPrimary, bgSecondary, bgSelected, bgSub } from './colors.css';
 
 export const button = recipe({
   base: {
@@ -15,6 +15,7 @@ export const button = recipe({
       sub: bgSub,
       optional: bgOptional,
       kakao: bgKakao,
+      selected: bgSelected,
     },
     size: {
       xs: { padding: '6px 12px', borderRadius: 18 },

@@ -25,7 +25,7 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
   return (
     <div
       className={cn(
-        `fixed z-10 w-full h-[80%]  bottom-0 transform transition-transform duration-300 ease-in-out ${
+        `fixed z-50 w-full h-[80%]  bottom-0 transform transition-transform duration-300 ease-in-out ${
           isOpen ? 'translate-y-0' : 'translate-y-full'
         }`,
       )}

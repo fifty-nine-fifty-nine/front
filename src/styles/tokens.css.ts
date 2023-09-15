@@ -40,6 +40,7 @@ export const [themeClass, themeVars] = createTheme({
     sub: grayScale.w100,
     optional: grayScale.w50,
     kakao: kakao,
+    selected: grayScale.w500,
   },
   spaces: {
     auto: 'auto',

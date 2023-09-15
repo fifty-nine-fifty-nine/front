@@ -4,7 +4,7 @@ const withVanillaExtract = createVanillaExtractPlugin();
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['k.kakaocdn.net'],
+    domains: ['k.kakaocdn.net', 'firebasestorage.googleapis.com'],
   },
 };
 

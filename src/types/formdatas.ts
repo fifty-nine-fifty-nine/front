@@ -22,6 +22,12 @@ export interface PetCardFormData {
   description: string;
 }
 
+export interface PetCardResponse {
+  type: AnimalTypeEnum;
+  name: string;
+  img_url: string;
+}
+
 export enum AnimalTypeEnum {
   dog = '강아지',
   cat = '고양이',

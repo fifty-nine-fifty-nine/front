@@ -1,4 +1,5 @@
 'use client';
+import { useRouter } from 'next/navigation';
 import { useFormContext } from 'react-hook-form';
 
 import { GenerateItem, GenerateView } from '@/components/templates';
@@ -8,6 +9,7 @@ import { type PetCardFormData } from '@/types';
 import { cn } from '@/utils';
 
 export const PetCardDescriptionView = () => {
+  const router = useRouter();
   const {
     register,
     watch,
@@ -16,14 +18,15 @@ export const PetCardDescriptionView = () => {
   } = useFormContext<PetCardFormData>();
 
   const onSubmit = (data: PetCardFormData) => {
-    console.log(data);
-
     if (!isValid) {
       console.log('invalid');
       return;
     }
-
-    console.log('결과 페이지로 이동');
+    if (data.type && data.name && data.description) {
+      router.push(
+        `/share/petcard?type=${data.type}&name=${data.name}&description=${data.description}`,
+      );
+    }
   };
 
   return (

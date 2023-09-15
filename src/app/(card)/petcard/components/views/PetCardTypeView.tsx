@@ -16,13 +16,10 @@ export const PetCardTypeView = () => {
   } = useFormContext<PetCardFormData>();
 
   const onSubmit = (data: PetCardFormData) => {
-    console.log(data);
-
     if (!isValid) {
       console.log('invalid');
       return;
     }
-
     window.history.pushState({}, '', '/petcard/2');
   };
 

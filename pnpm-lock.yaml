@@ -53,9 +53,6 @@ dependencies:
   react-hook-form:
     specifier: ^7.46.0
     version: 7.46.0(react@18.2.0)
-  return-fetch-json:
-    specifier: ^0.4.5
-    version: 0.4.5
   tailwindcss:
     specifier: 3.3.3
     version: 3.3.3
@@ -8183,18 +8180,6 @@ packages:
     resolution: {integrity: sha512-XQBQ3I8W1Cge0Seh+6gjj03LbmRFWuoszgK9ooCpwYIrhhoO80pfq4cUkU5DkknwfOfFteRwlZ56PYOGYyFWdg==}
     engines: {node: '>= 4'}
     dev: true
-
-  /return-fetch-json@0.4.5:
-    resolution: {integrity: sha512-hMApU32dSsXq0DfcV6eaC3Fz6AAq7PwVi464950cy5wgj7dW1+MEuR7QyLrrKqSGPMZDM3L9B23TjIVS/9JeDg==}
-    requiresBuild: true
-    dependencies:
-      return-fetch: 0.4.5
-    dev: false
-
-  /return-fetch@0.4.5:
-    resolution: {integrity: sha512-B4dEbp7cjVuXE0EshS4skHfCdGKYA2U1XDGRCa8EhE6P+R+tAmMtfVskeOI4CAyryD3HNz1esvFGKxOwq4VOhw==}
-    requiresBuild: true
-    dev: false
 
   /reusify@1.0.4:
     resolution: {integrity: sha512-U9nH88a3fc/ekCF1l0/UP1IosiuIjyTh7hBvXVMHYgVcfGvt897Xguj2UOLDeI5BG2m7/uwyaLVT6fbtCwTyzw==}

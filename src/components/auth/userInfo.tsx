@@ -12,7 +12,7 @@ export const UserInfo = () => {
         <h1>Client Session</h1>
         <strong>{session?.user?.name ?? '이름'}</strong>
         <Image
-          src={session?.user!.image!}
+          src={session?.user.image}
           alt="프로필 사진"
           width={100}
           height={100}

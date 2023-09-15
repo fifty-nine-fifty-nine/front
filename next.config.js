@@ -1,4 +1,10 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {}
+const withVanillaExtract = createVanillaExtractPlugin();
 
-module.exports = nextConfig
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  images: {
+    domains: ['k.kakaocdn.net'],
+  },
+};
+
+module.exports = withVanillaExtract(nextConfig);

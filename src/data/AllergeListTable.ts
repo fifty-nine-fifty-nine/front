@@ -13,7 +13,7 @@ const mainAllergeList = [
   '돼지',
 ];
 
-const subAllergeList = ['계란', '뼈 간식', '멸치', '우유', '치즈'];
+const subAllergeList = ['계란', '뼈간식', '멸치', '우유', '치즈'];
 
 const etcAllergeList = [
   '콩',

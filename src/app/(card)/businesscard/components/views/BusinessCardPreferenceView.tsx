@@ -55,6 +55,8 @@ export const BusinessCardPreferenceView = ({ setBusinessCardFormData }: Props) =
       petLike: data.petLike,
       petHate: data.petHate,
     }));
+
+    window.history.pushState({}, '', '/businesscard/6');
   };
 
   return (
@@ -65,7 +67,7 @@ export const BusinessCardPreferenceView = ({ setBusinessCardFormData }: Props) =
         onSubmit={handleSubmit(onSubmit)}
         watch={watch}
       >
-        <div className={cn(flexCol, 'px-5 gap-8')}>
+        <div className={cn(flexCol, 'px-5 pb-36 gap-8')}>
           <Controller
             name="petLike"
             control={control}
@@ -77,7 +79,7 @@ export const BusinessCardPreferenceView = ({ setBusinessCardFormData }: Props) =
               },
             }}
             render={({ fieldState }) => (
-              <GenerateItem question={'말랑이는 이런 것들을 좋아해요.'}>
+              <GenerateItem question={`${watch('petName')}는 이런 것들을 좋아해요.`}>
                 {[...Array(likeInputCount)].map((_, index) => (
                   <div key={index} className="flex gap-3">
                     <input
@@ -115,7 +117,7 @@ export const BusinessCardPreferenceView = ({ setBusinessCardFormData }: Props) =
               },
             }}
             render={({ fieldState }) => (
-              <GenerateItem question={'말랑이에게 이런 점들을 주의해주세요.'}>
+              <GenerateItem question={`${watch('petName')}에게 이런 점들을 주의해주세요.`}>
                 {[...Array(hateInputCount)].map((_, index) => (
                   <div key={index} className="flex gap-3">
                     <input

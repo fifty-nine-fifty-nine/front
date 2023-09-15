@@ -52,13 +52,13 @@ export const BusinessCardFreindshipView = ({ setBusinessCardFormData }: Props) =
         onSubmit={handleSubmit(onSubmit)}
         watch={watch}
       >
-        <div className={cn(flexCol, 'px-5 gap-8')}>
+        <div className={cn(flexCol, 'px-5 pb-36 gap-8')}>
           <Controller
             name="personalityToPerson"
             control={control}
             rules={{ required: '필수 입력값입니다.' }}
             render={({ fieldState }) => (
-              <GenerateItem question={'말랑이는 사람한테'}>
+              <GenerateItem question={`${watch('petName')}는 사람한테`}>
                 <input
                   type="text"
                   className={cn(input())}
@@ -77,7 +77,7 @@ export const BusinessCardFreindshipView = ({ setBusinessCardFormData }: Props) =
             control={control}
             rules={{ required: '필수 입력값입니다.' }}
             render={({ fieldState }) => (
-              <GenerateItem question={'말랑이는 동물친구들 사이에서'}>
+              <GenerateItem question={`${watch('petName')}는 동물친구들 사이에서`}>
                 <input
                   type="text"
                   className={cn(input())}

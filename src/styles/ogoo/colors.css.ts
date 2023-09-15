@@ -14,6 +14,7 @@ export const bgSubPrimary = sprinkles({ background: 'primarySub' });
 export const bgSecondary = sprinkles({ background: 'secondary' });
 export const bgSub = sprinkles({ background: 'sub' });
 export const bgOptional = sprinkles({ background: 'optional' });
+export const bgSelected = sprinkles({ background: 'selected' });
 export const bgKakao = sprinkles({ background: 'kakao' });
 
 export const inputColor = sprinkles({

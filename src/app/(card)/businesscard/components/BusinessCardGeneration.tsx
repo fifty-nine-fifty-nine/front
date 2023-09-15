@@ -1,7 +1,6 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { match } from 'ts-pattern';
 
@@ -15,8 +14,7 @@ import { cn } from '@/utils';
 import * as Step from './views';
 
 export const BusinessCardGeneration = () => {
-  const pathname = usePathname();
-  const TOTAL_STEPS = 5;
+  const TOTAL_STEPS = 6;
   const [currentStep, setCurrentStep] = useState('1');
 
   const [businessCardFormData, setBusinessCardFormData] = useState<BusinessCardFormData>({
@@ -35,6 +33,7 @@ export const BusinessCardGeneration = () => {
     personalityAmongAnimals: '',
     petLike: [],
     petHate: [],
+    businesscardImgPath: [],
   });
 
   const methods = useForm<BusinessCardFormData>();
@@ -48,14 +47,9 @@ export const BusinessCardGeneration = () => {
     }, []),
   );
 
-  // FIXME: 추후 삭제
-  useEffect(() => {
-    console.log(businessCardFormData);
-  }, [pathname, businessCardFormData]);
-
   return (
     <>
-      <header className={cn(`absolute top-0 left-0 right-0 pt-12 bg-white w-full`)}>
+      <header className={cn(`absolute top-0 left-0 right-0 pt-12 bg-white w-full z-30`)}>
         <div className={'flex flex-row justify-between mx-5 items-center'}>
           <StepBackButton
             pathname="/businesscard"
@@ -89,6 +83,9 @@ export const BusinessCardGeneration = () => {
           ))
           .with('5', () => (
             <Step.BusinessCardPreferenceView setBusinessCardFormData={setBusinessCardFormData} />
+          ))
+          .with('6', () => (
+            <Step.BusinessCardTempleteView businessCardFormData={businessCardFormData} />
           ))
           .otherwise(() => (
             <></>

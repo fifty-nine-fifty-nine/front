@@ -5,7 +5,7 @@ import { signIn, signOut } from 'next-auth/react';
 
 import { button } from '@/styles/ogoo';
 import { flexCenter, flexRowCenter } from '@/styles/ogoo/alignment.css';
-import { subText } from '@/styles/ogoo/colors.css';
+import { optionalText, subText } from '@/styles/ogoo/colors.css';
 import { bodyMd } from '@/styles/ogoo/typography.css';
 import { cn } from '@/utils';
 
@@ -31,11 +31,10 @@ export const KakaoLoginButton = () => {
 export const KakaoLogoutButton = () => {
   return (
     <button
-      className={cn(subText, bodyMd, flexRowCenter, logoutHover, `py-1`)}
+      className={cn(optionalText, bodyMd, flexRowCenter, logoutHover, `py-1`)}
       onClick={() => signOut()}
     >
       <span className="mr-0.5">로그아웃</span>
-      <Image src="/svg/arrow_right.svg" alt="" width={16} height={16} priority className="py-0.5" />
     </button>
   );
 };

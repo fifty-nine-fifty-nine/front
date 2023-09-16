@@ -30,4 +30,4 @@ const tabbar = cn(flexRowCenter, `w-full`);
 
 const tabMenu = cn(flexCenter, subtitle, `h-full py-3 hover:bg-neutral-100 ease-in duration-150`);
 
-const activeTab = `${blackText}, font-bold border-b-4 border-primary`;
+const activeTab = `${blackText}, font-semibold border-b-4 border-primary`;

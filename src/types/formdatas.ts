@@ -29,6 +29,11 @@ export interface PetCardResponse {
   img_url: string;
 }
 
+export interface PetCardSharedParams {
+  name: string;
+  imgPath: string;
+}
+
 export enum AnimalTypeEnum {
   dog = '강아지',
   cat = '고양이',

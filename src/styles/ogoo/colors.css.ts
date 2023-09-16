@@ -12,6 +12,7 @@ export const blackText = sprinkles({ color: 'blackText' });
 export const bgPrimary = sprinkles({ background: 'primary' });
 export const bgSubPrimary = sprinkles({ background: 'primarySub' });
 export const bgSecondary = sprinkles({ background: 'secondary' });
+export const bgTertiary = sprinkles({ background: 'tertiary' });
 export const bgSub = sprinkles({ background: 'sub' });
 export const bgOptional = sprinkles({ background: 'optional' });
 export const bgSelected = sprinkles({ background: 'selected' });

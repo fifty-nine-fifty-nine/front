@@ -45,9 +45,9 @@ export const PetCardTypeView = () => {
                 type="button"
                 className={cn(
                   button({
-                    color: watch('type') == AnimalTypeEnum.dog ? 'primary' : 'sub',
+                    color: watch('type') == AnimalTypeEnum.dog ? 'selected' : 'sub',
                   }),
-                  `pointer-events-none peer-checked:text-white transition duration-150 ease-in-out`,
+                  `pointer-events-none transition duration-150 ease-in-out`,
                 )}
               >
                 <p className={cn(`font-normal`)}>귀여운 강아지</p>
@@ -68,9 +68,9 @@ export const PetCardTypeView = () => {
                 type="button"
                 className={cn(
                   button({
-                    color: watch('type') == AnimalTypeEnum.cat ? 'primary' : 'sub',
+                    color: watch('type') == AnimalTypeEnum.cat ? 'selected' : 'sub',
                   }),
-                  `pointer-events-none peer-checked:text-white transition duration-150 ease-in-out`,
+                  `pointer-events-none transition duration-150 ease-in-out`,
                 )}
               >
                 <p className={cn(`font-normal`)}>도도한 고양이</p>

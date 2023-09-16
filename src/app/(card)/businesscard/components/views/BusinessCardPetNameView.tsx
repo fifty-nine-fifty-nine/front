@@ -74,11 +74,7 @@ export const BusinessCardPetNameView = ({ setBusinessCardFormData }: Props) => {
                     handleButtonClickToForm('type', '강아지');
                   }}
                 >
-                  <p
-                    className={cn(watch('type') === '강아지' ? whiteText : subText, `font-normal`)}
-                  >
-                    귀여운 강아지
-                  </p>
+                  <p className={'font-normal'}>귀여운 강아지</p>
                 </button>
                 <button
                   type="button"
@@ -91,11 +87,7 @@ export const BusinessCardPetNameView = ({ setBusinessCardFormData }: Props) => {
                     handleButtonClickToForm('type', '고양이');
                   }}
                 >
-                  <p
-                    className={cn(watch('type') === '고양이' ? whiteText : subText, `font-normal`)}
-                  >
-                    도도한 고양이
-                  </p>
+                  <p className={'font-normal'}>도도한 고양이</p>
                 </button>
               </div>
               {fieldState.error && (
@@ -142,11 +134,7 @@ export const BusinessCardPetNameView = ({ setBusinessCardFormData }: Props) => {
                     handleButtonClickToForm('gender', '수컷');
                   }}
                 >
-                  <p
-                    className={cn(watch('gender') === '수컷' ? whiteText : subText, `font-normal`)}
-                  >
-                    남자아이
-                  </p>
+                  <p className={'font-normal'}>남자아이</p>
                 </button>
                 <button
                   type="button"
@@ -159,11 +147,7 @@ export const BusinessCardPetNameView = ({ setBusinessCardFormData }: Props) => {
                     handleButtonClickToForm('gender', '암컷');
                   }}
                 >
-                  <p
-                    className={cn(watch('gender') === '암컷' ? whiteText : subText, `font-normal`)}
-                  >
-                    여자아이
-                  </p>
+                  <p className={'font-normal'}>여자아이</p>
                 </button>
               </div>
               {fieldState.error && (

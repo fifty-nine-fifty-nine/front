@@ -1,7 +1,15 @@
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-import { bgKakao, bgOptional, bgPrimary, bgSecondary, bgSelected, bgSub } from './colors.css';
+import {
+  bgKakao,
+  bgOptional,
+  bgPrimary,
+  bgSecondary,
+  bgSelected,
+  bgSub,
+  bgTertiary,
+} from './colors.css';
 
 export const button = recipe({
   base: {
@@ -12,6 +20,7 @@ export const button = recipe({
     color: {
       primary: bgPrimary,
       secondary: bgSecondary,
+      tertiary: bgTertiary,
       sub: bgSub,
       optional: bgOptional,
       kakao: bgKakao,

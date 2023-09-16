@@ -85,7 +85,7 @@ export const [themeClass, themeVars] = createTheme({
   fontWeights: {
     light: '300',
     semibold: '500',
-    bold: '700',
+    bold: '600',
   },
   fontSizes: {
     '12': '12px',

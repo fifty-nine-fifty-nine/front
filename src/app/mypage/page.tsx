@@ -15,8 +15,12 @@ import {
 } from '@/styles/ogoo/alignment.css';
 import {
   bgPrimary,
+  bgPrimaryActive,
+  bgPrimaryOptional,
+  bgPrimarySub,
   bgSecondary,
   bgSub,
+  bgTertiary,
   optionalText,
   primary,
   subText,
@@ -37,20 +41,17 @@ export default async function MyPage() {
 
   return (
     <Template>
-      <section className={cn(bgPrimary, whiteText, 'h-[221px] pt-5 px-5')}>
+      <header className={cn(bgPrimary, whiteText, 'h-[221px] pt-5 px-5')}>
         <p className={cn(titleLg)}>마이페이지</p>
         <div className={cn(flexColCenter, 'gap-3')}>
           <UserInfo />
           <div className={cn(flexRow, 'items-end')}>
-            {serverSession && (
-              <p className={cn(titleMd, 'mr-2 underline underline-offset-8')}>
-                {serverSession.user?.name}
-              </p>
-            )}
+            {serverSession && <p className={cn(titleMd, 'mr-2')}>{serverSession.user?.name}</p>}
             <p className={subtitle}>집사님</p>
           </div>
         </div>
-      </section>
+      </header>
+
       <section className={cn(flexCol, `px-5 pt-[38px] pb-5 gap-5`)}>
         <p className={titleSm}>보유중인 펫 명함</p>
         <div className={cn(flexRowCenter, 'gap-3')}>
@@ -68,8 +69,8 @@ export default async function MyPage() {
               <p className={cn(subtitle, primary)}>드림이</p>
             </div>
             <div className={cn(flexRowCenter, whiteText, 'gap-2')}>
-              <button className={cn(bgSecondary, button({ size: 'xs' }))}>수정</button>
-              <button className={cn(bgPrimary, button({ size: 'xs' }))}>공유</button>
+              <button className={cn(bgTertiary, button({ size: 'xxs' }))}>수정</button>
+              <button className={cn(bgPrimaryActive, button({ size: 'xxs' }))}>공유</button>
             </div>
           </div>
           <Link href={'/businesscard'} className="w-[195px] h-[215px]">
@@ -94,11 +95,11 @@ export default async function MyPage() {
             className="object-cover z-0"
           />
           <p className={cn(bodySm, subText)}>
-            펫 명함 기능은 최대 두명의 반려 가족까지만 지원되고 있어요.
+            펫 명함은 최대 두 마리의 반려동물만 지원되고 있어요.
           </p>
         </div>
       </section>
-      <section className={cn(bgSub, whiteText, 'h-22 p-5')}>
+      <section className={cn(bgPrimaryOptional, whiteText, 'h-22 p-5')}>
         <p className={cn(subText, 'text-sm')}>서비스를 사용해주신 가족님들의 의견을 들려주세요</p>
         <button className={cn(subText, bodyMd, flexRowCenter)}>
           <span className="mr-0.5">의견 남기러 가기</span>
@@ -112,12 +113,13 @@ export default async function MyPage() {
           />
         </button>
       </section>
-      <section className={cn(flexCol, `px-5 pt-6`)}>
-        <div>{serverSession?.user?.name && <KakaoLogoutButton />}</div>
+      <section className={cn(flexCol, `items-start px-5 pt-6`)}>
+        <KakaoLogoutButton />
         <p className={cn(subText, bodyMd)}>고객 서비스</p>
-        <div className={cn(flexRow, `gap-6`)}>
-          <p className={cn(subText, bodySm)}>개인정보 처리방침</p>
-          <p className={cn(subText, bodySm)}>이용약관</p>
+        <div className={cn(flexRow, optionalText, `gap-6 my-3`)}>
+          <p className={cn(bodySm)}>개인정보 처리방침</p>
+          <p className={cn(bodySm)}>이용약관</p>
+          <p className={cn(bodySm)}>회원탈퇴</p>
         </div>
       </section>
     </Template>

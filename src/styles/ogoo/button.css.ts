@@ -27,10 +27,11 @@ export const button = recipe({
       selected: bgSelected,
     },
     size: {
+      xxs: { padding: '4px 12px', borderRadius: 8, fontSize: 13 },
       xs: { padding: '6px 12px', borderRadius: 18 },
-      sm: { height: 36, borderRadius: 8.5, fontSize: 12, fontWeight: 700 },
+      sm: { height: 36, borderRadius: 8.5, fontSize: 12, fontWeight: 500 },
       md: { width: '100%', height: 45, borderRadius: 6, fontSize: 14 },
-      lg: { width: '100%', height: 60, borderRadius: 12, fontSize: 18, fontWeight: 700 },
+      lg: { width: '100%', height: 60, borderRadius: 12, fontSize: 18, fontWeight: 500 },
     },
   },
 

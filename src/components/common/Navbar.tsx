@@ -54,4 +54,4 @@ const navbarMenu = cn(
   `h-full p-4 select-none hover:bg-neutral-100 transition-all duration-300 ease-in-out`,
 );
 
-const activeText = `${primary} font-bold`;
+const activeText = `${primary} font-semibold`;

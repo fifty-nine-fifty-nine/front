@@ -21,9 +21,7 @@ export default async function Home() {
               <p>안녕하세요!</p>
               {session?.user?.name ? (
                 <p className={cn(flexRowItemsEnd)}>
-                  <strong className={cn(titleLg, primary, `underline underline-offset-4 mr-2`)}>
-                    {session?.user?.name}
-                  </strong>
+                  <strong className={cn(titleLg, primary, `mr-2`)}>{session?.user?.name}</strong>
                   집사님
                 </p>
               ) : (

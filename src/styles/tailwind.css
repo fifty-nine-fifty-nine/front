@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.viewport::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px #eee;
+  border-radius: 10px;
+}
+
+.viewport::-webkit-scrollbar {
+  width: 4px;
+}
+
+.viewport::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgba(115, 78, 247, 0.15);
+}
+
+.loading-wrapper {
+  width: 280px;
+  height: 80px;
+  margin: 20px;
+  position: relative;
+}
+
+.loading-indicator {
+  position: relative;
+  margin: 0 auto;
+  width: 36px;
+  height: 50px;
+  background-image: url('/svg/peticon_2.svg');
+  background-repeat: no-repeat;
+  transform: translateY(0%);
+  animation: loading-indicator-center 0.8s ease-in-out alternate infinite;
+  animation-delay: 0.5s;
+}
+.loading-indicator::after,
+.loading-indicator::before {
+  content: '';
+  position: absolute;
+  transform: translateY(0%);
+  width: 36px;
+  height: 50px;
+  animation: loading-indicator-side 0.8s ease-in-out alternate infinite;
+}
+.loading-indicator::before {
+  content: url('/svg/peticon_3.svg');
+  left: -50px;
+  animation-delay: 0.2s;
+}
+.loading-indicator::after {
+  content: url('/svg/peticon_1.svg');
+  right: -50px;
+  animation-delay: 1s;
+}
+
+@keyframes loading-indicator-center {
+  0% {
+    transform: translateY(40%);
+  }
+  100% {
+    transform: translateY(-40%);
+  }
+}
+
+@keyframes loading-indicator-side {
+  0% {
+    transform: translateY(20%);
+  }
+  100% {
+    transform: translateY(-20%);
+  }
+}

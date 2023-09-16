@@ -9,8 +9,8 @@ export const UserInfo = () => {
   if (session)
     return (
       <>
-        <h1>Client Session</h1>
-        <strong>{session?.user?.name ?? '이름'}</strong>
+        {/* <h1>Client Session</h1> */}
+        {/* <strong>{session?.user?.name ?? '이름'}</strong> */}
         <Image
           src={session?.user.image}
           alt="프로필 사진"
@@ -19,7 +19,7 @@ export const UserInfo = () => {
           priority
           className={`rounded-full`}
         />
-        <small className={` break-all`}>{JSON.stringify(session)}</small>
+        {/* <small className={` break-all`}>{JSON.stringify(session)}</small> */}
       </>
     );
 };

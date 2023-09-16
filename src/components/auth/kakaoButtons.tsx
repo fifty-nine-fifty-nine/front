@@ -31,7 +31,7 @@ export const KakaoLoginButton = () => {
 export const KakaoLogoutButton = () => {
   return (
     <button
-      className={cn(subText, bodyMd, flexRowCenter, logoutHover, `p-1`)}
+      className={cn(subText, bodyMd, flexRowCenter, logoutHover, `py-1`)}
       onClick={() => signOut()}
     >
       <span className="mr-0.5">로그아웃</span>

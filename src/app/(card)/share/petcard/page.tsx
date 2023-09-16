@@ -3,7 +3,7 @@ import React, { Suspense } from 'react';
 
 import { API_BASE_URL } from '@/constants';
 import { authOptions } from '@/lib/auth';
-import type { PetCardResponse } from '@/types';
+import type { PetCardResponse, PetCardSharedParams } from '@/types';
 
 import Loading from '../../loading';
 import { PetCardResult } from './component/PetCardResult';
@@ -29,7 +29,9 @@ export default async function SharePetCardPage({
       .then((res) => res.json())
       .then((res) => res);
 
-  const petCardInfo: PetCardResponse = genRequired ? await fetchPetCard() : searchParams;
+  const petCardInfo: PetCardResponse & PetCardSharedParams = genRequired
+    ? await fetchPetCard()
+    : searchParams;
 
   return (
     <Suspense fallback={<Loading />}>

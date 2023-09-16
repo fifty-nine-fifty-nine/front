@@ -30,7 +30,7 @@ export const MainPetCardView = ({ active }: Props) => {
             style={{ width: 'auto', height: 'auto' }}
             alt=""
             priority
-            className="object-cover object-top"
+            className="object-cover object-top min-w-full"
           />
         </picture>
         <div className={cn(bgSub, `sticky bottom-0 left-0 right-0 w-full p-5`)}>

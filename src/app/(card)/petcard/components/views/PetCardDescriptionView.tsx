@@ -23,7 +23,7 @@ export const PetCardDescriptionView = () => {
       return;
     }
     if (data.type && data.name && data.description) {
-      router.push(
+      router.replace(
         `/share/petcard?type=${data.type}&name=${data.name}&description=${data.description}`,
       );
     }

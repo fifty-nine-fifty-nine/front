@@ -1,7 +1,7 @@
 import { createTheme } from '@vanilla-extract/css';
 
-const primary = '#734EF7';
-const primarySub = '#EAE4FE';
+const primary = '#7082FF';
+const primarySub = '#1BD689';
 const secondary = '#FF8038';
 const kakao = '#FEE500';
 const black = '#000000';

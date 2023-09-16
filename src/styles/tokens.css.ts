@@ -1,8 +1,20 @@
 import { createTheme } from '@vanilla-extract/css';
 
 const primary = '#7082FF';
-const primarySub = '#1BD689';
-const secondary = '#FF8038';
+const primarySub = '#AEB8FF';
+const primaryOptional = '#E9ECFF';
+const primaryActive = '#492FA5';
+
+const secondary = '#1BD689';
+const secondarySub = '#8CEAC3';
+const secondaryActive = '#00643B';
+
+const tertiary = '#6C757D';
+const tertiarySub = '#C7CDD2';
+const tertiaryOptional = '#E9ECEF';
+
+const danger = '#FF0000';
+const dangerSub = '#FFD4D4';
 const kakao = '#FEE500';
 const black = '#000000';
 const white = '#FFFFFF';
@@ -22,7 +34,16 @@ export const [themeClass, themeVars] = createTheme({
   colors: {
     primary: primary,
     primarySub: primarySub,
+    primaryOptional: primaryOptional,
+    primaryActive: primaryActive,
     secondary: secondary,
+    secondarySub: secondarySub,
+    secondaryActive: secondaryActive,
+    tertiary: tertiary,
+    tertiarySub: tertiarySub,
+    tertiaryOptional: tertiaryOptional,
+    danger: danger,
+    dangerSub: dangerSub,
     blackText: black,
     whiteText: white,
     subtitleText: grayScale.w600,
@@ -34,13 +55,22 @@ export const [themeClass, themeVars] = createTheme({
   backgroundColors: {
     primary: primary,
     primarySub: primarySub,
+    primaryOptional: primaryOptional,
+    primaryActive: primaryActive,
     secondary: secondary,
+    secondarySub: secondarySub,
+    secondaryActive: secondaryActive,
+    tertiary: tertiary,
+    tertiarySub: tertiarySub,
+    tertiaryOptional: tertiaryOptional,
+    danger: danger,
+    dangerSub: dangerSub,
     white: white,
     black: black,
     sub: grayScale.w100,
     optional: grayScale.w50,
     kakao: kakao,
-    selected: grayScale.w500,
+    selected: tertiarySub,
   },
   spaces: {
     auto: 'auto',

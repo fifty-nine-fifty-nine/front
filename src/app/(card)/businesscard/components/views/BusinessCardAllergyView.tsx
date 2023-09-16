@@ -165,14 +165,7 @@ export const BusinessCardAllergyView = ({ setBusinessCardFormData }: Props) => {
                       handleButtonClickToForm('neutralization', true);
                     }}
                   >
-                    <p
-                      className={cn(
-                        watch('neutralization') === true ? whiteText : subText,
-                        `font-normal`,
-                      )}
-                    >
-                      중성화 했어요
-                    </p>
+                    <p className={'font-normal'}>중성화 했어요</p>
                   </button>
                   <button
                     type="button"
@@ -185,14 +178,7 @@ export const BusinessCardAllergyView = ({ setBusinessCardFormData }: Props) => {
                       handleButtonClickToForm('neutralization', false);
                     }}
                   >
-                    <p
-                      className={cn(
-                        watch('neutralization') === false ? whiteText : subText,
-                        `font-normal`,
-                      )}
-                    >
-                      중성화 안했어요
-                    </p>
+                    <p className={'font-normal'}>중성화 안했어요</p>
                   </button>
                 </div>
                 {fieldState.error && (
@@ -227,11 +213,7 @@ export const BusinessCardAllergyView = ({ setBusinessCardFormData }: Props) => {
                       handleButtonClickToForm('allergy', true);
                     }}
                   >
-                    <p
-                      className={cn(watch('allergy') === true ? whiteText : subText, `font-normal`)}
-                    >
-                      알러지가 있어요
-                    </p>
+                    <p className={'font-normal'}>알러지가 있어요</p>
                   </button>
                   <button
                     type="button"
@@ -245,14 +227,7 @@ export const BusinessCardAllergyView = ({ setBusinessCardFormData }: Props) => {
                       onClickNoAllergy();
                     }}
                   >
-                    <p
-                      className={cn(
-                        watch('allergy') === false ? whiteText : subText,
-                        `font-normal`,
-                      )}
-                    >
-                      알러지가 없어요
-                    </p>
+                    <p className={'font-normal'}>알러지가 없어요</p>
                   </button>
                 </div>
                 {fieldState.error && (

@@ -44,7 +44,7 @@ export const MainBusinessCardView = ({ active }: Props) => {
           <Image
             src="/img/bussinesscardBack_example.png"
             width={146}
-            height={222}
+            height={220}
             style={{ width: 'auto', height: 'auto' }}
             alt=""
             priority

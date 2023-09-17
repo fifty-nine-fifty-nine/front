@@ -5,7 +5,7 @@ import { Controller, useFormContext } from 'react-hook-form';
 
 import { GenerateItem, GenerateView } from '@/components/templates';
 import { button, input } from '@/styles/ogoo';
-import { flexCol } from '@/styles/ogoo/alignment.css';
+import { flexCol, flexRow } from '@/styles/ogoo/alignment.css';
 import { secondary, subText, whiteText } from '@/styles/ogoo/colors.css';
 import { caption } from '@/styles/ogoo/typography.css';
 import type { BusinessCardFormData } from '@/types';
@@ -59,7 +59,7 @@ export const BusinessCardPetNameView = ({ setBusinessCardFormData }: Props) => {
           rules={{ required: '필수 입력값입니다.' }}
           render={({ field, fieldState }) => (
             <GenerateItem question={'어떤 반려동물과 함께하고 계신가요?'}>
-              <div className={cn(flexCol, 'gap-3')}>
+              <div className={cn(flexRow, 'gap-3')}>
                 <button
                   type="button"
                   className={cn(
@@ -122,7 +122,7 @@ export const BusinessCardPetNameView = ({ setBusinessCardFormData }: Props) => {
           rules={{ required: '필수 입력값입니다.' }}
           render={({ field, fieldState }) => (
             <GenerateItem question={'반려동물의 성별은 무엇인가요?'}>
-              <div className={cn(flexCol, 'gap-3')}>
+              <div className={cn(flexRow, 'gap-3')}>
                 <button
                   type="button"
                   className={cn(

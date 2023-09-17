@@ -129,7 +129,7 @@ export const BusinessCardAllergyView = ({ setBusinessCardFormData }: Props) => {
       {isOpen && (
         <div
           onClick={() => allergySheetClose()}
-          className="fixed top-0 z-5 w-full h-screen bg-opacity-50 bg-black backdrop-blur-md"
+          className="fixed top-0 z-40 w-full h-screen bg-opacity-50 bg-black backdrop-blur-md"
         ></div>
       )}
       <GenerateView

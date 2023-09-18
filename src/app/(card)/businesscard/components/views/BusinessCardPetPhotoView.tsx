@@ -12,7 +12,7 @@ import { speciesMock } from '@/data/SpeciesMock';
 import { storage } from '@/firebase/fireStore';
 import { input } from '@/styles/ogoo';
 import { flexCol, flexColCenter } from '@/styles/ogoo/alignment.css';
-import { bgSub, optionalText, secondary } from '@/styles/ogoo/colors.css';
+import { bgSub, danger, optionalText, secondary } from '@/styles/ogoo/colors.css';
 import { caption } from '@/styles/ogoo/typography.css';
 import type { BusinessCardFormData } from '@/types';
 import { cn } from '@/utils';
@@ -147,7 +147,7 @@ export const BusinessCardPetPhotoView = ({ setBusinessCardFormData }: Props) => 
                     )}
                   </div>
                   {fieldState.error && (
-                    <p className={cn(secondary, caption)}>{fieldState.error.message}</p>
+                    <p className={cn(danger, caption)}>{fieldState.error.message}</p>
                   )}
                 </div>
               </GenerateItem>
@@ -176,7 +176,7 @@ export const BusinessCardPetPhotoView = ({ setBusinessCardFormData }: Props) => 
                   {...register('birth')}
                 ></input>
                 {fieldState.error && (
-                  <p className={cn(secondary, caption)}>{fieldState.error.message}</p>
+                  <p className={cn(danger, caption)}>{fieldState.error.message}</p>
                 )}
               </GenerateItem>
             )}
@@ -225,7 +225,7 @@ export const BusinessCardPetPhotoView = ({ setBusinessCardFormData }: Props) => 
                 </div>
 
                 {fieldState.error && (
-                  <p className={cn(secondary, caption)}>{fieldState.error.message}</p>
+                  <p className={cn(danger, caption)}>{fieldState.error.message}</p>
                 )}
               </GenerateItem>
             )}

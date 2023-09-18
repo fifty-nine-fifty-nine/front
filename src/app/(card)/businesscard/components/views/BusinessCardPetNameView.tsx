@@ -6,7 +6,7 @@ import { Controller, useFormContext } from 'react-hook-form';
 import { GenerateItem, GenerateView } from '@/components/templates';
 import { button, input } from '@/styles/ogoo';
 import { flexCol, flexRow } from '@/styles/ogoo/alignment.css';
-import { secondary, subText, whiteText } from '@/styles/ogoo/colors.css';
+import { danger } from '@/styles/ogoo/colors.css';
 import { caption } from '@/styles/ogoo/typography.css';
 import type { BusinessCardFormData } from '@/types';
 import { cn } from '@/utils';
@@ -91,7 +91,7 @@ export const BusinessCardPetNameView = ({ setBusinessCardFormData }: Props) => {
                 </button>
               </div>
               {fieldState.error && (
-                <p className={cn(secondary, caption)}>{fieldState.error.message}</p>
+                <p className={cn(danger, caption)}>{fieldState.error.message}</p>
               )}
             </GenerateItem>
           )}
@@ -110,7 +110,7 @@ export const BusinessCardPetNameView = ({ setBusinessCardFormData }: Props) => {
                 {...register('petName')}
               ></input>
               {fieldState.error && (
-                <p className={cn(secondary, caption)}>{fieldState.error.message}</p>
+                <p className={cn(danger, caption)}>{fieldState.error.message}</p>
               )}
             </GenerateItem>
           )}
@@ -151,7 +151,7 @@ export const BusinessCardPetNameView = ({ setBusinessCardFormData }: Props) => {
                 </button>
               </div>
               {fieldState.error && (
-                <p className={cn(secondary, caption)}>{fieldState.error.message}</p>
+                <p className={cn(danger, caption)}>{fieldState.error.message}</p>
               )}
             </GenerateItem>
           )}

@@ -9,7 +9,7 @@ import { GenerateItem, GenerateView } from '@/components/templates';
 import { AllergeListTable } from '@/data';
 import { button } from '@/styles/ogoo';
 import { flexCol, flexRow } from '@/styles/ogoo/alignment.css';
-import { secondary, subText, whiteText } from '@/styles/ogoo/colors.css';
+import { danger, subText, whiteText } from '@/styles/ogoo/colors.css';
 import { caption, subtitle } from '@/styles/ogoo/typography.css';
 import type { BusinessCardFormData } from '@/types';
 import { cn } from '@/utils';
@@ -182,7 +182,7 @@ export const BusinessCardAllergyView = ({ setBusinessCardFormData }: Props) => {
                   </button>
                 </div>
                 {fieldState.error && (
-                  <p className={cn(secondary, caption)}>{fieldState.error.message}</p>
+                  <p className={cn(danger, caption)}>{fieldState.error.message}</p>
                 )}
               </GenerateItem>
             )}
@@ -231,7 +231,7 @@ export const BusinessCardAllergyView = ({ setBusinessCardFormData }: Props) => {
                   </button>
                 </div>
                 {fieldState.error && (
-                  <p className={cn(secondary, caption)}>{fieldState.error.message}</p>
+                  <p className={cn(danger, caption)}>{fieldState.error.message}</p>
                 )}
               </GenerateItem>
             )}

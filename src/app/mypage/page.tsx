@@ -4,6 +4,7 @@ import { getServerSession } from 'next-auth';
 
 import { KakaoLogoutButton, UserInfo } from '@/components';
 import { Template } from '@/components/templates';
+import { API_BASE_URL } from '@/constants';
 import { authOptions } from '@/lib/auth';
 import { button } from '@/styles/ogoo';
 import {
@@ -17,8 +18,6 @@ import {
   bgPrimary,
   bgPrimaryActive,
   bgPrimaryOptional,
-  bgPrimarySub,
-  bgSecondary,
   bgSub,
   bgTertiary,
   optionalText,
@@ -27,10 +26,18 @@ import {
   whiteText,
 } from '@/styles/ogoo/colors.css';
 import { bodyMd, bodySm, subtitle, titleLg, titleMd, titleSm } from '@/styles/ogoo/typography.css';
+import type { BusinessCardFormData } from '@/types';
 import { cn } from '@/utils';
+
+interface BusinesscardWithId extends BusinessCardFormData {
+  id: number;
+}
 
 export default async function MyPage() {
   const serverSession = await getServerSession(authOptions);
+
+  const session = await getServerSession(authOptions);
+  const accessToken = session?.accessToken;
 
   const onClickResearch = () => {
     const newTabUrl = 'https://www.naver.com';
@@ -38,6 +45,19 @@ export default async function MyPage() {
     // 새로운 탭 열기
     window.open(newTabUrl, '_blank');
   };
+
+  const getMyBusinesscards = async () =>
+    await fetch(`${API_BASE_URL}/pets/businesscards/me`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => res);
+
+  const myPetBusinesscardList = await getMyBusinesscards();
 
   return (
     <Template>
@@ -55,34 +75,54 @@ export default async function MyPage() {
       <section className={cn(flexCol, `px-5 pt-[38px] pb-5 gap-5`)}>
         <p className={titleSm}>보유중인 펫 명함</p>
         <div className={cn(flexRowCenter, 'gap-3')}>
-          <div className={cn(bgSub, flexColCenter, 'w-[195px] h-[215px] rounded-xl pt-4')}>
-            <Image
-              src={''}
-              alt=""
-              width={100}
-              height={100}
-              priority
-              className={`rounded-full bg-red-400`}
-            />
-            <div className={cn(flexRow, 'items-end gap-1 pt-5 pb-1')}>
-              <p>첫째</p>
-              <p className={cn(subtitle, primary)}>드림이</p>
-            </div>
-            <div className={cn(flexRowCenter, whiteText, 'gap-2')}>
-              <button className={cn(bgTertiary, button({ size: 'xxs' }))}>수정</button>
-              <button className={cn(bgPrimaryActive, button({ size: 'xxs' }))}>공유</button>
-            </div>
-          </div>
-          <Link href={'/businesscard'} className="w-[195px] h-[215px]">
+          {myPetBusinesscardList.map((myPetBisinesscard: BusinesscardWithId) => (
             <div
-              className={cn(
-                flexCenter,
-                ' w-full h-full rounded-xl border-dashed border-2 border-gray-200',
-              )}
+              key={myPetBisinesscard.id}
+              className={cn(bgSub, flexColCenter, 'w-[195px] h-[215px] rounded-xl pt-4')}
             >
-              <p className={cn(optionalText, 'text-[60px] font-light')}>+</p>
+              <Image
+                src={myPetBisinesscard.petProfileImgPath}
+                alt=""
+                width={100}
+                height={100}
+                priority
+                className={`rounded-full bg-red-400 object-cover w-[100px] h-[100px]`}
+              />
+              <div className={cn(flexRow, 'items-end gap-1 pt-5 pb-1')}>
+                <p>첫째</p>
+                <p className={cn(subtitle, primary)}>{myPetBisinesscard.petName}</p>
+              </div>
+              <div className={cn(flexRowCenter, whiteText, 'gap-2')}>
+                <button className={cn(bgTertiary, button({ size: 'xxs' }))}>수정</button>
+                <button className={cn(bgPrimaryActive, button({ size: 'xxs' }))}>공유</button>
+              </div>
             </div>
-          </Link>
+          ))}
+
+          {myPetBusinesscardList.length <= 1 && (
+            <Link href={'/businesscard'} className="w-[195px] h-[215px]">
+              <div
+                className={cn(
+                  flexCenter,
+                  ' w-full h-full rounded-xl border-dashed border-2 border-gray-200',
+                )}
+              >
+                <p className={cn(optionalText, 'text-[60px] font-light')}>+</p>
+              </div>
+            </Link>
+          )}
+          {myPetBusinesscardList.length === 0 && (
+            <Link href={'/businesscard'} className="w-[195px] h-[215px]">
+              <div
+                className={cn(
+                  flexCenter,
+                  ' w-full h-full rounded-xl border-dashed border-2 border-gray-200',
+                )}
+              >
+                <p className={cn(optionalText, 'text-[60px] font-light')}>+</p>
+              </div>
+            </Link>
+          )}
         </div>
         <div className={cn(flexRowCenter, 'gap-2')}>
           <Image
@@ -95,7 +135,9 @@ export default async function MyPage() {
             className="object-cover z-0"
           />
           <p className={cn(bodySm, subText)}>
-            펫 명함은 최대 두 마리의 반려동물만 지원되고 있어요.
+            {myPetBusinesscardList.length === 0
+              ? '반려동물에게 명함을 만들어주세요!'
+              : '펫 명함은 최대 두 마리의 반려동물만 지원되고 있어요.'}
           </p>
         </div>
       </section>

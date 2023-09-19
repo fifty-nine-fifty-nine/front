@@ -57,7 +57,7 @@ export default async function MyPage() {
       .then((res) => res.json())
       .then((res) => res);
 
-  const myPetBusinesscardList = await getMyBusinesscards();
+  const myPetBusinesscardList: BusinesscardWithId[] = await getMyBusinesscards();
 
   return (
     <Template>
@@ -75,29 +75,30 @@ export default async function MyPage() {
       <section className={cn(flexCol, `px-5 pt-[38px] pb-5 gap-5`)}>
         <p className={titleSm}>보유중인 펫 명함</p>
         <div className={cn(flexRowCenter, 'gap-3')}>
-          {myPetBusinesscardList.map((myPetBisinesscard: BusinesscardWithId) => (
-            <div
-              key={myPetBisinesscard.id}
-              className={cn(bgSub, flexColCenter, 'w-[195px] h-[215px] rounded-xl pt-4')}
-            >
-              <Image
-                src={myPetBisinesscard.petProfileImgPath}
-                alt=""
-                width={100}
-                height={100}
-                priority
-                className={`rounded-full bg-red-400 object-cover w-[100px] h-[100px]`}
-              />
-              <div className={cn(flexRow, 'items-end gap-1 pt-5 pb-1')}>
-                <p>첫째</p>
-                <p className={cn(subtitle, primary)}>{myPetBisinesscard.petName}</p>
+          {myPetBusinesscardList.length > 0 &&
+            myPetBusinesscardList.map((myPetBisinesscard: BusinesscardWithId) => (
+              <div
+                key={myPetBisinesscard.id}
+                className={cn(bgSub, flexColCenter, 'w-[195px] h-[215px] rounded-xl pt-4')}
+              >
+                <Image
+                  src={myPetBisinesscard.petProfileImgPath}
+                  alt=""
+                  width={100}
+                  height={100}
+                  priority
+                  className={`rounded-full bg-red-400 object-cover w-[100px] h-[100px]`}
+                />
+                <div className={cn(flexRow, 'items-end gap-1 pt-5 pb-1')}>
+                  <p>첫째</p>
+                  <p className={cn(subtitle, primary)}>{myPetBisinesscard.petName}</p>
+                </div>
+                <div className={cn(flexRowCenter, whiteText, 'gap-2')}>
+                  <button className={cn(bgTertiary, button({ size: 'xxs' }))}>수정</button>
+                  <button className={cn(bgPrimaryActive, button({ size: 'xxs' }))}>공유</button>
+                </div>
               </div>
-              <div className={cn(flexRowCenter, whiteText, 'gap-2')}>
-                <button className={cn(bgTertiary, button({ size: 'xxs' }))}>수정</button>
-                <button className={cn(bgPrimaryActive, button({ size: 'xxs' }))}>공유</button>
-              </div>
-            </div>
-          ))}
+            ))}
 
           {myPetBusinesscardList.length <= 1 && (
             <Link href={'/businesscard'} className="w-[195px] h-[215px]">

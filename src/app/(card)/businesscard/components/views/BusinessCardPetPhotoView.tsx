@@ -11,8 +11,8 @@ import { GenerateItem, GenerateView } from '@/components/templates';
 import { speciesMock } from '@/data/SpeciesMock';
 import { storage } from '@/firebase/fireStore';
 import { input } from '@/styles/ogoo';
-import { flexCol, flexColCenter } from '@/styles/ogoo/alignment.css';
-import { bgSub, danger, optionalText, secondary } from '@/styles/ogoo/colors.css';
+import { flexCenter, flexCol, flexColCenter } from '@/styles/ogoo/alignment.css';
+import { bgSub, danger, optionalText } from '@/styles/ogoo/colors.css';
 import { caption } from '@/styles/ogoo/typography.css';
 import type { BusinessCardFormData } from '@/types';
 import { cn } from '@/utils';
@@ -140,7 +140,7 @@ export const BusinessCardPetPhotoView = ({ setBusinessCardFormData }: Props) => 
                       <button
                         type="button"
                         onClick={handleClick}
-                        className={cn(bgSub, 'w-32 h-32 rounded-full')}
+                        className={cn(bgSub, flexCenter, 'w-32 h-32 rounded-full')}
                       >
                         <p className={cn(optionalText, 'text-[60px] font-light')}>+</p>
                       </button>

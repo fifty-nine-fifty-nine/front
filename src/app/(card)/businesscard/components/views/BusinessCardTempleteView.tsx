@@ -36,7 +36,7 @@ export const BusinessCardTempleteView = ({
     handleSubmit,
     watch,
     setValue,
-    control,
+    getValues,
     formState: { isValid },
   } = useFormContext<BusinessCardFormData>();
 
@@ -50,6 +50,7 @@ export const BusinessCardTempleteView = ({
   const { data: session } = useSession();
 
   const accessToken = session?.accessToken;
+  const petName = getValues('petName');
 
   const handleBusinesscardUpload = async () => {
     if (!businesscardFrontRef.current || !businesscardBackRef.current) return [];
@@ -120,9 +121,7 @@ export const BusinessCardTempleteView = ({
     await createBusinesscard(watch());
 
     router.push(
-      `/share/businesscard?petName=${watch(
-        'petName',
-      )}&&frontPage=${uploadFrontFileName}&&backPage=${uploadBackFileName}`,
+      `/share/businesscard?petName=${petName}&&frontPage=${uploadFrontFileName}&&backPage=${uploadBackFileName}`,
     );
   };
 

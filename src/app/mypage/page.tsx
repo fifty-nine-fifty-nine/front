@@ -39,23 +39,24 @@ export default async function MyPage() {
   const session = await getServerSession(authOptions);
   const accessToken = session?.accessToken;
 
-  const onClickResearch = () => {
-    const newTabUrl = 'https://www.naver.com';
+  const getMyBusinesscards = async (): Promise<BusinesscardWithId[] | []> => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/pets/businesscards/me`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
 
-    // 새로운 탭 열기
-    window.open(newTabUrl, '_blank');
+      const data = await response.json();
+
+      return data as BusinesscardWithId[] | [];
+    } catch (err) {
+      console.error(err);
+      return [];
+    }
   };
-
-  const getMyBusinesscards = async () =>
-    await fetch(`${API_BASE_URL}/pets/businesscards/me`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => res);
 
   const myPetBusinesscardList: BusinesscardWithId[] = await getMyBusinesscards();
 
@@ -145,7 +146,9 @@ export default async function MyPage() {
       <section className={cn(bgPrimaryOptional, whiteText, 'h-22 p-5')}>
         <p className={cn(subText, 'text-sm')}>서비스를 사용해주신 가족님들의 의견을 들려주세요</p>
         <button className={cn(subText, bodyMd, flexRowCenter)}>
-          <span className="mr-0.5">의견 남기러 가기</span>
+          <Link href="https://www.naver.com" target="_blank">
+            <span className="mr-0.5">의견 남기러 가기</span>
+          </Link>
           <Image
             src="/svg/arrow_right.svg"
             alt=""

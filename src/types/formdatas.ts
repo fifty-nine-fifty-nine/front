@@ -2,6 +2,7 @@ export interface BusinessCardFormData {
   type: string;
   petName: string;
   gender: string;
+  businesscardImgPath: string[];
   petProfileImgPath: string;
   birth: string;
   species: string;
@@ -14,7 +15,6 @@ export interface BusinessCardFormData {
   personalityAmongAnimals: string;
   petLike: string[];
   petHate: string[];
-  businesscardImgPath: string[];
 }
 
 export interface PetCardFormData {
@@ -32,6 +32,12 @@ export interface PetCardResponse {
 export interface PetCardSharedParams {
   name: string;
   imgPath: string;
+}
+
+export interface BusinessCardSharedParams {
+  petName: string;
+  frontPage: string;
+  backPage: string;
 }
 
 export enum AnimalTypeEnum {

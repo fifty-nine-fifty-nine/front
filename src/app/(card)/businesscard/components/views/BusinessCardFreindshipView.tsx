@@ -7,7 +7,7 @@ import { Controller, useFormContext } from 'react-hook-form';
 import { GenerateItem, GenerateView } from '@/components/templates';
 import { input } from '@/styles/ogoo';
 import { flexCol } from '@/styles/ogoo/alignment.css';
-import { secondary } from '@/styles/ogoo/colors.css';
+import { danger } from '@/styles/ogoo/colors.css';
 import { caption } from '@/styles/ogoo/typography.css';
 import type { BusinessCardFormData } from '@/types';
 import { cn } from '@/utils';
@@ -66,7 +66,7 @@ export const BusinessCardFreindshipView = ({ setBusinessCardFormData }: Props) =
                   {...register('personalityToPerson')}
                 ></input>
                 {fieldState.error && (
-                  <p className={cn(secondary, caption)}>{fieldState.error.message}</p>
+                  <p className={cn(danger, caption)}>{fieldState.error.message}</p>
                 )}
               </GenerateItem>
             )}
@@ -85,7 +85,7 @@ export const BusinessCardFreindshipView = ({ setBusinessCardFormData }: Props) =
                   {...register('personalityAmongAnimals')}
                 ></input>
                 {fieldState.error && (
-                  <p className={cn(secondary, caption)}>{fieldState.error.message}</p>
+                  <p className={cn(danger, caption)}>{fieldState.error.message}</p>
                 )}
               </GenerateItem>
             )}

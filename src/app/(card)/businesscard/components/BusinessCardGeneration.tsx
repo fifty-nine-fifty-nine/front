@@ -85,7 +85,10 @@ export const BusinessCardGeneration = () => {
             <Step.BusinessCardPreferenceView setBusinessCardFormData={setBusinessCardFormData} />
           ))
           .with('6', () => (
-            <Step.BusinessCardTempleteView businessCardFormData={businessCardFormData} />
+            <Step.BusinessCardTempleteView
+              businessCardFormData={businessCardFormData}
+              setBusinessCardFormData={setBusinessCardFormData}
+            />
           ))
           .otherwise(() => (
             <></>

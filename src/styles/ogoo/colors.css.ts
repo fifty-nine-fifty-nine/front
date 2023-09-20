@@ -6,6 +6,7 @@ export const primaryOptional = sprinkles({ color: 'primaryOptional' });
 export const primaryActive = sprinkles({ color: 'primaryActive' });
 export const secondary = sprinkles({ color: 'secondary' });
 export const secondarySub = sprinkles({ color: 'secondarySub' });
+export const danger = sprinkles({ color: 'danger' });
 export const tertiary = sprinkles({ color: 'tertiary' });
 export const tertiarySub = sprinkles({ color: 'tertiarySub' });
 export const tertiaryOptional = sprinkles({ color: 'tertiarySub' });

@@ -19,13 +19,13 @@ export default async function SharePetBusinesscardPage({
   const backPath = ref(storage, `businesscard/${businesscardInfo.backPage}`);
 
   //FIXME: url 변경해서 데이터 받아오기
-  const fronet = await getDownloadURL(frontPath);
+  const front = await getDownloadURL(frontPath);
   const back = await getDownloadURL(backPath);
 
   return (
     <Suspense fallback={<Loading />}>
       <BusinessCardResult
-        businesscardInfo={{ petName: businesscardInfo.petName, frontPage: fronet, backPage: back }}
+        businesscardInfo={{ petName: businesscardInfo.petName, frontPage: front, backPage: back }}
       />
     </Suspense>
   );

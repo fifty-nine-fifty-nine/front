@@ -64,7 +64,7 @@ export const BusinessCardRectangleFront = ({
           <Image
             src={businessCardFormData.petProfileImgPath}
             fill
-            className="object-fill"
+            className="object-cover"
             alt=""
             priority
           />

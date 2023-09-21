@@ -8,6 +8,10 @@ const config: Config = {
         primary: '#7082FF',
         secondary: '#1BD689',
       },
+      backgroundImage: {
+        'primary-pattern': "url('/img/pattern_primary.png')",
+        'secondary-pattern': "url('/img/pattern_secondary.png')",
+      },
     },
   },
   plugins: [],

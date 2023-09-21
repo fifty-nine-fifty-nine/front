@@ -32,17 +32,11 @@ export const BusinessCardBack = ({
         className={cn(
           flexColCenter,
           JalnanFont.className,
-          'relative w-[281px] min-h-[440px] justify-center',
+          'relative w-[281px] min-h-[440px] justify-center bg-repeat p-[26px] rounded-xl',
+          isPrimary ? 'bg-primary-pattern' : 'bg-secondary-pattern',
         )}
       >
-        {isPrimary ? (
-          <Image className="" src="/img/background_primary.png" alt="" fill priority />
-        ) : (
-          <Image className="" src="/img/background_sub.png" alt="" fill priority />
-        )}
-        <></>
-
-        <div className="absolute top-[26px] left-[25px] bg-white w-[231px] min-h-[382px] rounded-2xl z-10">
+        <div className="top-[26px] left-[25px] bg-white w-[231px] min-h-[382px] rounded-2xl z-10">
           <div className="p-4">
             <h1 className={cn(titleMd, `${isPrimary ? 'text-[#492FA5]' : 'text-[#00643B]'}`)}>
               Profile
@@ -128,16 +122,18 @@ export const BusinessCardBack = ({
                 <div className={flexRow}>
                   <p className={cn(isPrimaryColorChange, 'min-w-[28px]')}>선호:</p>
                   <div>
-                    {businessCardFormData.petLike.map((like: string) => (
-                      <p key={like}>#{like}</p>
-                    ))}
+                    {businessCardFormData.petLike
+                      .filter((e) => e !== '')
+                      .map((like: string) => (
+                        <span key={like}>#{like} </span>
+                      ))}
                   </div>
                 </div>
                 <div className={flexRow}>
                   <p className={cn(isPrimaryColorChange, 'min-w-[52px]')}>주의사항:</p>
                   <div>
                     {businessCardFormData.petHate.map((hate: string) => (
-                      <p key={hate}>#{hate}</p>
+                      <span key={hate}>#{hate} </span>
                     ))}
                   </div>
                 </div>

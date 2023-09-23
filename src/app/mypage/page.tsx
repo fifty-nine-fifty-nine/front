@@ -146,7 +146,7 @@ export default async function MyPage() {
       <section className={cn(bgPrimaryOptional, whiteText, 'h-22 p-5')}>
         <p className={cn(subText, 'text-sm')}>서비스를 사용해주신 가족님들의 의견을 들려주세요</p>
         <button className={cn(subText, bodyMd, flexRowCenter)}>
-          <Link href="https://www.naver.com" target="_blank">
+          <Link href="https://www.naver.com" target="_blank" referrerPolicy="no-referrer">
             <span className="mr-0.5">의견 남기러 가기</span>
           </Link>
           <Image

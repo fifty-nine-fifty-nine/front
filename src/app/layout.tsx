@@ -24,7 +24,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ko">
-      <body className={cn(themeClass, Pretendard.className, flexCenter, bgSubPrimary)}>
+      <head>
+        {/* eslint-disable-next-line @next/next/no-before-interactive-script-outside-document */}
         <Script
           id="maze-script"
           strategy="beforeInteractive"
@@ -52,6 +53,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             `,
           }}
         />
+      </head>
+
+      <body className={cn(themeClass, Pretendard.className, flexCenter, bgSubPrimary)}>
         <main
           className={cn(mainContainer, `flex-1 max-w-md relative overflow-hidden drop-shadow-sm`)}
         >

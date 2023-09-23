@@ -1,3 +1,5 @@
+import '@/extensions';
+
 import localFont from 'next/font/local';
 import Image from 'next/image';
 import type { RefObject } from 'react';
@@ -32,11 +34,11 @@ export const BusinessCardBack = ({
         className={cn(
           flexColCenter,
           JalnanFont.className,
-          'relative w-[281px] min-h-[440px] justify-center bg-repeat p-[26px] rounded-xl',
+          'relative w-[292px] min-h-[440px] justify-center bg-repeat px-[25px] py-[26px] rounded-xl',
           isPrimary ? 'bg-primary-pattern' : 'bg-secondary-pattern',
         )}
       >
-        <div className="top-[26px] left-[25px] bg-white w-[231px] min-h-[382px] rounded-2xl z-10">
+        <div className="bg-white min-h-[382px] rounded-2xl z-10">
           <div className="p-4">
             <h1 className={cn(titleMd, `${isPrimary ? 'text-[#492FA5]' : 'text-[#00643B]'}`)}>
               Profile
@@ -122,17 +124,15 @@ export const BusinessCardBack = ({
                 <div className={flexRow}>
                   <p className={cn(isPrimaryColorChange, 'min-w-[28px]')}>선호:</p>
                   <div>
-                    {businessCardFormData.petLike
-                      .filter((e) => e !== '')
-                      .map((like: string) => (
-                        <span key={like}>#{like} </span>
-                      ))}
+                    {businessCardFormData.petLike.removeEmptyStrings().map((like: string) => (
+                      <span key={like}>#{like} </span>
+                    ))}
                   </div>
                 </div>
                 <div className={flexRow}>
                   <p className={cn(isPrimaryColorChange, 'min-w-[52px]')}>주의사항:</p>
                   <div>
-                    {businessCardFormData.petHate.map((hate: string) => (
+                    {businessCardFormData.petHate.removeEmptyStrings().map((hate: string) => (
                       <span key={hate}>#{hate} </span>
                     ))}
                   </div>

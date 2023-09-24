@@ -1,6 +1,6 @@
 import { getServerSession } from 'next-auth';
 
-import { KakaoLoginButton, KakaoLogoutButton, UserInfo } from '@/components';
+import { KakaoLoginButton, KakaoLogoutButton, UserProfile } from '@/components';
 import { Template } from '@/components/templates';
 import { authOptions } from '@/lib/auth';
 import { flexColCenter } from '@/styles/ogoo/alignment.css';
@@ -15,7 +15,7 @@ export default async function Login() {
       <section className={cn(flexColCenter, `p-5`)}>
         <p>{session.user?.name}님 반갑습니다</p>
         <KakaoLogoutButton />
-        <UserInfo />
+        <UserProfile />
       </section>
     );
   }

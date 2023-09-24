@@ -17,6 +17,10 @@ export interface BusinessCardFormData {
   petHate: string[];
 }
 
+export interface BusinesscardWithId extends BusinessCardFormData {
+  id: number;
+}
+
 export interface PetCardFormData {
   type: AnimalTypeEnum;
   name: string;

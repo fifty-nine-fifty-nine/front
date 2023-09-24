@@ -30,7 +30,7 @@ const BusinessCardResult = ({ businesscardInfo }: Props) => {
       </header>
       <div className="h-full flex-col justify-between px-5 mt-[-40px]">
         <div className={cn(flexColCenter)}>
-          <h2 className={cn(titleLg, `whitespace-pre-wrap`)}>
+          <h2 className={cn(titleLg, `mb-5 whitespace-pre-wrap`)}>
             {businesscardInfo.petName} 명함이 완성되었어요!
           </h2>
 
@@ -53,7 +53,7 @@ const BusinessCardResult = ({ businesscardInfo }: Props) => {
             <button className={cn(whiteText, button({ size: 'sm' }), 'w-full')} type="button">
               저장
             </button>
-            <strong className={cn(bodyLg, subText, `block pb-2`)}>유의사항</strong>
+            <strong className={cn(bodyLg, subText, `block mt-4 pb-2`)}>유의사항</strong>
             <ul className={bulletItem}>
               <li>펫 명함은 최대 2개까지만 저장 가능합니다.</li>
               <li>

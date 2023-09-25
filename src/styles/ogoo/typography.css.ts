@@ -48,7 +48,6 @@ export const bodyLg = sprinkles({
 
 export const bodyMd = sprinkles({
   fontSize: '14',
-  fontWeight: 'semibold',
 });
 
 export const bodySm = sprinkles({

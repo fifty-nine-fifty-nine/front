@@ -39,8 +39,8 @@
     "@typescript-eslint/eslint-plugin": "^6.5.0",
     "@vanilla-extract/next-plugin": "^2.2.2",
     "clsx": "^2.0.0",
+    "encoding": "^0.1.13",
     "eslint-plugin-simple-import-sort": "^10.0.0",
-    "firebase-tools": "11.19.0",
     "tailwind-merge": "^1.14.0"
   }
 }

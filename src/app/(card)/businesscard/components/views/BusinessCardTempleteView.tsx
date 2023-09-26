@@ -1,91 +1,128 @@
-'use client';
-
 import 'swiper/css';
 import 'swiper/css/pagination';
 
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-// import html2canvas from 'html2canvas';
+import html2canvas from 'html2canvas';
+import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
+import type { Dispatch, SetStateAction } from 'react';
 import { useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { blob } from 'stream/consumers';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { v4 as uuid } from 'uuid'; //v4 버전 사용
 
 import { BusinessCardBack } from '@/app/(card)/share/businesscard/components/BusinessCardBack';
 import { BusinessCardRectangleFront } from '@/app/(card)/share/businesscard/components/BusinessCardRectangleFront';
-import { BusinessCardRoundFront } from '@/app/(card)/share/businesscard/components/BusinessCardRoundFront';
 import { GenerateItem, GenerateView } from '@/components/templates';
+import { API_BASE_URL } from '@/constants';
 import { storage } from '@/firebase/fireStore';
 import { button } from '@/styles/ogoo';
-import { flexCenter, flexCol } from '@/styles/ogoo/alignment.css';
+import { flexCenter, flexCol, flexRow } from '@/styles/ogoo/alignment.css';
 import { subText, whiteText } from '@/styles/ogoo/colors.css';
 import type { BusinessCardFormData } from '@/types';
 import { cn } from '@/utils';
 
 interface Props {
   businessCardFormData: BusinessCardFormData;
+  setBusinessCardFormData: Dispatch<SetStateAction<BusinessCardFormData>>;
 }
 
-export const BusinessCardTempleteView = ({ businessCardFormData }: Props) => {
+export const BusinessCardTempleteView = ({
+  businessCardFormData,
+  setBusinessCardFormData,
+}: Props) => {
   const {
     handleSubmit,
     watch,
     setValue,
+    getValues,
     formState: { isValid },
   } = useFormContext<BusinessCardFormData>();
 
   const businesscardFrontRef = useRef<HTMLDivElement>(null);
   const businesscardBackRef = useRef<HTMLDivElement>(null);
 
-  const [roundType, setRoundType] = useState<boolean>();
   const [isPrimary, setIsPrimary] = useState<boolean>();
   const [uploadedBusinesscardPath, setUploadedBusinesscardPath] = useState<string[]>([]);
 
-  // const handleBusinesscardUpload = async () => {
-  //   if (!businesscardFrontRef.current || !businesscardBackRef.current) return;
+  const router = useRouter();
+  const { data: session } = useSession();
 
-  //   try {
-  //     const businesscardFront = businesscardFrontRef.current;
-  //     const businesscardBack = businesscardBackRef.current;
+  const accessToken = session?.accessToken;
+  const petName = getValues('petName');
 
-  //     const frontcanvas = await html2canvas(businesscardFront, { scale: 2 });
-  //     const backcanvas = await html2canvas(businesscardBack, { scale: 2 });
+  const handleBusinesscardUpload = async () => {
+    if (!businesscardFrontRef.current || !businesscardBackRef.current) return [];
 
-  //     console.log(frontcanvas, backcanvas);
+    try {
+      const businesscardFront = businesscardFrontRef.current;
+      const businesscardBack = businesscardBackRef.current;
 
-  //     frontcanvas.toBlob(async (blob) => {
-  //       if (blob !== null) {
-  //         const uploadFileName = uuid() + '.png';
-  //         const storageRef = ref(storage, `businesscard/${uploadFileName}`);
-  //         await uploadBytes(storageRef, blob);
-  //         const downloadURL = await getDownloadURL(storageRef);
-  //         setUploadedBusinesscardPath((prevPaths) => [...prevPaths, downloadURL]);
-  //       }
-  //     });
-  //     backcanvas.toBlob(async (blob) => {
-  //       if (blob !== null) {
-  //         const uploadFileName = uuid() + '.png';
-  //         const storageRef = ref(storage, `businesscard/${uploadFileName}`);
-  //         await uploadBytes(storageRef, blob);
-  //         const downloadURL = await getDownloadURL(storageRef);
-  //         setUploadedBusinesscardPath((prevPaths) => [...prevPaths, downloadURL]);
-  //       }
-  //     });
-  //     console.log(uploadedBusinesscardPath, '@@@');
+      const frontcanvas = await html2canvas(businesscardFront, { scale: 2 });
+      const backcanvas = await html2canvas(businesscardBack, { scale: 2 });
 
-  //     setValue('businesscardImgPath', uploadedBusinesscardPath);
-  //   } catch (error) {
-  //     console.error('Error converting div to image:', error);
-  //   }
-  // };
+      const _frontblob: Blob = await new Promise<Blob>(async (res, rej) => {
+        frontcanvas.toBlob(async (blob) => {
+          if (blob) {
+            res(blob);
+            return;
+          }
+          rej(new Error('Failed to create blob.'));
+        });
+      });
 
-  const onSubmit = async (data: BusinessCardFormData) => {
-    // await handleBusinesscardUpload();
+      const _backblob: Blob = await new Promise<Blob>(async (res, rej) => {
+        backcanvas.toBlob(async (blob) => {
+          if (blob) {
+            res(blob);
+            return;
+          }
+          rej(new Error('Failed to create blob.'));
+        });
+      });
 
-    console.log(data, '폼데이터 확인');
+      const uploadFrontFileName = uuid() + '.png';
+      const storageFrontRef = ref(storage, `businesscard/${uploadFrontFileName}`);
+      await uploadBytes(storageFrontRef, _frontblob);
+      const downloadFrontURL = await getDownloadURL(storageFrontRef);
 
-    // window.history.pushState({}, '', '/share/businesscard');
+      const uploadBackFileName = uuid() + '.png';
+      const storageBackRef = ref(storage, `businesscard/${uploadBackFileName}`);
+      await uploadBytes(storageBackRef, _backblob);
+      const downloadBackURL = await getDownloadURL(storageBackRef);
+      setValue('businesscardImgPath', [downloadFrontURL, downloadBackURL]);
+
+      return [uploadFrontFileName, uploadBackFileName];
+    } catch (error) {
+      console.error('Error converting div to image:', error);
+    }
+    return [];
+  };
+
+  const createBusinesscard = async (data: BusinessCardFormData) => {
+    try {
+      await fetch(`${API_BASE_URL}/pets/businesscards`, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+    } catch (error) {
+      console.error('Error creating business card:', error);
+    }
+  };
+
+  const onSubmit = async () => {
+    const [uploadFrontFileName, uploadBackFileName] = await handleBusinesscardUpload();
+
+    await createBusinesscard(watch());
+
+    router.push(
+      `/share/businesscard?petName=${petName}&&frontPage=${uploadFrontFileName}&&backPage=${uploadBackFileName}`,
+    );
   };
 
   return (
@@ -98,62 +135,25 @@ export const BusinessCardTempleteView = ({ businessCardFormData }: Props) => {
       <div className={cn(flexCol, 'px-5 pb-36 gap-8')}>
         <div className={cn(flexCenter)}>
           <Swiper modules={[Pagination]} pagination={{ clickable: true }}>
-            {roundType ? (
-              <SwiperSlide className="mb-8">
-                <div ref={businesscardFrontRef}>
-                  <BusinessCardRoundFront
-                    isPrimary={isPrimary!}
-                    businessCardFormData={businessCardFormData}
-                  />
-                </div>
-              </SwiperSlide>
-            ) : (
-              <SwiperSlide className="mb-8">
-                <div ref={businesscardFrontRef}>
-                  <BusinessCardRectangleFront
-                    isPrimary={isPrimary!}
-                    businessCardFormData={businessCardFormData}
-                  />
-                </div>
-              </SwiperSlide>
-            )}
             <SwiperSlide className="mb-8">
-              <div ref={businesscardBackRef}>
-                <BusinessCardBack
-                  roundType={roundType!}
-                  isPrimary={isPrimary!}
-                  businessCardFormData={businessCardFormData}
-                />
-              </div>
+              <BusinessCardRectangleFront
+                businesscardFrontRef={businesscardFrontRef}
+                isPrimary={isPrimary!}
+                businessCardFormData={businessCardFormData}
+              />
+            </SwiperSlide>
+            <SwiperSlide className="mb-8">
+              <BusinessCardBack
+                isPrimary={isPrimary!}
+                businessCardFormData={businessCardFormData}
+                businesscardBackRef={businesscardBackRef}
+              />
             </SwiperSlide>
           </Swiper>
         </div>
 
-        <GenerateItem question={'어떤 반려동물과 함께하고 계신가요?'}>
-          <div className={cn(flexCol, 'gap-3')}>
-            <button
-              type="button"
-              className={cn(button({ color: roundType ? 'selected' : 'sub' }))}
-              onClick={() => {
-                setRoundType(true);
-              }}
-            >
-              <p className={cn(roundType ? whiteText : subText, `font-normal`)}>라운드형</p>
-            </button>
-            <button
-              type="button"
-              className={cn(button({ color: !roundType ? 'selected' : 'sub' }))}
-              onClick={() => {
-                setRoundType(false);
-              }}
-            >
-              <p className={cn(!roundType ? whiteText : subText, `font-normal`)}>격자형</p>
-            </button>
-          </div>
-        </GenerateItem>
-
         <GenerateItem question={'오구오구의 컬러 중 선호하는 컬러를 선택해주세요.'}>
-          <div className={cn(flexCol, 'gap-3')}>
+          <div className={cn(flexRow, 'gap-3')}>
             <button
               type="button"
               className={cn(button({ color: isPrimary ? 'selected' : 'sub' }))}
@@ -161,7 +161,7 @@ export const BusinessCardTempleteView = ({ businessCardFormData }: Props) => {
                 setIsPrimary(true);
               }}
             >
-              <p className={cn(isPrimary ? whiteText : subText, `font-normal`)}>보라색</p>
+              <p className={cn(isPrimary ? whiteText : subText, `font-normal`)}>파란색</p>
             </button>
             <button
               type="button"
@@ -170,7 +170,7 @@ export const BusinessCardTempleteView = ({ businessCardFormData }: Props) => {
                 setIsPrimary(false);
               }}
             >
-              <p className={cn(!isPrimary ? whiteText : subText, `font-normal`)}>주황색</p>
+              <p className={cn(!isPrimary ? whiteText : subText, `font-normal`)}>초록색</p>
             </button>
           </div>
         </GenerateItem>

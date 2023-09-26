@@ -1,2 +1,2 @@
-export * from './kakaoButtons';
-export * from './userInfo';
+export * from './KakaoButtons';
+export * from './UserProfile';

@@ -26,6 +26,7 @@ export default async function SharePetBusinesscardPage({
     <Suspense fallback={<Loading />}>
       <BusinessCardResult
         businesscardInfo={{ petName: businesscardInfo.petName, frontPage: front, backPage: back }}
+        businesscardData={businesscardInfo}
       />
     </Suspense>
   );

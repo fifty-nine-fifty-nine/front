@@ -53,6 +53,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             `,
           }}
         />
+        {/* <Script
+          defer
+          src="https://t1.kakaocdn.net/kakao_js_sdk/2.4.0/kakao.min.js"
+          integrity="sha384-mXVrIX2T/Kszp6Z0aEWaA8Nm7J6/ZeWXbL8UpGRjKwWe56Srd/iyNmWMBhcItAjH"
+          crossOrigin="anonymous"
+        ></Script> */}
+        <Script defer src="https://developers.kakao.com/sdk/js/kakao.min.js" />
       </head>
 
       <body className={cn(themeClass, Pretendard.className, flexCenter, bgSubPrimary)}>

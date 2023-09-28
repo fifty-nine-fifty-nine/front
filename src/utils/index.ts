@@ -1,2 +1,2 @@
-export * from './birthFormatter';
+export * from './date-utils';
 export * from './classname';

@@ -7,8 +7,9 @@ import Image from 'next/image';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import { Navbar } from '@/components';
 import KaKaoShareButton from '@/components/common/KakaoShareButton';
-import { StepBackButton } from '@/components/templates';
+import { StepBackButton, Template } from '@/components/templates';
 import { button } from '@/styles/ogoo';
 import { flexCenter, flexColCenter, flexRowCenter } from '@/styles/ogoo/alignment.css';
 import { optionalText, subText, subtitleText, whiteText } from '@/styles/ogoo/colors.css';
@@ -27,10 +28,10 @@ const BusinessCardResult = ({ businesscardInfo, businesscardData }: Props) => {
 
   return (
     <>
-      <header className={cn(`absolute top-0 left-0 right-0 pt-12 bg-white w-full`)}>
+      <header className={cn(`absolute top-0 left-0 right-0 pt-12 bg-white w-full z-40`)}>
         <StepBackButton />
       </header>
-      <div className="h-full flex-col justify-between px-5 mt-[-40px]">
+      <div className="h-[calc(100vh-80px)] flex-col justify-between px-5 mt-[-40px]">
         <div className={cn(flexColCenter)}>
           <h2 className={cn(titleLg, `mb-5 whitespace-pre-wrap`)}>
             {businesscardInfo.petName} 명함이 완성되었어요!
@@ -58,7 +59,9 @@ const BusinessCardResult = ({ businesscardInfo, businesscardData }: Props) => {
                 <div className={cn(flexRowCenter, 'gap-4')}>
                   <KaKaoShareButton
                     templateId={98893}
-                    requestUrl={`http://localhost:3000/kakaoshare?petName=${businesscardInfo.petName}&&frontPage=${businesscardData.frontPage}&&backPage=${businesscardData.backPage}`}
+                    requestUrl={`petName=${businesscardInfo.petName}&&frontPage=${businesscardData.frontPage}&&backPage=${businesscardData.backPage}`}
+                    thumbImgPath={frontUrl}
+                    petName={businesscardInfo.petName}
                   />
                   <Image
                     src="/svg/linkicon.svg"

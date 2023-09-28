@@ -13,8 +13,8 @@ export default async function Kakaoshare({
 }) {
   const businesscardInfo = searchParams;
 
-  const frontPath = ref(storage, `kakaoshare/${businesscardInfo.frontPage}`);
-  const backPath = ref(storage, `kakaoshare/${businesscardInfo.backPage}`);
+  const frontPath = ref(storage, `businesscard/${businesscardInfo.frontPage}`);
+  const backPath = ref(storage, `businesscard/${businesscardInfo.backPage}`);
 
   //FIXME: url 변경해서 데이터 받아오기
   const front = await getDownloadURL(frontPath);

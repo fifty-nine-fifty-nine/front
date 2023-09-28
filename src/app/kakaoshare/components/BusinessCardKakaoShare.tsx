@@ -4,7 +4,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 import Image from 'next/image';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -22,10 +22,11 @@ interface Props {
 const BusinessCardKakaoShare = ({ businesscardInfo }: Props) => {
   const frontUrl = businesscardInfo.frontPage;
   const backUrl = businesscardInfo.backPage;
+  const router = useRouter();
 
   return (
-    <div className="h-full flex-col justify-between px-5 mt-[-40px]">
-      <div className={cn(flexColCenter)}>
+    <div className="h-full flex-col justify-between px-5">
+      <div className={cn(flexColCenter, 'mt-4')}>
         <h2 className={cn(titleLg, `mb-5 whitespace-pre-wrap`)}>{businesscardInfo.petName} 명함</h2>
 
         <div className={(cn(flexCenter), 'w-[292px] min-h-[440px]')}>
@@ -43,15 +44,15 @@ const BusinessCardKakaoShare = ({ businesscardInfo }: Props) => {
           </Swiper>
         </div>
 
-        <div className={`w-full px-5 mt-7 mb-10`}>
-          <Link
-            href={'/'}
-            className={cn(whiteText, button({ size: 'sm' }), 'w-full')}
-            type="button"
-          >
-            명함 만들러가기
-          </Link>
-        </div>
+        <button
+          className={cn(whiteText, button({ size: 'sm' }), 'w-[154px]')}
+          type="button"
+          onClick={() => {
+            router.push('/');
+          }}
+        >
+          명함 만들러가기
+        </button>
       </div>
     </div>
   );

@@ -36,7 +36,7 @@ export const BusinessCardPetPhotoView = ({ setBusinessCardFormData }: Props) => 
 
   const fileRef = useRef<HTMLInputElement>(null);
   const [imgFile, setImgFile] = useState<File>();
-  const [uploadedUrl, setUploadedUrl] = useState('');
+  const petProfileImgPath = watch('petProfileImgPath');
 
   const handleClick = () => {
     fileRef.current?.click();
@@ -72,7 +72,6 @@ export const BusinessCardPetPhotoView = ({ setBusinessCardFormData }: Props) => 
       await uploadBytes(storageRef, imgFile);
       const downloadURL = await getDownloadURL(storageRef);
       setValue('petProfileImgPath', downloadURL);
-      setUploadedUrl(downloadURL);
     } catch (err) {
       console.error(err);
     }
@@ -122,11 +121,11 @@ export const BusinessCardPetPhotoView = ({ setBusinessCardFormData }: Props) => 
                       onChange={handleChangeImage}
                     />
 
-                    {uploadedUrl ? (
+                    {petProfileImgPath ? (
                       <div className="w-52 h-52 relative">
                         <div className="absolute inset-0 flex items-center justify-center">
                           <Image
-                            src={uploadedUrl}
+                            src={petProfileImgPath}
                             fill
                             className="object-contain"
                             sizes="(max-width: 208px)"

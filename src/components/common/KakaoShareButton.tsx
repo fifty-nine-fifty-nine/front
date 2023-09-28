@@ -3,16 +3,21 @@ import Image from 'next/image';
 interface Props {
   templateId: number;
   requestUrl: string;
+  thumbImgPath: string;
+  petName?: string;
 }
 
-const KaKaoShareButton = ({ templateId, requestUrl }: Props) => {
+const KaKaoShareButton = ({ templateId, requestUrl, thumbImgPath, petName }: Props) => {
   const onClick = () => {
     const { Kakao } = window;
-    console.log(Kakao);
 
     Kakao.Share.sendCustom({
       templateId: templateId,
-      requestUrl: requestUrl,
+      templateArgs: {
+        IMAGE: thumbImgPath,
+        URL: requestUrl,
+        NAME: petName,
+      },
     });
   };
 

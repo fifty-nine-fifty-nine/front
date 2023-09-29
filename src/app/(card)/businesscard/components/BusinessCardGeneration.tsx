@@ -51,12 +51,14 @@ export const BusinessCardGeneration = () => {
     <>
       <header className={cn(`absolute top-0 left-0 right-0 pt-12 bg-white w-full z-30`)}>
         <div className={'flex flex-row justify-between mx-5 items-center'}>
-          <StepBackButton
-            pathname="/businesscard"
-            currentStep={+currentStep}
-            setCurrentStep={setCurrentStep}
-            shallow={true}
-          />
+          <div className="-mt-3 mb-3">
+            <StepBackButton
+              pathname="/businesscard"
+              currentStep={+currentStep}
+              setCurrentStep={setCurrentStep}
+              shallow={true}
+            />
+          </div>
 
           <div className={bodySm}>
             <p className={optionalText}>

@@ -9,6 +9,7 @@ interface Props {
   setCurrentStep?: (step: string) => void;
   link?: string;
   shallow?: boolean;
+  back?: boolean;
 }
 
 type PropsWithOptionalFields =
@@ -22,6 +23,7 @@ export const StepBackButton = ({
   setCurrentStep,
   link = '/',
   shallow = false,
+  back = false,
 }: PropsWithOptionalFields) => {
   const router = useRouter();
 
@@ -33,14 +35,14 @@ export const StepBackButton = ({
           shallow
             ? window.history.pushState({}, '', `${pathname}/${currentStep - 1}`)
             : setCurrentStep(currentStep - 1 + '');
-        } else if (link) {
-          currentStep == 1 ? router.replace(link) : router.push(link);
-        } else {
+        } else if (back) {
           router.back();
+        } else {
+          currentStep == 1 ? router.replace(link) : router.push(link);
         }
       }}
     >
-      <Image className={`mb-3`} src="/svg/arrow_left.svg" alt="" width={32} height={32} priority />
+      <Image src="/svg/arrow_left.svg" alt="" width={32} height={32} priority />
     </button>
   );
 };

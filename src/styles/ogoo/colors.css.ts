@@ -29,6 +29,8 @@ export const bgOptional = sprinkles({ background: 'optional' });
 export const bgSelected = sprinkles({ background: 'selected' });
 export const bgKakao = sprinkles({ background: 'kakao' });
 export const bgDanger = sprinkles({ background: 'danger' });
+export const bgDangerSub = sprinkles({ background: 'dangerSub' });
+export const bgDangerOptional = sprinkles({ background: 'dangerOptional' });
 
 export const inputColor = sprinkles({
   color: 'input',

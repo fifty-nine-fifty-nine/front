@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { button } from '@/styles/ogoo';
 import * as A from '@/styles/ogoo/alignment.css';
@@ -21,7 +22,7 @@ export const CardSlots = async ({ data }: { data: Array<BusinesscardWithId> | nu
             className={cn(
               C.bgSub,
               A.flexColCenter,
-              'w-[183px] h-[210px] rounded-xl pt-4 hover:transform hover:scale-105 transition-all',
+              'relative w-[183px] h-[210px] rounded-xl pt-4 hover:transform hover:scale-105 transition-all',
             )}
           >
             <Image
@@ -36,9 +37,17 @@ export const CardSlots = async ({ data }: { data: Array<BusinesscardWithId> | nu
               <p>{idx == 0 ? '첫째' : '둘째'}</p>
               <p className={cn(subtitle, C.primary)}>{myPetBisinesscard.petName}</p>
             </div>
+
+            <Link
+              href={`/mypage/businesscard/edit/${myPetBisinesscard.id}`}
+              className="absolute top-2 right-2 rounded p-1 hover:bg-neutral-100 ease-in duration-150"
+            >
+              <Image src="/svg/edit.svg" width={16} height={16} alt="수정" priority />
+            </Link>
+
             <div className={cn(A.flexRowCenter, C.whiteText, 'gap-2')}>
-              <button className={cn(C.bgTertiary, button({ size: 'xxs' }))}>수정</button>
-              <button className={cn(C.bgPrimaryActive, button({ size: 'xxs' }))}>공유</button>
+              <button className={cn(C.bgTertiary, button({ size: 'xxs' }))}>공유</button>
+              <button className={cn(C.bgDangerSub, button({ size: 'xxs' }))}>삭제</button>
             </div>
           </article>
         ))}

@@ -6,7 +6,8 @@ import { authOptions } from '@/lib/auth';
 export const serverFetcher = async <T>(
   operation: RequestInfo | URL,
   method: RequestInit['method'] = 'GET',
-  body: RequestInit['body'] = null,
+  _: string | undefined,
+  body?: Record<string, any>,
 ) => {
   const session = await getServerSession(authOptions);
   const accessToken = session?.accessToken;

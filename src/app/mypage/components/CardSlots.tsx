@@ -39,7 +39,7 @@ export const CardSlots = async ({ data }: { data: Array<BusinesscardWithId> | nu
             </div>
 
             <Link
-              href={`/mypage/businesscard/edit/${myPetBisinesscard.id}`}
+              href={`/mypage/businesscard/${myPetBisinesscard.id}/edit`}
               className="absolute top-2 right-2 rounded p-1 hover:bg-neutral-100 ease-in duration-150"
             >
               <Image src="/svg/edit.svg" width={16} height={16} alt="수정" priority />

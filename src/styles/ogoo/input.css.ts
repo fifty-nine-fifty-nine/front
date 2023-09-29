@@ -15,7 +15,12 @@ export const input = recipe({
       border: `2px solid ${themeVars.colors.primarySub}`,
     },
     outline: 'none',
-    transition: `all 150 ease-in-out`,
+    transition: `all 0.15s ease-in-out`,
+    selectors: {
+      '&:hover, &:focus': {
+        backgroundColor: `${themeVars.backgroundColors.optional}`,
+      },
+    },
   },
 
   variants: {

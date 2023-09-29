@@ -5,7 +5,9 @@ import {
   bgKakao,
   bgOptional,
   bgPrimary,
+  bgPrimarySub,
   bgSecondary,
+  bgSecondarySub,
   bgSelected,
   bgSub,
   bgTertiary,
@@ -19,7 +21,9 @@ export const button = recipe({
   variants: {
     color: {
       primary: bgPrimary,
+      primarySub: bgPrimarySub,
       secondary: bgSecondary,
+      secondarySub: bgSecondarySub,
       tertiary: bgTertiary,
       sub: bgSub,
       optional: bgOptional,

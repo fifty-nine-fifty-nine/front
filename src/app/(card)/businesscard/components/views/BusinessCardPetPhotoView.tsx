@@ -15,7 +15,7 @@ import { flexCenter, flexCol, flexColCenter } from '@/styles/ogoo/alignment.css'
 import { bgSub, danger, optionalText } from '@/styles/ogoo/colors.css';
 import { caption } from '@/styles/ogoo/typography.css';
 import type { BusinessCardFormData } from '@/types';
-import { cn } from '@/utils';
+import { cn, isBeforeToday } from '@/utils';
 
 interface Props {
   setBusinessCardFormData: Dispatch<SetStateAction<BusinessCardFormData>>;
@@ -158,9 +158,15 @@ export const BusinessCardPetPhotoView = ({ setBusinessCardFormData }: Props) => 
             control={control}
             rules={{
               validate: (value) => {
+
+                if(isBeforeToday(value)) {
+                  return '과거 시간대를 입력해주세요'
+                }
+                
                 if (!/^\d{8}$/.test(value)) {
                   return '8자리의 숫자로 입력해주세요.';
                 }
+
               },
             }}
             render={({ fieldState }) => (

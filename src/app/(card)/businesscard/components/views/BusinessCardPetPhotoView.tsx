@@ -1,21 +1,19 @@
 'use client';
 
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import Image from 'next/image';
 import type { Dispatch, SetStateAction } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
-import { v4 as uuid } from 'uuid'; //v4 버전 사용
 
 import { GenerateItem, GenerateView } from '@/components/templates';
 import { speciesMock } from '@/data/SpeciesMock';
-import { storage } from '@/firebase/fireStore';
 import { input } from '@/styles/ogoo';
 import { flexCenter, flexCol, flexColCenter } from '@/styles/ogoo/alignment.css';
 import { bgSub, danger, optionalText } from '@/styles/ogoo/colors.css';
 import { caption } from '@/styles/ogoo/typography.css';
 import type { BusinessCardFormData } from '@/types';
 import { cn, isBeforeToday } from '@/utils';
+import { uploadImageFileToFirestore } from '@/utils/image-utils';
 
 interface Props {
   setBusinessCardFormData: Dispatch<SetStateAction<BusinessCardFormData>>;
@@ -59,23 +57,16 @@ export const BusinessCardPetPhotoView = ({ setBusinessCardFormData }: Props) => 
 
   useEffect(() => {
     if (imgFile) {
-      handleImageUpload(); // Call handleImageUpload when imgFile changes
+      // Call handleImageUpload when imgFile changes
+      const handleImageUpload = async () => {
+        const imageUrl = await uploadImageFileToFirestore(imgFile);
+        if (imageUrl) setValue('petProfileImgPath', imageUrl);
+      };
+
+      handleImageUpload();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imgFile]);
-
-  const handleImageUpload = async () => {
-    if (!imgFile) return;
-
-    try {
-      const uploadFileName = uuid() + '.png';
-      const storageRef = ref(storage, `businesscardOrigin/${uploadFileName}`);
-      await uploadBytes(storageRef, imgFile);
-      const downloadURL = await getDownloadURL(storageRef);
-      setValue('petProfileImgPath', downloadURL);
-    } catch (err) {
-      console.error(err);
-    }
-  };
 
   const onSubmit = (data: BusinessCardFormData) => {
     console.log(data);
@@ -158,15 +149,13 @@ export const BusinessCardPetPhotoView = ({ setBusinessCardFormData }: Props) => 
             control={control}
             rules={{
               validate: (value) => {
-
-                if(isBeforeToday(value)) {
-                  return '과거 시간대를 입력해주세요'
+                if (isBeforeToday(value)) {
+                  return '과거 시간대를 입력해주세요';
                 }
-                
+
                 if (!/^\d{8}$/.test(value)) {
                   return '8자리의 숫자로 입력해주세요.';
                 }
-
               },
             }}
             render={({ fieldState }) => (

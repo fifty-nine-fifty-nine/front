@@ -91,7 +91,7 @@ export const BusinessCardTempleteView = ({
       const storageBackRef = ref(storage, `businesscard/${uploadBackFileName}`);
       await uploadBytes(storageBackRef, _backblob);
       const downloadBackURL = await getDownloadURL(storageBackRef);
-      setValue('businesscardImgPath', [downloadFrontURL, downloadBackURL]);
+      setValue('businesscardImgPath', [uploadFrontFileName, uploadBackFileName]);
 
       return [uploadFrontFileName, uploadBackFileName];
     } catch (error) {

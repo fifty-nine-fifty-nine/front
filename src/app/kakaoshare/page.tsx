@@ -1,20 +1,18 @@
 import { getDownloadURL, ref } from 'firebase/storage';
-import React, { Suspense } from 'react';
 
+import { Template } from '@/components/templates';
 import { storage } from '@/firebase/fireStore';
 import type { BusinessCardSharedParams } from '@/types';
 
-import Loading from '../../loading';
-import BusinessCardResult from './components/BusinessCardResult';
+import BusinessCardKakaoShare from './components/BusinessCardKakaoShare';
 
-export default async function SharePetBusinesscardPage({
+export default async function Kakaoshare({
   searchParams,
 }: {
   searchParams: BusinessCardSharedParams;
 }) {
-  const businesscardInfo = searchParams; // uuid
+  const businesscardInfo = searchParams;
 
-  // Create a reference with an initial file path and name
   const frontPath = ref(storage, `businesscard/${businesscardInfo.frontPage}`);
   const backPath = ref(storage, `businesscard/${businesscardInfo.backPage}`);
 
@@ -23,11 +21,10 @@ export default async function SharePetBusinesscardPage({
   const back = await getDownloadURL(backPath);
 
   return (
-    <Suspense fallback={<Loading />}>
-      <BusinessCardResult
+    <Template>
+      <BusinessCardKakaoShare
         businesscardInfo={{ petName: businesscardInfo.petName, frontPage: front, backPage: back }}
-        businesscardData={businesscardInfo}
       />
-    </Suspense>
+    </Template>
   );
 }

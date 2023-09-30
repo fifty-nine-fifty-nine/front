@@ -1,11 +1,15 @@
 import type { RefObject } from 'react';
 
-import { convertHtmlToBlob, uploadImageFileToFirestore } from '@/utils/image-utils';
+import { convertHtmlToBlob, uploadFileToFireStoreAndGetFileName } from '@/utils/image-utils';
 
-export const uploadBusinessCard = async ({
+type CardType = 'businesscard' | 'petcard';
+
+export const uploadCardImages = async ({
+  cardType,
   frontRef,
   backRef,
 }: {
+  cardType: CardType;
   frontRef: RefObject<HTMLElement>;
   backRef: RefObject<HTMLElement>;
 }) => {
@@ -20,12 +24,12 @@ export const uploadBusinessCard = async ({
 
     if (!frontBlob || !backBlob) throw new Error('html2canvas 생성 실패');
 
-    const frontImgUrl = await uploadImageFileToFirestore(frontBlob);
-    const backImgUrl = await uploadImageFileToFirestore(backBlob);
+    const frontFileName = await uploadFileToFireStoreAndGetFileName(cardType, frontBlob);
+    const backFileName = await uploadFileToFireStoreAndGetFileName(cardType, backBlob);
 
-    if (!frontImgUrl || !backImgUrl) throw new Error('firestore 업로드 실패');
+    if (!frontFileName || !backFileName) throw new Error('firestore 업로드 실패');
 
-    return [frontImgUrl, backImgUrl];
+    return [frontFileName, backFileName];
   } catch (error) {
     console.error('Error converting div to image:', error);
     return [];

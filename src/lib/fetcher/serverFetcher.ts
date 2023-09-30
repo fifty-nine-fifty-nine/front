@@ -19,7 +19,7 @@ export const serverFetcher = async <T>(
       'Content-Type': 'application/json',
       authorization: `Bearer ${accessToken}`,
     },
-    next: { revalidate: 60 },
+    // next: { revalidate: 60 },
   };
 
   const res = await fetch(`${API_BASE_URL}${operation}`, config);

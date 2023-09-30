@@ -13,7 +13,7 @@ import { bgSub, danger, optionalText } from '@/styles/ogoo/colors.css';
 import { caption } from '@/styles/ogoo/typography.css';
 import type { BusinessCardFormData } from '@/types';
 import { cn, isBeforeToday } from '@/utils';
-import { uploadImageFileToFirestore } from '@/utils/image-utils';
+import { uploadUserImageToFirestore } from '@/utils/image-utils';
 
 interface Props {
   setBusinessCardFormData: Dispatch<SetStateAction<BusinessCardFormData>>;
@@ -59,7 +59,7 @@ export const BusinessCardPetPhotoView = ({ setBusinessCardFormData }: Props) => 
     if (imgFile) {
       // Call handleImageUpload when imgFile changes
       const handleImageUpload = async () => {
-        const imageUrl = await uploadImageFileToFirestore(imgFile);
+        const imageUrl = await uploadUserImageToFirestore(imgFile);
         if (imageUrl) setValue('petProfileImgPath', imageUrl);
       };
 

@@ -38,7 +38,7 @@ export const BusinessCardBack = ({
           isPrimary ? 'bg-primary-pattern' : 'bg-secondary-pattern',
         )}
       >
-        <div className="bg-white min-h-[382px] rounded-2xl z-10">
+        <div className="bg-white w-full min-h-[382px] rounded-2xl z-10">
           <div className="p-4">
             <h1 className={cn(titleMd, `${isPrimary ? 'text-[#492FA5]' : 'text-[#00643B]'}`)}>
               Profile
@@ -116,8 +116,8 @@ export const BusinessCardBack = ({
               </div>
               <div className="py-4 border-y border-neutral-300">
                 <h2 className={cn(isPrimary ? primary : secondary, 'mb-2')}>성격을 소개할게요!!</h2>
-                <p>#{businessCardFormData.personalityToPerson}</p>
-                <p>#{businessCardFormData.personalityAmongAnimals}</p>
+                <p className="break-all">#{businessCardFormData.personalityToPerson}</p>
+                <p className="break-all">#{businessCardFormData.personalityAmongAnimals}</p>
               </div>
               <div className="py-4">
                 <h2 className={cn(isPrimary ? primary : secondary, 'mb-2')}>선호 및 주의사항!</h2>

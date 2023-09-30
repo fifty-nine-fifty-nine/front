@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import type { Dispatch, SetStateAction } from 'react';
 import { useRef, useState } from 'react';
+import type { SubmitHandler } from 'react-hook-form';
 import { useFormContext } from 'react-hook-form';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -13,7 +14,7 @@ import { BusinessCardBack } from '@/app/(card)/share/businesscard/components/Bus
 import { BusinessCardRectangleFront } from '@/app/(card)/share/businesscard/components/BusinessCardRectangleFront';
 import { GenerateItem, GenerateView } from '@/components/templates';
 import { API_BASE_URL } from '@/constants';
-import { uploadBusinessCard } from '@/services/uploadBusinessCardImages';
+import { uploadCardImages } from '@/services/uploadCardImages';
 import { button } from '@/styles/ogoo';
 import { flexCenter, flexCol, flexRow } from '@/styles/ogoo/alignment.css';
 import { subText, whiteText } from '@/styles/ogoo/colors.css';
@@ -63,15 +64,19 @@ export const BusinessCardTempleteView = ({
     }
   };
 
-  const onSubmit = async () => {
-    const [uploadFrontFileName, uploadBackFileName] = await uploadBusinessCard({
+  const onSubmit: SubmitHandler<BusinessCardFormData> = async (data) => {
+    const [uploadFrontFileName, uploadBackFileName] = await uploadCardImages({
+      cardType: 'businesscard',
       frontRef: businesscardFrontRef,
       backRef: businesscardBackRef,
     });
 
-    setValue('businesscardImgPath', [uploadFrontFileName, uploadBackFileName]);
+    const newData = {
+      ...data,
+      ...{ businesscardImgPath: [uploadFrontFileName, uploadBackFileName] },
+    } as BusinessCardFormData;
 
-    await createBusinesscard(watch());
+    await createBusinesscard(newData);
 
     router.push(
       `/share/businesscard?petName=${petName}&&frontPage=${uploadFrontFileName}&&backPage=${uploadBackFileName}`,

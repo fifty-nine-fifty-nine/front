@@ -7,7 +7,6 @@ import Image from 'next/image';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { Navbar } from '@/components';
 import KaKaoShareButton from '@/components/common/KakaoShareButton';
 import { StepBackButton, Template } from '@/components/templates';
 import { button } from '@/styles/ogoo';

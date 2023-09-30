@@ -15,12 +15,11 @@ export const clientFetcher = async <T>(
       'Content-Type': 'application/json',
       authorization: `Bearer ${accessToken}`,
     },
-    next: { revalidate: 60 },
+    // next: { revalidate: 60 },
   };
 
   const res = await fetch(`${API_BASE_URL}${operation}`, config);
-  const data: T | null = await res.json();
-  // console.log(data); // FIXME: 추후 제거
+  const data: T | null = res ? await res.json() : null;
 
   return { data };
 };

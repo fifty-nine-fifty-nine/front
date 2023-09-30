@@ -7,9 +7,9 @@ import Image from 'next/image';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import KaKaoShareButton from '@/components/common/KakaoShareButton';
+import { ShareButtonList } from '@/components/common/ShareButtonList';
 import { StepBackButton, Template } from '@/components/templates';
-import { button } from '@/styles/ogoo';
+import { button, buttonHover } from '@/styles/ogoo';
 import { flexCenter, flexColCenter, flexRowCenter } from '@/styles/ogoo/alignment.css';
 import { optionalText, subText, subtitleText, whiteText } from '@/styles/ogoo/colors.css';
 import { bodyLg, bodySm, titleLg, titleSm } from '@/styles/ogoo/typography.css';
@@ -55,24 +55,18 @@ const BusinessCardResult = ({ businesscardInfo, businesscardData }: Props) => {
             <div className={cn(flexColCenter, 'gap-5')}>
               <div>
                 <h2 className={cn(titleSm, subtitleText)}>공유하기</h2>
-                <div className={cn(flexRowCenter, 'gap-4')}>
-                  <KaKaoShareButton
-                    templateId={98893}
-                    requestUrl={`petName=${businesscardInfo.petName}&&frontPage=${businesscardData.frontPage}&&backPage=${businesscardData.backPage}`}
-                    thumbImgPath={frontUrl}
-                    petName={businesscardInfo.petName}
-                  />
-                  <Image
-                    src="/svg/linkicon.svg"
-                    alt=""
-                    width={24}
-                    height={24}
-                    priority
-                    // onClick={() => {}}
-                  />
-                </div>
+                <ShareButtonList
+                  templateId={98893}
+                  requestUrl={`petName=${businesscardInfo.petName}&&frontPage=${businesscardData.frontPage}&&backPage=${businesscardData.backPage}`}
+                  thumbImgPath={frontUrl}
+                  petName={businesscardInfo.petName}
+                />
+                <div className={cn(flexRowCenter, 'gap-4')}></div>
               </div>
-              <button className={cn(whiteText, button({ size: 'sm' }), 'w-[154px]')} type="button">
+              <button
+                className={cn(whiteText, buttonHover, button({ size: 'sm' }), 'w-[154px]')}
+                type="button"
+              >
                 명함 저장하기
               </button>
             </div>

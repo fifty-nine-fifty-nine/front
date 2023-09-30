@@ -3,11 +3,11 @@ import { Dialog, Transition } from '@headlessui/react';
 import type { ReactNode } from 'react';
 import { Fragment, useState } from 'react';
 
-interface ModalProps {
+export interface ModalProps {
   isOpen: boolean;
   closeModal: () => void;
-  title: string;
-  content: string;
+  title?: string;
+  content?: string;
   actions?: Array<ReactNode>;
 }
 

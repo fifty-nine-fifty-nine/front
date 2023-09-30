@@ -1,8 +1,7 @@
-import { getDownloadURL, ref } from 'firebase/storage';
 import React, { Suspense } from 'react';
 
-import { storage } from '@/firebase/fireStore';
 import type { BusinessCardSharedParams } from '@/types';
+import { findUrlFromFirestore } from '@/utils/image-utils';
 
 import Loading from '../../loading';
 import BusinessCardResult from './components/BusinessCardResult';
@@ -14,18 +13,23 @@ export default async function SharePetBusinesscardPage({
 }) {
   const businesscardInfo = searchParams; // uuid
 
-  // Create a reference with an initial file path and name
-  const frontPath = ref(storage, `businesscard/${businesscardInfo.frontPage}`);
-  const backPath = ref(storage, `businesscard/${businesscardInfo.backPage}`);
-
-  //FIXME: url 변경해서 데이터 받아오기
-  const front = await getDownloadURL(frontPath);
-  const back = await getDownloadURL(backPath);
+  const frontPathname = await findUrlFromFirestore({
+    folderName: 'businesscard',
+    fileName: businesscardInfo.frontPage,
+  });
+  const backPathname = await findUrlFromFirestore({
+    folderName: 'businesscard',
+    fileName: businesscardInfo.backPage,
+  });
 
   return (
     <Suspense fallback={<Loading />}>
       <BusinessCardResult
-        businesscardInfo={{ petName: businesscardInfo.petName, frontPage: front, backPage: back }}
+        businesscardInfo={{
+          petName: businesscardInfo.petName,
+          frontPage: frontPathname,
+          backPage: backPathname,
+        }}
         businesscardData={businesscardInfo}
       />
     </Suspense>

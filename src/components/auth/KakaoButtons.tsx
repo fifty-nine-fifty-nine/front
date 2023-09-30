@@ -5,7 +5,7 @@ import { signIn, signOut } from 'next-auth/react';
 
 import { button } from '@/styles/ogoo';
 import { flexCenter, flexRowCenter } from '@/styles/ogoo/alignment.css';
-import { optionalText, subText } from '@/styles/ogoo/colors.css';
+import { optionalText } from '@/styles/ogoo/colors.css';
 import { bodyMd } from '@/styles/ogoo/typography.css';
 import { cn } from '@/utils';
 

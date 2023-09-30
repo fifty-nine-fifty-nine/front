@@ -6,7 +6,7 @@ import Script from 'next/script';
 
 import { themeClass } from '@/styles';
 import { flexCenter } from '@/styles/ogoo/alignment.css';
-import { bgSubPrimary } from '@/styles/ogoo/colors.css';
+import { bgPrimarySub } from '@/styles/ogoo/colors.css';
 import { mainContainer } from '@/styles/ogoo/container.css';
 import { cn } from '@/utils';
 
@@ -62,7 +62,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
 
-      <body className={cn(themeClass, Pretendard.className, flexCenter, bgSubPrimary)}>
+      <body className={cn(themeClass, Pretendard.className, flexCenter, bgPrimarySub)}>
         <main
           className={cn(mainContainer, `flex-1 max-w-md relative overflow-hidden drop-shadow-sm`)}
         >

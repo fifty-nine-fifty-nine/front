@@ -14,7 +14,8 @@ const tertiarySub = '#C7CDD2';
 const tertiaryOptional = '#E9ECEF';
 
 const danger = '#FF0000';
-const dangerSub = '#FFD4D4';
+const dangerSub = '#FF5555';
+const dangerOptional = '#FFD4D4';
 const kakao = '#FEE500';
 const black = '#000000';
 const white = '#FFFFFF';
@@ -44,6 +45,7 @@ export const [themeClass, themeVars] = createTheme({
     tertiaryOptional: tertiaryOptional,
     danger: danger,
     dangerSub: dangerSub,
+    dangerOptional: dangerOptional,
     blackText: black,
     whiteText: white,
     subtitleText: grayScale.w600,
@@ -65,6 +67,7 @@ export const [themeClass, themeVars] = createTheme({
     tertiaryOptional: tertiaryOptional,
     danger: danger,
     dangerSub: dangerSub,
+    dangerOptional: dangerOptional,
     white: white,
     black: black,
     sub: grayScale.w100,

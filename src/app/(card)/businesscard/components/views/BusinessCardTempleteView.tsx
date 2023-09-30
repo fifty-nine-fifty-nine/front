@@ -1,22 +1,20 @@
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-import html2canvas from 'html2canvas';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import type { Dispatch, SetStateAction } from 'react';
 import { useRef, useState } from 'react';
+import type { SubmitHandler } from 'react-hook-form';
 import { useFormContext } from 'react-hook-form';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { v4 as uuid } from 'uuid'; //v4 버전 사용
 
 import { BusinessCardBack } from '@/app/(card)/share/businesscard/components/BusinessCardBack';
 import { BusinessCardRectangleFront } from '@/app/(card)/share/businesscard/components/BusinessCardRectangleFront';
 import { GenerateItem, GenerateView } from '@/components/templates';
 import { API_BASE_URL } from '@/constants';
-import { storage } from '@/firebase/fireStore';
+import { uploadCardImages } from '@/services/uploadCardImages';
 import { button } from '@/styles/ogoo';
 import { flexCenter, flexCol, flexRow } from '@/styles/ogoo/alignment.css';
 import { subText, whiteText } from '@/styles/ogoo/colors.css';
@@ -44,61 +42,12 @@ export const BusinessCardTempleteView = ({
   const businesscardBackRef = useRef<HTMLDivElement>(null);
 
   const [isPrimary, setIsPrimary] = useState<boolean>();
-  const [uploadedBusinesscardPath, setUploadedBusinesscardPath] = useState<string[]>([]);
 
   const router = useRouter();
   const { data: session } = useSession();
 
   const accessToken = session?.accessToken;
   const petName = getValues('petName');
-
-  const handleBusinesscardUpload = async () => {
-    if (!businesscardFrontRef.current || !businesscardBackRef.current) return [];
-
-    try {
-      const businesscardFront = businesscardFrontRef.current;
-      const businesscardBack = businesscardBackRef.current;
-
-      const frontcanvas = await html2canvas(businesscardFront, { scale: 2 });
-      const backcanvas = await html2canvas(businesscardBack, { scale: 2 });
-
-      const _frontblob: Blob = await new Promise<Blob>(async (res, rej) => {
-        frontcanvas.toBlob(async (blob) => {
-          if (blob) {
-            res(blob);
-            return;
-          }
-          rej(new Error('Failed to create blob.'));
-        });
-      });
-
-      const _backblob: Blob = await new Promise<Blob>(async (res, rej) => {
-        backcanvas.toBlob(async (blob) => {
-          if (blob) {
-            res(blob);
-            return;
-          }
-          rej(new Error('Failed to create blob.'));
-        });
-      });
-
-      const uploadFrontFileName = uuid() + '.png';
-      const storageFrontRef = ref(storage, `businesscard/${uploadFrontFileName}`);
-      await uploadBytes(storageFrontRef, _frontblob);
-      const downloadFrontURL = await getDownloadURL(storageFrontRef);
-
-      const uploadBackFileName = uuid() + '.png';
-      const storageBackRef = ref(storage, `businesscard/${uploadBackFileName}`);
-      await uploadBytes(storageBackRef, _backblob);
-      const downloadBackURL = await getDownloadURL(storageBackRef);
-      setValue('businesscardImgPath', [uploadFrontFileName, uploadBackFileName]);
-
-      return [uploadFrontFileName, uploadBackFileName];
-    } catch (error) {
-      console.error('Error converting div to image:', error);
-    }
-    return [];
-  };
 
   const createBusinesscard = async (data: BusinessCardFormData) => {
     try {
@@ -115,10 +64,19 @@ export const BusinessCardTempleteView = ({
     }
   };
 
-  const onSubmit = async () => {
-    const [uploadFrontFileName, uploadBackFileName] = await handleBusinesscardUpload();
+  const onSubmit: SubmitHandler<BusinessCardFormData> = async (data) => {
+    const [uploadFrontFileName, uploadBackFileName] = await uploadCardImages({
+      cardType: 'businesscard',
+      frontRef: businesscardFrontRef,
+      backRef: businesscardBackRef,
+    });
 
-    await createBusinesscard(watch());
+    const newData = {
+      ...data,
+      ...{ businesscardImgPath: [uploadFrontFileName, uploadBackFileName] },
+    } as BusinessCardFormData;
+
+    await createBusinesscard(newData);
 
     router.push(
       `/share/businesscard?petName=${petName}&&frontPage=${uploadFrontFileName}&&backPage=${uploadBackFileName}`,

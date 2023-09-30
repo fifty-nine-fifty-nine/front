@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import React from 'react';
 
@@ -7,7 +9,22 @@ import { cn } from '@/utils';
 import type { KaKaoShareProps } from './KakaoShareButton';
 import KaKaoShareButton from './KakaoShareButton';
 
-export const ShareButtonList = (props: KaKaoShareProps) => {
+interface Props extends KaKaoShareProps {
+  imageUrl: string[];
+  domain: string;
+}
+
+export const ShareButtonList = (props: Props) => {
+  const handleCopyShareLink = async () => {
+    const shareUrl = `${props.domain}/kakaoshare?petName=${props.petName}&frontPage=${props.imageUrl[0]}&backPage=${props.imageUrl[1]}`;
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      alert('클립보드에 링크가 복사되었습니다.');
+    } catch (e) {
+      alert('복사에 실패하였습니다');
+    }
+  };
+
   return (
     <div className={cn(flexRowCenter, 'gap-4')}>
       <KaKaoShareButton
@@ -24,7 +41,9 @@ export const ShareButtonList = (props: KaKaoShareProps) => {
         className="cursor-pointer"
         style={{ width: 'auto', height: 'auto' }}
         priority
-        // onClick={() => {}}
+        onClick={() => {
+          handleCopyShareLink();
+        }}
       />
     </div>
   );

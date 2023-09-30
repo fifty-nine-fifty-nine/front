@@ -25,8 +25,8 @@ const KaKaoShareButton = ({ templateId, requestUrl, thumbImgPath, petName }: KaK
     <Image
       src="/svg/kakao.svg"
       alt="카카오톡 공유하기"
-      width={20}
-      height={20}
+      width={24}
+      height={24}
       className="cursor-pointer"
       style={{ width: 'auto', height: 'auto' }}
       priority

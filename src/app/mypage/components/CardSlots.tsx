@@ -13,6 +13,7 @@ import * as C from '@/styles/ogoo/colors.css';
 import { subtitle } from '@/styles/ogoo/typography.css';
 import type { BusinesscardWithId } from '@/types';
 import { cn } from '@/utils';
+import { findUrlFromFirestore } from '@/utils/image-utils';
 
 import { CardDeleteModal } from '../businesscard/components/CardDeleteModal';
 import { CardShareModal } from '../businesscard/components/CardShareModal';
@@ -35,6 +36,8 @@ export const CardSlots = ({ data }: { data: Array<BusinesscardWithId> | null }) 
   } = usePopupModal();
   const [selectedCardPetName, setSelectedCardPetName] = useState<string>('');
   const [selectedCardId, setSelectedCardId] = useState<number>();
+  const [selectedCardUrl, setSeletedCardUrl] = useState<string[]>([]);
+  const [selectedShareThumb, setSeletedShareThumb] = useState<string>('');
 
   const myPetBusinesscardList = data || [];
   console.log(accessToken, myPetBusinesscardList); // FIXME: 추후 삭제
@@ -49,6 +52,14 @@ export const CardSlots = ({ data }: { data: Array<BusinesscardWithId> | null }) 
       closeDeleteModal();
       router.refresh();
     }
+  };
+
+  const frontPath = async (frontPage: string) => {
+    const frontPathname = await findUrlFromFirestore({
+      folderName: 'businesscard',
+      fileName: frontPage,
+    });
+    setSeletedShareThumb(frontPathname);
   };
 
   return (
@@ -95,7 +106,9 @@ export const CardSlots = ({ data }: { data: Array<BusinesscardWithId> | null }) 
                   type="button"
                   className={cn(C.bgTertiary, S.button({ size: 'xxs' }))}
                   onClick={() => {
+                    frontPath(card.businesscardImgPath[0]);
                     setSelectedCardPetName(card.petName);
+                    setSeletedCardUrl(card.businesscardImgPath);
                     openShareModal();
                   }}
                 >
@@ -123,6 +136,8 @@ export const CardSlots = ({ data }: { data: Array<BusinesscardWithId> | null }) 
               isOpen={isShareModalOpen}
               closeModal={closeShareModal}
               petName={selectedCardPetName}
+              imageUrl={selectedCardUrl}
+              selectedShareThumb={selectedShareThumb}
             />
           </Fragment>
         ))}

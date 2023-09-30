@@ -11,7 +11,7 @@ import { BusinessCardRectangleFront } from '@/app/(card)/share/businesscard/comp
 import { userProfileImage } from '@/components/auth/UserProfile/style.css';
 import { GenerateItem } from '@/components/templates';
 import { fetcher } from '@/lib/fetcher';
-import { uploadBusinessCard } from '@/services/uploadBusinessCardImages';
+import { uploadCardImages } from '@/services/uploadCardImages';
 import { button, buttonHover, input } from '@/styles/ogoo';
 import { flexRow } from '@/styles/ogoo/alignment.css';
 import { subText, subtitleText, whiteText } from '@/styles/ogoo/colors.css';
@@ -23,7 +23,7 @@ import {
   type BusinesscardWithId,
 } from '@/types';
 import { cn } from '@/utils';
-import { uploadImageFileToFirestore } from '@/utils/image-utils';
+import { uploadUserImageToFirestore } from '@/utils/image-utils';
 
 export const CardInfoEditForm = ({ card }: { card: BusinesscardWithId }) => {
   const router = useRouter();
@@ -67,22 +67,39 @@ export const CardInfoEditForm = ({ card }: { card: BusinesscardWithId }) => {
     }
   };
 
-  const onSubmit: SubmitHandler<BusinessCardFormData> = async (data) => {
+  const onSubmit: SubmitHandler<BusinessCardFormData> = async (formdata) => {
     try {
       setIsLoading(true);
 
-      const [uploadFrontFileName, uploadBackFileName] = await uploadBusinessCard({
+      const [uploadFrontFileName, uploadBackFileName] = await uploadCardImages({
+        cardType: 'businesscard',
         frontRef: businesscardFrontRef,
         backRef: businesscardBackRef,
       });
 
       const res = await fetcher(`/pets/businesscards/${card.id}`, 'PUT', accessToken, {
-        ...data,
+        ...formdata,
         ...{ businesscardImgPath: [uploadFrontFileName, uploadBackFileName] },
       });
 
       console.log('성공!', res); // FIXME: 추후 삭제
-      router.push('/mypage'); // TODO: 펫 명함 페이지 이동
+
+      let petName: string | undefined;
+      let businesscardImgPath: string[] | undefined;
+
+      if (
+        typeof res.data === 'object' &&
+        res.data !== null &&
+        Array.isArray((res.data as any)['businesscardImgPath'])
+      ) {
+        petName = (res.data as any)['petName'];
+        businesscardImgPath = (res.data as any)['businesscardImgPath'];
+      }
+      const nextUrl = businesscardImgPath
+        ? `/share/businesscard?petName=${petName}&frontPage=${businesscardImgPath[0]}&backPage=${businesscardImgPath[1]}`
+        : '/mypage';
+
+      router.replace(nextUrl);
     } catch (e) {
       console.error(e);
     } finally {
@@ -98,7 +115,7 @@ export const CardInfoEditForm = ({ card }: { card: BusinesscardWithId }) => {
   useEffect(() => {
     if (imgFile) {
       const handleImageUpload = async () => {
-        const imageUrl = await uploadImageFileToFirestore(imgFile);
+        const imageUrl = await uploadUserImageToFirestore(imgFile);
         if (imageUrl) setValue('petProfileImgPath', imageUrl);
       };
 
@@ -124,7 +141,14 @@ export const CardInfoEditForm = ({ card }: { card: BusinesscardWithId }) => {
         </div>
         <label htmlFor="petProfileFile">
           <div className="absolute right-1 bottom-0 p-1.5 rounded-full bg-gray-200 hover:bg-gray-300 hover:transform hover:scale-110 transition-all cursor-pointer">
-            <Image src="/svg/edit.svg" width={16} height={16} alt="명함 사진 수정" priority />
+            <Image
+              src="/svg/edit.svg"
+              width={16}
+              height={16}
+              alt="명함 사진 수정"
+              style={{ width: 'auto', height: 'auto' }}
+              priority
+            />
           </div>
           <input
             type="file"

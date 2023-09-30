@@ -15,13 +15,25 @@ import type { BusinesscardWithId } from '@/types';
 import { cn } from '@/utils';
 
 import { CardDeleteModal } from '../businesscard/components/CardDeleteModal';
+import { CardShareModal } from '../businesscard/components/CardShareModal';
 import { FallbackCardSlot } from './FallbackCardSlot';
 
 export const CardSlots = ({ data }: { data: Array<BusinesscardWithId> | null }) => {
   const router = useRouter();
   const { data: session } = useSession();
   const accessToken = session?.accessToken;
-  const { isOpen, openModal, closeModal } = usePopupModal();
+
+  const {
+    isOpen: isDeleteModalOpen,
+    openModal: openDeleteModal,
+    closeModal: closeDeleteModal,
+  } = usePopupModal();
+  const {
+    isOpen: isShareModalOpen,
+    openModal: openShareModal,
+    closeModal: closeShareModal,
+  } = usePopupModal();
+  const [selectedCardPetName, setSelectedCardPetName] = useState<string>('');
   const [selectedCardId, setSelectedCardId] = useState<number>();
 
   const myPetBusinesscardList = data || [];
@@ -34,13 +46,13 @@ export const CardSlots = ({ data }: { data: Array<BusinesscardWithId> | null }) 
     } catch (e) {
       console.error(e);
     } finally {
-      closeModal();
+      closeDeleteModal();
       router.refresh();
     }
   };
 
   return (
-    <div className={cn(A.flexRowCenter, 'gap-3')}>
+    <div className={cn(A.flexRowCenter)}>
       {myPetBusinesscardList.length > 0 &&
         myPetBusinesscardList.map((card: BusinesscardWithId, idx) => (
           <Fragment key={card.id}>
@@ -48,7 +60,7 @@ export const CardSlots = ({ data }: { data: Array<BusinesscardWithId> | null }) 
               className={cn(
                 C.bgSub,
                 A.flexColCenter,
-                'relative w-[183px] h-[210px] rounded-xl pt-4 hover:transform hover:scale-105 transition-all',
+                'relative w-[183px] h-[210px] mx-1.5 rounded-xl pt-4 hover:transform hover:scale-105 transition-all',
               )}
             >
               <Image
@@ -79,14 +91,21 @@ export const CardSlots = ({ data }: { data: Array<BusinesscardWithId> | null }) 
               </Link>
 
               <div className={cn(A.flexRowCenter, C.whiteText, 'gap-2')}>
-                <button type="button" className={cn(C.bgTertiary, S.button({ size: 'xxs' }))}>
+                <button
+                  type="button"
+                  className={cn(C.bgTertiary, S.button({ size: 'xxs' }))}
+                  onClick={() => {
+                    setSelectedCardPetName(card.petName);
+                    openShareModal();
+                  }}
+                >
                   공유
                 </button>
                 <button
                   type="button"
                   onClick={() => {
                     setSelectedCardId(card.id);
-                    openModal();
+                    openDeleteModal();
                   }}
                   className={cn(C.bgDangerSub, S.button({ size: 'xxs' }))}
                 >
@@ -96,9 +115,14 @@ export const CardSlots = ({ data }: { data: Array<BusinesscardWithId> | null }) 
             </article>
 
             <CardDeleteModal
-              isOpen={isOpen}
-              closeModal={closeModal}
+              isOpen={isDeleteModalOpen}
+              closeModal={closeDeleteModal}
               onClickDelete={() => handleDeleteCard()}
+            />
+            <CardShareModal
+              isOpen={isShareModalOpen}
+              closeModal={closeShareModal}
+              petName={selectedCardPetName}
             />
           </Fragment>
         ))}

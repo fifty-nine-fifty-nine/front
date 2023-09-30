@@ -1,13 +1,13 @@
 import Image from 'next/image';
 
-interface Props {
+export interface KaKaoShareProps {
   templateId: number;
   requestUrl: string;
   thumbImgPath: string;
   petName?: string;
 }
 
-const KaKaoShareButton = ({ templateId, requestUrl, thumbImgPath, petName }: Props) => {
+const KaKaoShareButton = ({ templateId, requestUrl, thumbImgPath, petName }: KaKaoShareProps) => {
   const onClick = () => {
     const { Kakao } = window;
 
@@ -22,18 +22,18 @@ const KaKaoShareButton = ({ templateId, requestUrl, thumbImgPath, petName }: Pro
   };
 
   return (
-    <div>
-      <Image
-        src="/svg/kakao.svg"
-        alt=""
-        width={20}
-        height={20}
-        priority
-        onClick={() => {
-          onClick();
-        }}
-      />
-    </div>
+    <Image
+      src="/svg/kakao.svg"
+      alt="카카오톡 공유하기"
+      width={20}
+      height={20}
+      className="cursor-pointer"
+      style={{ width: 'auto', height: 'auto' }}
+      priority
+      onClick={() => {
+        onClick();
+      }}
+    />
   );
 };
 

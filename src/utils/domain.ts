@@ -1,4 +1,4 @@
-export const damainExtractor = (url: string, point: string) => {
+export const domainExtractor = (url: string, point: string) => {
   const splitedDomain = url.split(point);
   const domain = splitedDomain[0];
 

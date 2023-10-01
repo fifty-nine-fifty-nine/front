@@ -1,7 +1,7 @@
 import type { ModalProps } from '@/components/common/PopupModal';
 import PopupModal from '@/components/common/PopupModal';
 import { ShareButtonList } from '@/components/common/ShareButtonList';
-import { damainExtractor } from '@/utils';
+import { domainExtractor } from '@/utils';
 
 interface Props extends ModalProps {
   petName: string;
@@ -17,7 +17,7 @@ export const CardShareModal = ({
   selectedShareThumb,
 }: Props) => {
   const currentUrl = window.location.href;
-  const domain = damainExtractor(currentUrl, '/share');
+  const domain = domainExtractor(currentUrl, '/share');
 
   return (
     <PopupModal

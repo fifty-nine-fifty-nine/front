@@ -14,7 +14,7 @@ import { flexCenter, flexColCenter, flexRowCenter } from '@/styles/ogoo/alignmen
 import { optionalText, subText, subtitleText, whiteText } from '@/styles/ogoo/colors.css';
 import { bodyLg, bodySm, titleLg, titleSm } from '@/styles/ogoo/typography.css';
 import type { BusinessCardSharedParams } from '@/types';
-import { cn, damainExtractor } from '@/utils';
+import { cn, domainExtractor } from '@/utils';
 
 interface Props {
   businesscardInfo: BusinessCardSharedParams;
@@ -26,7 +26,7 @@ const BusinessCardResult = ({ businesscardInfo, businesscardData }: Props) => {
   const backUrl = businesscardInfo.backPage;
 
   const currentUrl = window.location.href;
-  const domain = damainExtractor(currentUrl, '/share');
+  const domain = domainExtractor(currentUrl, '/share');
 
   return (
     <>

@@ -1,15 +1,9 @@
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
-import {
-  bgKakao,
-  bgOptional,
-  bgPrimary,
-  bgSecondary,
-  bgSelected,
-  bgSub,
-  bgTertiary,
-} from './colors.css';
+import { themeVars } from '..';
+import * as C from './colors.css';
+import { bodyMd } from './typography.css';
 
 export const button = recipe({
   base: {
@@ -18,13 +12,15 @@ export const button = recipe({
 
   variants: {
     color: {
-      primary: bgPrimary,
-      secondary: bgSecondary,
-      tertiary: bgTertiary,
-      sub: bgSub,
-      optional: bgOptional,
-      kakao: bgKakao,
-      selected: bgSelected,
+      primary: C.bgPrimary,
+      primarySub: C.bgPrimarySub,
+      secondary: C.bgSecondary,
+      secondarySub: C.bgSecondarySub,
+      tertiary: C.bgTertiary,
+      sub: C.bgSub,
+      optional: C.bgOptional,
+      kakao: C.bgKakao,
+      selected: C.bgSelected,
     },
     size: {
       xxs: { padding: '4px 12px', borderRadius: 8, fontSize: 13 },
@@ -42,8 +38,48 @@ export const button = recipe({
 });
 
 export const buttonHover = style({
-  transition: 'all 200 ease-in-out',
+  transition: 'all 0.2s ease-in-out',
   ':hover': {
     opacity: '90%',
   },
 });
+
+export const modalButton = style([
+  bodyMd,
+  buttonHover,
+  {
+    display: 'inline-flex',
+    justifyContent: 'center',
+    width: '100%',
+    padding: '8px 16px',
+    borderRadius: '8px',
+  },
+]);
+
+export const filled = style([
+  {
+    color: themeVars.colors.whiteText,
+    backgroundColor: themeVars.backgroundColors.primary,
+    fontWeight: themeVars.fontWeights.semibold,
+  },
+]);
+
+export const outlined = style([
+  C.primary,
+  {
+    border: `1px solid ${themeVars.colors.primary}`,
+    fontWeight: themeVars.fontWeights.semibold,
+    ':hover': {
+      backgroundColor: themeVars.backgroundColors.primaryOptional,
+    },
+  },
+]);
+
+export const textOnly = style([
+  C.optionalText,
+  {
+    ':hover': {
+      backgroundColor: themeVars.backgroundColors.optional,
+    },
+  },
+]);

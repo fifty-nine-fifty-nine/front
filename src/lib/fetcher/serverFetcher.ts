@@ -6,7 +6,8 @@ import { authOptions } from '@/lib/auth';
 export const serverFetcher = async <T>(
   operation: RequestInfo | URL,
   method: RequestInit['method'] = 'GET',
-  body: RequestInit['body'] = null,
+  _: string | undefined,
+  body?: Record<string, any>,
 ) => {
   const session = await getServerSession(authOptions);
   const accessToken = session?.accessToken;
@@ -18,7 +19,7 @@ export const serverFetcher = async <T>(
       'Content-Type': 'application/json',
       authorization: `Bearer ${accessToken}`,
     },
-    next: { revalidate: 60 },
+    // next: { revalidate: 60 },
   };
 
   const res = await fetch(`${API_BASE_URL}${operation}`, config);

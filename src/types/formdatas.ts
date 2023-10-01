@@ -48,3 +48,8 @@ export enum AnimalTypeEnum {
   dog = '강아지',
   cat = '고양이',
 }
+
+export enum AnimalGenderEnum {
+  male = '수컷',
+  female = '암컷',
+}

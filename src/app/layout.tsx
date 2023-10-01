@@ -6,10 +6,11 @@ import Script from 'next/script';
 
 import { themeClass } from '@/styles';
 import { flexCenter } from '@/styles/ogoo/alignment.css';
-import { bgSubPrimary } from '@/styles/ogoo/colors.css';
+import { bgPrimarySub } from '@/styles/ogoo/colors.css';
 import { mainContainer } from '@/styles/ogoo/container.css';
 import { cn } from '@/utils';
 
+import Kakaoinit from './kakaoinit';
 import { NextAuthProvider } from './providers';
 
 const Pretendard = localFont({
@@ -20,6 +21,12 @@ export const metadata: Metadata = {
   title: '5959',
   description: '오구오구에 오신 것을 환영합니다',
 };
+
+declare global {
+  interface Window {
+    Kakao: any;
+  }
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -55,11 +62,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
 
-      <body className={cn(themeClass, Pretendard.className, flexCenter, bgSubPrimary)}>
+      <body className={cn(themeClass, Pretendard.className, flexCenter, bgPrimarySub)}>
         <main
           className={cn(mainContainer, `flex-1 max-w-md relative overflow-hidden drop-shadow-sm`)}
         >
-          <NextAuthProvider>{children}</NextAuthProvider>
+          <Kakaoinit>
+            <NextAuthProvider>{children}</NextAuthProvider>
+          </Kakaoinit>
         </main>
       </body>
     </html>

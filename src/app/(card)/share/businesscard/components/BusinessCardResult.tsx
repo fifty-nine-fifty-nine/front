@@ -7,28 +7,32 @@ import Image from 'next/image';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import { ShareButtonList } from '@/components/common/ShareButtonList';
 import { StepBackButton } from '@/components/templates';
-import { button } from '@/styles/ogoo';
-import { flexCenter, flexColCenter } from '@/styles/ogoo/alignment.css';
-import { optionalText, subText, whiteText } from '@/styles/ogoo/colors.css';
-import { bodyLg, bodySm, titleLg } from '@/styles/ogoo/typography.css';
+import { useDomain } from '@/hooks/useDomain';
+import { button, buttonHover } from '@/styles/ogoo';
+import { flexCenter, flexColCenter, flexRowCenter } from '@/styles/ogoo/alignment.css';
+import { optionalText, subText, subtitleText, whiteText } from '@/styles/ogoo/colors.css';
+import { bodyLg, bodySm, titleLg, titleSm } from '@/styles/ogoo/typography.css';
 import type { BusinessCardSharedParams } from '@/types';
 import { cn } from '@/utils';
 
 interface Props {
   businesscardInfo: BusinessCardSharedParams;
+  businesscardData: BusinessCardSharedParams;
 }
 
-const BusinessCardResult = ({ businesscardInfo }: Props) => {
+const BusinessCardResult = ({ businesscardInfo, businesscardData }: Props) => {
+  const domain = useDomain();
   const frontUrl = businesscardInfo.frontPage;
   const backUrl = businesscardInfo.backPage;
 
   return (
     <>
-      <header className={cn(`absolute top-0 left-0 right-0 pt-12 bg-white w-full`)}>
+      <header className={cn(`absolute top-0 left-0 right-0 pt-12 bg-white w-full z-40`)}>
         <StepBackButton />
       </header>
-      <div className="h-full flex-col justify-between px-5 mt-[-40px]">
+      <div className="h-[calc(100vh-80px)] flex-col justify-between px-5 mt-[-40px]">
         <div className={cn(flexColCenter)}>
           <h2 className={cn(titleLg, `mb-5 whitespace-pre-wrap`)}>
             {businesscardInfo.petName} 명함이 완성되었어요!
@@ -50,9 +54,28 @@ const BusinessCardResult = ({ businesscardInfo }: Props) => {
           </div>
 
           <div className={`w-full px-5 mt-7 mb-10`}>
-            <button className={cn(whiteText, button({ size: 'sm' }), 'w-full')} type="button">
-              저장
-            </button>
+            <div className={cn(flexColCenter, 'gap-5')}>
+              <div>
+                <h2 className={cn(titleSm, subtitleText)}>공유하기</h2>
+                {domain && (
+                  <ShareButtonList
+                    templateId={98893}
+                    requestUrl={`petName=${businesscardInfo.petName}&&frontPage=${businesscardData.frontPage}&&backPage=${businesscardData.backPage}`}
+                    thumbImgPath={frontUrl}
+                    petName={businesscardInfo.petName}
+                    imageUrl={[businesscardData.frontPage, businesscardData.backPage]}
+                    domain={domain}
+                  />
+                )}
+                <div className={cn(flexRowCenter, 'gap-4')}></div>
+              </div>
+              <button
+                className={cn(whiteText, buttonHover, button({ size: 'sm' }), 'w-[154px]')}
+                type="button"
+              >
+                명함 저장하기
+              </button>
+            </div>
             <strong className={cn(bodyLg, subText, `block mt-4 pb-2`)}>유의사항</strong>
             <ul className={bulletItem}>
               <li>펫 명함은 최대 2개까지만 저장 가능합니다.</li>

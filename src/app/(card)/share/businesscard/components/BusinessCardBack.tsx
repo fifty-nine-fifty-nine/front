@@ -38,7 +38,7 @@ export const BusinessCardBack = ({
           isPrimary ? 'bg-primary-pattern' : 'bg-secondary-pattern',
         )}
       >
-        <div className="bg-white min-h-[382px] rounded-2xl z-10">
+        <div className="bg-white w-full min-h-[382px] rounded-2xl z-10">
           <div className="p-4">
             <h1 className={cn(titleMd, `${isPrimary ? 'text-[#492FA5]' : 'text-[#00643B]'}`)}>
               Profile
@@ -73,7 +73,7 @@ export const BusinessCardBack = ({
                       <p className={cn(isPrimaryColorChange, 'min-w-[67px]')}>주 단백질원:</p>
                       {businessCardFormData.mainAllerge?.length !== 0 ? (
                         <div className="flex flex-wrap gap-0.5">
-                          {businessCardFormData.mainAllerge!.map((allerge: string) => (
+                          {businessCardFormData.mainAllerge?.map((allerge: string) => (
                             <p key={allerge} className="rounded-lg">
                               #{allerge}
                             </p>
@@ -87,7 +87,7 @@ export const BusinessCardBack = ({
                       <p className={cn(isPrimaryColorChange, 'min-w-[79px]')}>보조 단백질원:</p>
                       {businessCardFormData.subAllerge?.length !== 0 ? (
                         <div className="flex flex-wrap gap-0.5">
-                          {businessCardFormData.subAllerge!.map((allerge: string) => (
+                          {businessCardFormData.subAllerge?.map((allerge: string) => (
                             <p key={allerge} className="rounded-lg">
                               #{allerge}
                             </p>
@@ -101,7 +101,7 @@ export const BusinessCardBack = ({
                       <p className={cn(isPrimaryColorChange, 'min-w-[28px]')}>기타:</p>
                       {businessCardFormData.etcAllerge?.length !== 0 ? (
                         <div className="flex flex-wrap gap-0.5">
-                          {businessCardFormData.etcAllerge!.map((allerge: string) => (
+                          {businessCardFormData.etcAllerge?.map((allerge: string) => (
                             <p key={allerge} className="rounded-lg">
                               #{allerge}
                             </p>
@@ -116,8 +116,8 @@ export const BusinessCardBack = ({
               </div>
               <div className="py-4 border-y border-neutral-300">
                 <h2 className={cn(isPrimary ? primary : secondary, 'mb-2')}>성격을 소개할게요!!</h2>
-                <p>#{businessCardFormData.personalityToPerson}</p>
-                <p>#{businessCardFormData.personalityAmongAnimals}</p>
+                <p className="break-all">#{businessCardFormData.personalityToPerson}</p>
+                <p className="break-all">#{businessCardFormData.personalityAmongAnimals}</p>
               </div>
               <div className="py-4">
                 <h2 className={cn(isPrimary ? primary : secondary, 'mb-2')}>선호 및 주의사항!</h2>

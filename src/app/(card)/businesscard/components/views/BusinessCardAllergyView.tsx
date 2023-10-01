@@ -12,7 +12,7 @@ import { flexCol, flexRow } from '@/styles/ogoo/alignment.css';
 import { danger, subText, whiteText } from '@/styles/ogoo/colors.css';
 import { caption, subtitle } from '@/styles/ogoo/typography.css';
 import type { BusinessCardFormData } from '@/types';
-import { cn } from '@/utils';
+import { calculateAge, cn } from '@/utils';
 
 type UpdateAllergesForForm = Pick<
   BusinessCardFormData,
@@ -135,7 +135,7 @@ export const BusinessCardAllergyView = ({ setBusinessCardFormData }: Props) => {
       <GenerateView
         questionNumber={'3'}
         title={() =>
-          `${watch('petName')}는 N살이군요!\n${watch('petName')}에 대해 조금 더 알려주세요!`
+          `${watch('petName')}는 ${calculateAge(watch('birth'))}살이군요!\n${watch('petName')}에 대해 조금 더 알려주세요!`
         }
         onSubmit={handleSubmit(onSubmit)}
         watch={watch}

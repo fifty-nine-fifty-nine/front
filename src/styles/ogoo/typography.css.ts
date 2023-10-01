@@ -34,7 +34,7 @@ export const titleSm = sprinkles({
 
 export const subtitle = sprinkles({
   fontSize: '18',
-  fontWeight: 'semibold',
+  fontWeight: 'bold',
 });
 
 export const subtitleMd = sprinkles({

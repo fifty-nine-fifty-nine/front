@@ -78,7 +78,7 @@ export const BusinessCardTempleteView = ({
 
     await createBusinesscard(newData);
 
-    router.push(
+    router.replace(
       `/share/businesscard?petName=${petName}&&frontPage=${uploadFrontFileName}&&backPage=${uploadBackFileName}`,
     );
   };

@@ -69,6 +69,7 @@ export const CardInfoEditForm = ({ card }: { card: BusinesscardWithId }) => {
 
   const onSubmit: SubmitHandler<BusinessCardFormData> = async (formdata) => {
     try {
+      if (isLoading) return;
       setIsLoading(true);
 
       const [uploadFrontFileName, uploadBackFileName] = await uploadCardImages({

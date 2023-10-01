@@ -131,7 +131,7 @@ export const MainBusinessCardView = ({ active }: Props) => {
       </div>
 
       <footer className={cn(flexColCenter, `mb-8`)}>
-        {totalCount && totalCount < 2 ? (
+        {/* {totalCount && totalCount < 2 ? (
           <>
             <Link href={'/businesscard'} className="w-full">
               <button className={cn(button(), buttonHover)}>
@@ -161,7 +161,14 @@ export const MainBusinessCardView = ({ active }: Props) => {
               </p>
             </div>
           </>
-        )}
+        )} */}
+        <>
+          <Link href={'/businesscard'} className="w-full">
+            <button className={cn(button(), buttonHover)}>
+              <p className={whiteText}>2분만에 펫 명함 만들기</p>
+            </button>
+          </Link>
+        </>
       </footer>
     </section>
   );

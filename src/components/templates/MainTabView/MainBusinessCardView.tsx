@@ -131,45 +131,35 @@ export const MainBusinessCardView = ({ active }: Props) => {
       </div>
 
       <footer className={cn(flexColCenter, `mb-8`)}>
-        {totalCount ? (
-          totalCount < 2 ? (
-            <>
-              <Link href={'/businesscard'} className="w-full">
-                <button className={cn(button(), buttonHover)}>
-                  <p className={whiteText}>2분만에 펫 명함 만들기</p>
-                </button>
-              </Link>
-            </>
-          ) : (
-            <>
-              <Link href={'/mypage'} className="w-full">
-                <button className={cn(button(), buttonHover)}>
-                  <p className={whiteText}>마이페이지로 이동</p>
-                </button>
-              </Link>
-              <div className={cn(A.flexRowCenter, 'gap-2 mt-4 items-center')}>
-                <Image
-                  src="/svg/warningIcon.svg"
-                  width={20}
-                  height={20}
-                  sizes="100%"
-                  alt=""
-                  priority
-                  className="object-cover z-0"
-                />
-                <p className={cn(bodySm, subText)}>
-                  이미 2개의 펫명함을 보유하고 있어요. 삭제 후 새로 생성 가능합니다.
-                </p>
-              </div>
-            </>
-          )
-        ) : (
+        {totalCount && totalCount < 2 ? (
           <>
-            <Link href={'/login'} className="w-full">
+            <Link href={'/businesscard'} className="w-full">
               <button className={cn(button(), buttonHover)}>
-                <p className={whiteText}>로그인하고 명함 만들기</p>
+                <p className={whiteText}>2분만에 펫 명함 만들기</p>
               </button>
             </Link>
+          </>
+        ) : (
+          <>
+            <Link href={'/mypage'} className="w-full">
+              <button className={cn(button(), buttonHover)}>
+                <p className={whiteText}>마이페이지로 이동</p>
+              </button>
+            </Link>
+            <div className={cn(A.flexRowCenter, 'gap-2 mt-4 items-center')}>
+              <Image
+                src="/svg/warningIcon.svg"
+                width={20}
+                height={20}
+                sizes="100%"
+                alt=""
+                priority
+                className="object-cover z-0"
+              />
+              <p className={cn(bodySm, subText)}>
+                이미 2개의 펫명함을 보유하고 있어요. 삭제 후 새로 생성 가능합니다.
+              </p>
+            </div>
           </>
         )}
       </footer>

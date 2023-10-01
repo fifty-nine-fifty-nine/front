@@ -1,9 +1,8 @@
 'use client';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useMemo, useState } from 'react';
 
 import { usePopupModal } from '@/components/common/PopupModal';
 import { fetcher } from '@/lib/fetcher';
@@ -39,8 +38,12 @@ export const CardSlots = ({ data }: { data: Array<BusinesscardWithId> | null }) 
   const [selectedCardUrl, setSeletedCardUrl] = useState<string[]>([]);
   const [selectedShareThumb, setSeletedShareThumb] = useState<string>('');
 
-  const myPetBusinesscardList = data || [];
-  console.log(accessToken, myPetBusinesscardList); // FIXME: 추후 삭제
+  const myPetBusinesscardList = useMemo(() => data ?? [], [data]);
+
+  // FIXME: 추후 삭제
+  useEffect(() => {
+    console.log(accessToken, myPetBusinesscardList);
+  }, [accessToken, myPetBusinesscardList]);
 
   const handleDeleteCard = async () => {
     if (!accessToken) return;
@@ -71,8 +74,13 @@ export const CardSlots = ({ data }: { data: Array<BusinesscardWithId> | null }) 
               className={cn(
                 C.bgSub,
                 A.flexColCenter,
-                'relative w-[183px] h-[210px] mx-1.5 rounded-xl pt-4 hover:transform hover:scale-105 transition-all',
+                'relative w-[183px] h-[210px] mx-1.5 rounded-xl pt-4 hover:transform hover:scale-105 transition-all cursor-pointer',
               )}
+              onClick={() =>
+                router.push(
+                  `/share/businesscard?petName=${card.petName}&frontPage=${card.businesscardImgPath[0]}&backPage=${card.businesscardImgPath[1]}`,
+                )
+              }
             >
               <Image
                 src={card.petProfileImgPath}
@@ -87,9 +95,12 @@ export const CardSlots = ({ data }: { data: Array<BusinesscardWithId> | null }) 
                 <p className={cn(subtitle, C.primary)}>{card.petName}</p>
               </div>
 
-              <Link
-                href={`/mypage/businesscard/${card.id}/edit`}
+              <div
                 className="absolute top-2 right-2 rounded p-1 hover:bg-neutral-100 ease-in duration-150"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  router.push(`/mypage/businesscard/${card.id}/edit`);
+                }}
               >
                 <Image
                   src="/svg/edit.svg"
@@ -99,13 +110,14 @@ export const CardSlots = ({ data }: { data: Array<BusinesscardWithId> | null }) 
                   alt="수정"
                   priority
                 />
-              </Link>
+              </div>
 
               <div className={cn(A.flexRowCenter, C.whiteText, 'gap-2')}>
                 <button
                   type="button"
                   className={cn(C.bgTertiary, S.button({ size: 'xxs' }))}
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.stopPropagation();
                     frontPath(card.businesscardImgPath[0]);
                     setSelectedCardPetName(card.petName);
                     setSeletedCardUrl(card.businesscardImgPath);
@@ -116,7 +128,8 @@ export const CardSlots = ({ data }: { data: Array<BusinesscardWithId> | null }) 
                 </button>
                 <button
                   type="button"
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.stopPropagation();
                     setSelectedCardId(card.id);
                     openDeleteModal();
                   }}

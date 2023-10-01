@@ -129,6 +129,7 @@ export const MainBusinessCardView = ({ active }: Props) => {
           </li>
         </ul>
       </div>
+
       <footer className={cn(flexColCenter, `mb-8`)}>
         {totalCount && totalCount < 2 ? (
           <>

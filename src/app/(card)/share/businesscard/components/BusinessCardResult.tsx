@@ -8,13 +8,13 @@ import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { ShareButtonList } from '@/components/common/ShareButtonList';
-import { StepBackButton, Template } from '@/components/templates';
+import { StepBackButton } from '@/components/templates';
 import { button, buttonHover } from '@/styles/ogoo';
 import { flexCenter, flexColCenter, flexRowCenter } from '@/styles/ogoo/alignment.css';
 import { optionalText, subText, subtitleText, whiteText } from '@/styles/ogoo/colors.css';
 import { bodyLg, bodySm, titleLg, titleSm } from '@/styles/ogoo/typography.css';
 import type { BusinessCardSharedParams } from '@/types';
-import { cn } from '@/utils';
+import { cn, damainExtractor } from '@/utils';
 
 interface Props {
   businesscardInfo: BusinessCardSharedParams;
@@ -24,6 +24,9 @@ interface Props {
 const BusinessCardResult = ({ businesscardInfo, businesscardData }: Props) => {
   const frontUrl = businesscardInfo.frontPage;
   const backUrl = businesscardInfo.backPage;
+
+  const currentUrl = window.location.href;
+  const domain = damainExtractor(currentUrl, '/share');
 
   return (
     <>
@@ -60,6 +63,8 @@ const BusinessCardResult = ({ businesscardInfo, businesscardData }: Props) => {
                   requestUrl={`petName=${businesscardInfo.petName}&&frontPage=${businesscardData.frontPage}&&backPage=${businesscardData.backPage}`}
                   thumbImgPath={frontUrl}
                   petName={businesscardInfo.petName}
+                  imageUrl={[businesscardData.frontPage, businesscardData.backPage]}
+                  domain={domain}
                 />
                 <div className={cn(flexRowCenter, 'gap-4')}></div>
               </div>

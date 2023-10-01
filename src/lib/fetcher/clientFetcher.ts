@@ -15,6 +15,7 @@ export const clientFetcher = async <T>(
       'Content-Type': 'application/json',
       authorization: `Bearer ${accessToken}`,
     },
+    cache: 'no-cache',
     // next: { revalidate: 60 },
   };
 

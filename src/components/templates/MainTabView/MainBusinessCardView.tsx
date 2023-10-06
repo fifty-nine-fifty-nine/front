@@ -1,17 +1,18 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
-import React, { useEffect, useState } from 'react';
 
+import { usePopupModal } from '@/components/common/PopupModal';
 import { fetcher } from '@/lib/fetcher';
 import { button, buttonHover } from '@/styles/ogoo';
-import * as A from '@/styles/ogoo/alignment.css';
 import { flexColCenter, flexRowCenter } from '@/styles/ogoo/alignment.css';
-import { optionalText, subText, whiteText } from '@/styles/ogoo/colors.css';
-import { bodyLg, bodySm } from '@/styles/ogoo/typography.css';
+import { optionalText, whiteText } from '@/styles/ogoo/colors.css';
+import { bodyLg } from '@/styles/ogoo/typography.css';
 import { cn } from '@/utils';
+
+import { ValidationTotalBusinessModal } from './ValidationTotalBusinessModal';
 
 interface Props {
   active: boolean;
@@ -20,23 +21,27 @@ interface Props {
 export const MainBusinessCardView = ({ active }: Props) => {
   const { data: session } = useSession();
   const accessToken = session?.accessToken;
+  const router = useRouter();
+  const { isOpen, openModal, closeModal } = usePopupModal();
 
-  const [totalCount, setTotalCount] = useState<number | null>(null);
+  const handlePushToMaypage = () => {
+    router.push('/mypage');
+  };
 
-  useEffect(() => {
+  const handleVerificationAndNavigate = () => {
+    if (!accessToken) router.push('/login');
+
     const fetchTotalCount = async () => {
       if (accessToken) {
-        try {
-          const { data } = await fetcher<number>('/pets/check', 'GET', accessToken);
-          setTotalCount(data);
-        } catch (error) {
-          console.error(`Error fetching total count: ${error}`);
+        const { data: totalCount } = await fetcher<number>('/pets/check', 'GET', accessToken);
+        if (totalCount && totalCount > 2) {
+          openModal();
         }
+        router.push('/businesscard');
       }
     };
-
     fetchTotalCount();
-  }, [accessToken]);
+  };
 
   return (
     <section className={cn(active ? show : hide)}>
@@ -131,44 +136,17 @@ export const MainBusinessCardView = ({ active }: Props) => {
       </div>
 
       <footer className={cn(flexColCenter, `mb-8`)}>
-        {/* {totalCount && totalCount < 2 ? (
-          <>
-            <Link href={'/businesscard'} className="w-full">
-              <button className={cn(button(), buttonHover)}>
-                <p className={whiteText}>2분만에 펫 명함 만들기</p>
-              </button>
-            </Link>
-          </>
-        ) : (
-          <>
-            <Link href={'/mypage'} className="w-full">
-              <button className={cn(button(), buttonHover)}>
-                <p className={whiteText}>마이페이지로 이동</p>
-              </button>
-            </Link>
-            <div className={cn(A.flexRowCenter, 'gap-2 mt-4 items-center')}>
-              <Image
-                src="/svg/warningIcon.svg"
-                width={20}
-                height={20}
-                sizes="100%"
-                alt=""
-                priority
-                className="object-cover z-0"
-              />
-              <p className={cn(bodySm, subText)}>
-                이미 2개의 펫명함을 보유하고 있어요. 삭제 후 새로 생성 가능합니다.
-              </p>
-            </div>
-          </>
-        )} */}
-        <>
-          <Link href={'/businesscard'} className="w-full">
-            <button className={cn(button(), buttonHover)}>
-              <p className={whiteText}>2분만에 펫 명함 만들기</p>
-            </button>
-          </Link>
-        </>
+        <button
+          className={cn(button(), buttonHover)}
+          onClick={() => handleVerificationAndNavigate()}
+        >
+          <p className={whiteText}>2분만에 펫 명함 만들기</p>
+        </button>
+        <ValidationTotalBusinessModal
+          isOpen={isOpen}
+          closeModal={closeModal}
+          handleRoute={handlePushToMaypage}
+        />
       </footer>
     </section>
   );

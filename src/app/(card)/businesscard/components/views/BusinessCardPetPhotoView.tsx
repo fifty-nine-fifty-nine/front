@@ -13,6 +13,7 @@ import { bgSub, danger, optionalText } from '@/styles/ogoo/colors.css';
 import { caption } from '@/styles/ogoo/typography.css';
 import type { BusinessCardFormData } from '@/types';
 import { cn, isBeforeToday } from '@/utils';
+import useDebounce from '@/utils/debounce-utils';
 import { uploadUserImageToFirestore } from '@/utils/image-utils';
 
 interface Props {
@@ -30,6 +31,8 @@ export const BusinessCardPetPhotoView = ({ setBusinessCardFormData }: Props) => 
   } = useFormContext<BusinessCardFormData>();
 
   const [selectedSpecies, setSelectedSpecies] = useState<string>('');
+  const debouncedSpecies = useDebounce(selectedSpecies, 300); // Adjust the delay as needed
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const fileRef = useRef<HTMLInputElement>(null);
@@ -74,8 +77,6 @@ export const BusinessCardPetPhotoView = ({ setBusinessCardFormData }: Props) => 
   }, [imgFile]);
 
   const onSubmit = (data: BusinessCardFormData) => {
-    console.log(data);
-
     if (watch('birth') === '' || watch('petProfileImgPath') === '' || watch('species') === '') {
       console.log('Please enter the required value!');
       return;

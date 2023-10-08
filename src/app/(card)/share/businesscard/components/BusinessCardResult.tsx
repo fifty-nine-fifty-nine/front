@@ -9,6 +9,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { ShareButtonList } from '@/components/common/ShareButtonList';
 import { StepBackButton } from '@/components/templates';
+import { KAKAO_SHARE_TEMPLATE_ID } from '@/constants';
 import { useDomain } from '@/hooks/useDomain';
 import { button, buttonHover } from '@/styles/ogoo';
 import { flexCenter, flexColCenter, flexRowCenter } from '@/styles/ogoo/alignment.css';
@@ -59,10 +60,10 @@ const BusinessCardResult = ({ businesscardInfo, businesscardData }: Props) => {
                 <h2 className={cn(titleSm, subtitleText)}>공유하기</h2>
                 {domain && (
                   <ShareButtonList
-                    templateId={98893}
+                    templateId={KAKAO_SHARE_TEMPLATE_ID}
                     requestUrl={`petName=${businesscardInfo.petName}&&frontPage=${businesscardData.frontPage}&&backPage=${businesscardData.backPage}`}
                     thumbImgPath={frontUrl}
-                    petName={businesscardInfo.petName}
+                    petName={`${businesscardInfo.petName} 명함`}
                     imageUrl={[businesscardData.frontPage, businesscardData.backPage]}
                     domain={domain}
                   />

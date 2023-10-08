@@ -3,7 +3,7 @@ import React, { Suspense } from 'react';
 import type { BusinessCardSharedParams } from '@/types';
 import { findUrlFromFirestore } from '@/utils/image-utils';
 
-import Loading from '../../loading';
+import Loading from '../loading';
 import BusinessCardResult from './components/BusinessCardResult';
 
 export default async function SharePetBusinesscardPage({

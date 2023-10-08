@@ -1,6 +1,7 @@
 import type { ModalProps } from '@/components/common/PopupModal';
 import PopupModal from '@/components/common/PopupModal';
 import { ShareButtonList } from '@/components/common/ShareButtonList';
+import { KAKAO_SHARE_TEMPLATE_ID } from '@/constants';
 import { useDomain } from '@/hooks/useDomain';
 
 interface Props extends ModalProps {
@@ -28,10 +29,10 @@ export const CardShareModal = ({
         actions={[
           <ShareButtonList
             key="share"
-            templateId={98893}
+            templateId={KAKAO_SHARE_TEMPLATE_ID}
             requestUrl={`petName=${petName}&frontPage=${imageUrl[0]}&backPage=${imageUrl[1]}`}
             thumbImgPath={selectedShareThumb}
-            petName={petName}
+            petName={`${petName} 명함`}
             imageUrl={imageUrl}
             domain={domain}
           />,

@@ -2,7 +2,7 @@
 import { redirect, usePathname } from 'next/navigation';
 import { Suspense } from 'react';
 
-import Loading from '../../loading';
+import Loading from '../../share/loading';
 import { PetCardGeneration } from '../components';
 
 export default function PetBusinessCardPage() {

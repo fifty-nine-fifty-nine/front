@@ -4,3 +4,5 @@ export const IS_BROWSER = typeof window !== 'undefined';
 
 export const APPBAR_HEIGHT = '88';
 export const NAVBAR_HEIGHT = '80';
+
+export const KAKAO_SHARE_TEMPLATE_ID = 98893;

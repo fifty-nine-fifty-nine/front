@@ -5,7 +5,7 @@ import { API_BASE_URL } from '@/constants';
 import { authOptions } from '@/lib/auth';
 import type { PetCardResponse, PetCardSharedParams } from '@/types';
 
-import Loading from '../../loading';
+import Loading from '../loading';
 import { PetCardResult } from './component/PetCardResult';
 
 export default async function SharePetCardPage({

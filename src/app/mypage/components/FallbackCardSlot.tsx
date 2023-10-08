@@ -6,7 +6,7 @@ import { cn } from '@/utils';
 
 export const FallbackCardSlot = () => {
   return (
-    <Link href={'/businesscard'} className="w-[183px] h-[210px]">
+    <Link href={'/businesscard'} className="w-[183px] h-[210px] mx-1.5">
       <article
         className={cn(
           flexCenter,

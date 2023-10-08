@@ -16,7 +16,7 @@ export const clientFetcher = async <T>(
       authorization: `Bearer ${accessToken}`,
     },
     cache: 'no-store',
-    // next: { revalidate: 60 },
+    next: { revalidate: 0 },
   };
 
   const res = await fetch(`${API_BASE_URL}${operation}`, config);

@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import type { Dispatch, SetStateAction } from 'react';
+import type { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
@@ -13,6 +13,7 @@ import { bgSub, danger, optionalText } from '@/styles/ogoo/colors.css';
 import { caption } from '@/styles/ogoo/typography.css';
 import type { BusinessCardFormData } from '@/types';
 import { cn, isBeforeToday } from '@/utils';
+import useDebounce from '@/utils/debounce-utils';
 import { uploadUserImageToFirestore } from '@/utils/image-utils';
 
 interface Props {
@@ -29,7 +30,9 @@ export const BusinessCardPetPhotoView = ({ setBusinessCardFormData }: Props) => 
     formState: { isValid },
   } = useFormContext<BusinessCardFormData>();
 
-  const [selectedSpecies, setSelectedSpecies] = useState<string>();
+  const [selectedSpecies, setSelectedSpecies] = useState<string>('');
+  const debouncedSpecies = useDebounce(selectedSpecies, 300); // Adjust the delay as needed
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const fileRef = useRef<HTMLInputElement>(null);
@@ -55,6 +58,11 @@ export const BusinessCardPetPhotoView = ({ setBusinessCardFormData }: Props) => 
     setIsDropdownOpen(!isDropdownOpen);
   };
 
+  const handleSpeciesInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const enteredString = event.target.value;
+    setSelectedSpecies(enteredString);
+  };
+
   useEffect(() => {
     if (imgFile) {
       // Call handleImageUpload when imgFile changes
@@ -69,8 +77,6 @@ export const BusinessCardPetPhotoView = ({ setBusinessCardFormData }: Props) => 
   }, [imgFile]);
 
   const onSubmit = (data: BusinessCardFormData) => {
-    console.log(data);
-
     if (watch('birth') === '' || watch('petProfileImgPath') === '' || watch('species') === '') {
       console.log('Please enter the required value!');
       return;
@@ -189,30 +195,35 @@ export const BusinessCardPetPhotoView = ({ setBusinessCardFormData }: Props) => 
                     {...register('species')}
                     value={selectedSpecies}
                     onClick={handleSpeciesClick}
+                    onChange={handleSpeciesInputChange}
                   />
                   {isDropdownOpen && (
                     <div className="absolute mt-2 bg-gray-100 border border-gray-300 rounded-xl w-full max-h-32 overflow-y-auto shadow-lg z-40">
                       <ul>
                         {watch('type') === '강아지' &&
-                          speciesMock.dog.map((value) => (
-                            <li
-                              key={value}
-                              onClick={() => handleOptionClick(value)}
-                              className="mx-5 py-2 cursor-pointer border-b-2 border-gray"
-                            >
-                              {value}
-                            </li>
-                          ))}
+                          speciesMock.dog
+                            .filter((value) => value.includes(selectedSpecies))
+                            .map((value) => (
+                              <li
+                                key={value}
+                                onClick={() => handleOptionClick(value)}
+                                className="mx-5 py-2 cursor-pointer border-b-2 border-gray"
+                              >
+                                {value}
+                              </li>
+                            ))}
                         {watch('type') === '고양이' &&
-                          speciesMock.cat.map((value) => (
-                            <li
-                              key={value}
-                              onClick={() => handleOptionClick(value)}
-                              className="mx-5 py-2 cursor-pointer border-b-2 border-gray"
-                            >
-                              {value}
-                            </li>
-                          ))}
+                          speciesMock.cat
+                            .filter((value) => value.includes(selectedSpecies))
+                            .map((value) => (
+                              <li
+                                key={value}
+                                onClick={() => handleOptionClick(value)}
+                                className="mx-5 py-2 cursor-pointer border-b-2 border-gray"
+                              >
+                                {value}
+                              </li>
+                            ))}
                       </ul>
                     </div>
                   )}

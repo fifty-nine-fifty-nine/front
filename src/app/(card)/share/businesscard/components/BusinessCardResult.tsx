@@ -58,24 +58,22 @@ const BusinessCardResult = ({ businesscardInfo, businesscardData }: Props) => {
             <div className={cn(flexColCenter, 'gap-5')}>
               <div>
                 <h2 className={cn(titleSm, subtitleText)}>공유하기</h2>
-                {domain && (
-                  <ShareButtonList
-                    templateId={KAKAO_SHARE_TEMPLATE_ID}
-                    requestUrl={`petName=${businesscardInfo.petName}&&frontPage=${businesscardData.frontPage}&&backPage=${businesscardData.backPage}`}
-                    thumbImgPath={frontUrl}
-                    petName={`${businesscardInfo.petName} 명함`}
-                    imageUrl={[businesscardData.frontPage, businesscardData.backPage]}
-                    domain={domain}
-                  />
-                )}
+                <ShareButtonList
+                  templateId={KAKAO_SHARE_TEMPLATE_ID}
+                  requestUrl={`petName=${businesscardInfo.petName}&&frontPage=${businesscardData.frontPage}&&backPage=${businesscardData.backPage}`}
+                  thumbImgPath={frontUrl}
+                  petName={`${businesscardInfo.petName} 명함`}
+                  imageUrl={[businesscardData.frontPage, businesscardData.backPage]}
+                  domain={domain!}
+                />
                 <div className={cn(flexRowCenter, 'gap-4')}></div>
               </div>
-              <button
+              {/* <button
                 className={cn(whiteText, buttonHover, button({ size: 'sm' }), 'w-[154px]')}
                 type="button"
               >
                 명함 저장하기
-              </button>
+              </button> */}
             </div>
             <strong className={cn(bodyLg, subText, `block mt-4 pb-2`)}>유의사항</strong>
             <ul className={bulletItem}>

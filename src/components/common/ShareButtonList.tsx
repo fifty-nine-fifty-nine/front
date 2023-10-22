@@ -16,7 +16,8 @@ interface Props extends KaKaoShareProps {
 
 export const ShareButtonList = (props: Props) => {
   const handleCopyShareLink = async () => {
-    const shareUrl = `${props.domain}/kakaoshare?petName=${props.petName}&frontPage=${props.imageUrl[0]}&backPage=${props.imageUrl[1]}`;
+    const petName = props.petName?.split('')[0];
+    const shareUrl = `${props.domain}/kakaoshare?petName=${petName}&frontPage=${props.imageUrl[0]}&backPage=${props.imageUrl[1]}`;
     try {
       await navigator.clipboard.writeText(shareUrl);
       alert('클립보드에 링크가 복사되었습니다.');

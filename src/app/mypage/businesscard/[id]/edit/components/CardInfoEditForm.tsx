@@ -13,7 +13,7 @@ import { GenerateItem } from '@/components/templates';
 import { fetcher } from '@/lib/fetcher';
 import { uploadCardImages } from '@/services/uploadCardImages';
 import { button, buttonHover, input } from '@/styles/ogoo';
-import { flexRow } from '@/styles/ogoo/alignment.css';
+import { flexCenter, flexRow } from '@/styles/ogoo/alignment.css';
 import { subText, subtitleText, whiteText } from '@/styles/ogoo/colors.css';
 import { subtitle, subtitleMd } from '@/styles/ogoo/typography.css';
 import {
@@ -24,6 +24,8 @@ import {
 } from '@/types';
 import { cn } from '@/utils';
 import { uploadUserImageToFirestore } from '@/utils/image-utils';
+
+import { CardEditAllergeSheet } from './CardEditAllergeSheet';
 
 export const CardInfoEditForm = ({ card }: { card: BusinesscardWithId }) => {
   const router = useRouter();
@@ -36,6 +38,7 @@ export const CardInfoEditForm = ({ card }: { card: BusinesscardWithId }) => {
     setValue,
     reset,
     watch,
+    getValues,
     formState: { isValid },
   } = useForm<BusinessCardFormData>();
 
@@ -49,6 +52,8 @@ export const CardInfoEditForm = ({ card }: { card: BusinesscardWithId }) => {
 
   const businesscardFrontRef = useRef<HTMLDivElement>(null);
   const businesscardBackRef = useRef<HTMLDivElement>(null);
+
+  const [allergeSheetOpen, setAllergeSheetOpen] = useState(false);
 
   const handleAddLikeInput = () => {
     if (likeInputCount < 3) {
@@ -125,6 +130,12 @@ export const CardInfoEditForm = ({ card }: { card: BusinesscardWithId }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imgFile]);
 
+  const onClickNoAllergy = () => {
+    setValue('mainAllerge', []);
+    setValue('subAllerge', []);
+    setValue('etcAllerge', []);
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col p-5 gap-y-7">
       <div className="relative m-auto">
@@ -170,6 +181,52 @@ export const CardInfoEditForm = ({ card }: { card: BusinesscardWithId }) => {
           {...register('petName')}
         />
       </label>
+
+      <div>
+        <h3 className={subtitle}>종류</h3>
+        <div className="flex gap-3">
+          <label htmlFor="dog" className="flex-1 block cursor-pointer">
+            <input
+              {...register('type', { required: true })}
+              type="radio"
+              id="dog"
+              value={AnimalTypeEnum.dog}
+              className="hidden peer"
+            />
+            <button
+              type="button"
+              className={cn(
+                button({
+                  color: watch('type') == AnimalTypeEnum.dog ? 'selected' : 'sub',
+                }),
+                `pointer-events-none transition duration-150 ease-in-out`,
+              )}
+            >
+              <p className={cn(`font-normal`)}>강아지</p>
+            </button>
+          </label>
+          <label htmlFor="cat" className="flex-1 block cursor-pointer">
+            <input
+              {...register('type', { required: true })}
+              type="radio"
+              id="cat"
+              value={AnimalTypeEnum.cat}
+              className="hidden peer"
+            />
+            <button
+              type="button"
+              className={cn(
+                button({
+                  color: watch('type') == AnimalTypeEnum.cat ? 'selected' : 'sub',
+                }),
+                `pointer-events-none transition duration-150 ease-in-out`,
+              )}
+            >
+              <p className={cn(`font-normal`)}>고양이</p>
+            </button>
+          </label>
+        </div>
+      </div>
 
       <label>
         <h3 className={subtitle}>{card.type == AnimalTypeEnum.dog ? '견종' : '묘종'}</h3>
@@ -288,6 +345,7 @@ export const CardInfoEditForm = ({ card }: { card: BusinesscardWithId }) => {
               checked={watch('allergy') == true}
               onChange={() => setValue('allergy', true)}
               className="hidden peer"
+              onClick={() => setAllergeSheetOpen(true)}
             />
             <button
               type="button"
@@ -308,6 +366,7 @@ export const CardInfoEditForm = ({ card }: { card: BusinesscardWithId }) => {
               checked={!watch('allergy')}
               onChange={() => setValue('allergy', false)}
               className="hidden peer"
+              onClick={() => onClickNoAllergy()}
             />
             <button
               type="button"
@@ -322,6 +381,36 @@ export const CardInfoEditForm = ({ card }: { card: BusinesscardWithId }) => {
             </button>
           </label>
         </div>
+        {getValues('allergy') && (
+          <div>
+            {allergeSheetOpen ? (
+              <CardEditAllergeSheet
+                setSheetOpen={setAllergeSheetOpen}
+                setValue={setValue}
+                getValues={getValues}
+              />
+            ) : (
+              <button
+                type="button"
+                className={cn(button({ color: 'sub', size: 'sm' }), 'w-full mt-4')}
+                onClick={() => {
+                  setAllergeSheetOpen(true);
+                }}
+              >
+                <p className={cn(flexCenter, subtitleMd, subtitleText)}>
+                  <Image
+                    src="/svg/arrow_right.svg"
+                    alt=""
+                    width={32}
+                    height={32}
+                    priority
+                    className="py-0.5 rotate-90"
+                  />
+                </p>
+              </button>
+            )}
+          </div>
+        )}
       </div>
 
       <div>

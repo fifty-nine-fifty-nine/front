@@ -34,10 +34,11 @@ export const MainBusinessCardView = ({ active }: Props) => {
     const fetchTotalCount = async () => {
       if (accessToken) {
         const { data: totalCount } = await fetcher<number>('/pets/check', 'GET', accessToken);
-        if (totalCount && totalCount > 2) {
+        if (totalCount && totalCount >= 2) {
           openModal();
+        } else {
+          router.push('/businesscard');
         }
-        router.push('/businesscard');
       }
     };
     fetchTotalCount();
